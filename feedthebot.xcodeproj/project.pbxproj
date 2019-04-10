@@ -13,6 +13,7 @@
 		918F2658225D7F4F00D6056C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 918F2657225D7F4F00D6056C /* Assets.xcassets */; };
 		918F265B225D7F4F00D6056C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 918F2659225D7F4F00D6056C /* LaunchScreen.storyboard */; };
 		918F2666225D7F4F00D6056C /* feedthebotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 918F2665225D7F4F00D6056C /* feedthebotTests.swift */; };
+		918F2676225D857900D6056C /* TrainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 918F2675225D857900D6056C /* TrainViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +37,9 @@
 		918F2661225D7F4F00D6056C /* feedthebotTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = feedthebotTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		918F2665225D7F4F00D6056C /* feedthebotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = feedthebotTests.swift; sourceTree = "<group>"; };
 		918F2667225D7F4F00D6056C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		918F2671225D7FEA00D6056C /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		918F2673225D801500D6056C /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
+		918F2675225D857900D6056C /* TrainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +63,8 @@
 		918F2644225D7F4D00D6056C = {
 			isa = PBXGroup;
 			children = (
+				918F2671225D7FEA00D6056C /* README.md */,
+				918F2673225D801500D6056C /* Podfile */,
 				918F264F225D7F4D00D6056C /* feedthebot */,
 				918F2664225D7F4F00D6056C /* feedthebotTests */,
 				918F264E225D7F4D00D6056C /* Products */,
@@ -79,6 +85,7 @@
 			children = (
 				918F2650225D7F4D00D6056C /* AppDelegate.swift */,
 				918F2652225D7F4D00D6056C /* ViewController.swift */,
+				918F2675225D857900D6056C /* TrainViewController.swift */,
 				918F2654225D7F4D00D6056C /* Main.storyboard */,
 				918F2657225D7F4F00D6056C /* Assets.xcassets */,
 				918F2659225D7F4F00D6056C /* LaunchScreen.storyboard */,
@@ -106,6 +113,7 @@
 				918F2649225D7F4D00D6056C /* Sources */,
 				918F264A225D7F4D00D6056C /* Frameworks */,
 				918F264B225D7F4D00D6056C /* Resources */,
+				918F2670225D7F8100D6056C /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -192,6 +200,26 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		918F2670225D7F8100D6056C /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to inse# Ty#printenv | sort > ~/xcode_environ_vars.txt\nOLD_NUMBER=`/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"$PRODUCT_SETTINGS_PATH\"`\nNEW_NUMBER=$((OLD_NUMBER+=1))\n`/usr/libexec/PlistBuddy -c \"Set CFBundleVersion $NEW_NUMBER\" \"$PRODUCT_SETTINGS_PATH\"`\n\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		918F2649225D7F4D00D6056C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -199,6 +227,7 @@
 			files = (
 				918F2653225D7F4D00D6056C /* ViewController.swift in Sources */,
 				918F2651225D7F4D00D6056C /* AppDelegate.swift in Sources */,
+				918F2676225D857900D6056C /* TrainViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

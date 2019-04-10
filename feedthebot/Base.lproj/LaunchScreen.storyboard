@@ -1,8 +1,11 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
-        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -13,13 +16,50 @@
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="app_launch" translatesAutoresizingMaskIntoConstraints="NO" id="Hhp-Dh-CBb">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bot_small_white" translatesAutoresizingMaskIntoConstraints="NO" id="dJi-ea-bue">
+                                <rect key="frame" x="123.5" y="66" width="128" height="128"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="128" id="EVQ-m8-nfu"/>
+                                    <constraint firstAttribute="height" constant="128" id="e5H-mR-bLL"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Thank you..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rp8-60-eqF">
+                                <rect key="frame" x="107" y="244" width="161" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="161" id="dag-5F-wa0"/>
+                                    <constraint firstAttribute="height" constant="21" id="jaQ-Yz-S0W"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="22"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                                <color key="shadowColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <size key="shadowOffset" width="0.0" height="1"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <constraints>
+                            <constraint firstItem="Hhp-Dh-CBb" firstAttribute="bottom" secondItem="Ze5-6b-2t3" secondAttribute="bottom" id="4W7-U4-hlp"/>
+                            <constraint firstItem="rp8-60-eqF" firstAttribute="centerX" secondItem="dJi-ea-bue" secondAttribute="centerX" id="5YL-YV-ghd"/>
+                            <constraint firstItem="dJi-ea-bue" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="Agb-1h-u2F"/>
+                            <constraint firstItem="dJi-ea-bue" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" constant="66" id="Ai9-2a-2xb"/>
+                            <constraint firstItem="Hhp-Dh-CBb" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="K8h-6m-y62"/>
+                            <constraint firstItem="Hhp-Dh-CBb" firstAttribute="trailing" secondItem="Ze5-6b-2t3" secondAttribute="trailing" id="P73-DJ-ejb"/>
+                            <constraint firstItem="Hhp-Dh-CBb" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="nu1-HK-2Tq"/>
+                            <constraint firstItem="rp8-60-eqF" firstAttribute="leading" secondItem="dJi-ea-bue" secondAttribute="trailing" constant="-144.5" id="x4D-ZY-fBr"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="53" y="375"/>
+            <point key="canvasLocation" x="52" y="374.66266866566718"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="app_launch" width="48" height="85.171562194824219"/>
+        <image name="bot_small_white" width="128" height="128"/>
+    </resources>
 </document>

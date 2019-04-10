@@ -9,7 +9,13 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    @IBAction func doTrainButton(_ sender: Any) {
+    }
+    @IBAction func doPlayButton(_ sender: Any) {
+    }
+    @IBAction func doPayoutButton(_ sender: Any) {
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
