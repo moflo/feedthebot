@@ -14,6 +14,7 @@
 		918F265B225D7F4F00D6056C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 918F2659225D7F4F00D6056C /* LaunchScreen.storyboard */; };
 		918F2666225D7F4F00D6056C /* feedthebotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 918F2665225D7F4F00D6056C /* feedthebotTests.swift */; };
 		918F2676225D857900D6056C /* TrainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 918F2675225D857900D6056C /* TrainViewController.swift */; };
+		918F2678225DA65F00D6056C /* TextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 918F2677225DA65F00D6056C /* TextViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +41,7 @@
 		918F2671225D7FEA00D6056C /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		918F2673225D801500D6056C /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
 		918F2675225D857900D6056C /* TrainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainViewController.swift; sourceTree = "<group>"; };
+		918F2677225DA65F00D6056C /* TextViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +88,7 @@
 				918F2650225D7F4D00D6056C /* AppDelegate.swift */,
 				918F2652225D7F4D00D6056C /* ViewController.swift */,
 				918F2675225D857900D6056C /* TrainViewController.swift */,
+				918F2677225DA65F00D6056C /* TextViewController.swift */,
 				918F2654225D7F4D00D6056C /* Main.storyboard */,
 				918F2657225D7F4F00D6056C /* Assets.xcassets */,
 				918F2659225D7F4F00D6056C /* LaunchScreen.storyboard */,
@@ -228,6 +231,7 @@
 				918F2653225D7F4D00D6056C /* ViewController.swift in Sources */,
 				918F2651225D7F4D00D6056C /* AppDelegate.swift in Sources */,
 				918F2676225D857900D6056C /* TrainViewController.swift in Sources */,
+				918F2678225DA65F00D6056C /* TextViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
