@@ -12,6 +12,7 @@
 		9175454A225FBB2A00DB77EE /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91754549225FBB2A00DB77EE /* UserManager.swift */; };
 		9175454C225FFA2400DB77EE /* MFColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9175454B225FFA2400DB77EE /* MFColors.swift */; };
 		9175454E225FFBA400DB77EE /* MFButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9175454D225FFBA400DB77EE /* MFButtons.swift */; };
+		91754550226008D400DB77EE /* MFForms.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9175454F226008D400DB77EE /* MFForms.swift */; };
 		918660C8225FA99D00E158D2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 918660C7225FA99D00E158D2 /* GoogleService-Info.plist */; };
 		918F2651225D7F4D00D6056C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 918F2650225D7F4D00D6056C /* AppDelegate.swift */; };
 		918F2653225D7F4D00D6056C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 918F2652225D7F4D00D6056C /* ViewController.swift */; };
@@ -41,6 +42,7 @@
 		91754549225FBB2A00DB77EE /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		9175454B225FFA2400DB77EE /* MFColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MFColors.swift; sourceTree = "<group>"; };
 		9175454D225FFBA400DB77EE /* MFButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MFButtons.swift; sourceTree = "<group>"; };
+		9175454F226008D400DB77EE /* MFForms.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MFForms.swift; sourceTree = "<group>"; };
 		918660C7225FA99D00E158D2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		918F264D225D7F4D00D6056C /* feedthebot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = feedthebot.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		918F2650225D7F4D00D6056C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -132,6 +134,7 @@
 				91754549225FBB2A00DB77EE /* UserManager.swift */,
 				9175454B225FFA2400DB77EE /* MFColors.swift */,
 				9175454D225FFBA400DB77EE /* MFButtons.swift */,
+				9175454F226008D400DB77EE /* MFForms.swift */,
 				918F2654225D7F4D00D6056C /* Main.storyboard */,
 				918F2657225D7F4F00D6056C /* Assets.xcassets */,
 				918F2659225D7F4F00D6056C /* LaunchScreen.storyboard */,
@@ -412,6 +415,7 @@
 			files = (
 				918F2653225D7F4D00D6056C /* ViewController.swift in Sources */,
 				918F2651225D7F4D00D6056C /* AppDelegate.swift in Sources */,
+				91754550226008D400DB77EE /* MFForms.swift in Sources */,
 				9175454C225FFA2400DB77EE /* MFColors.swift in Sources */,
 				918F2676225D857900D6056C /* TrainViewController.swift in Sources */,
 				9175454A225FBB2A00DB77EE /* UserManager.swift in Sources */,
