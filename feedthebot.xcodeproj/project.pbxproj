@@ -10,6 +10,8 @@
 		3D4E6D827958EEA4FAC3E2B9 /* Pods_feedthebotTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B57A0CCBB9083A30FDD77040 /* Pods_feedthebotTests.framework */; };
 		82486DD38D487BF29872D135 /* Pods_feedthebot.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BD871FF00F2B2AB6FA97E91 /* Pods_feedthebot.framework */; };
 		9175454A225FBB2A00DB77EE /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91754549225FBB2A00DB77EE /* UserManager.swift */; };
+		9175454C225FFA2400DB77EE /* MFColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9175454B225FFA2400DB77EE /* MFColors.swift */; };
+		9175454E225FFBA400DB77EE /* MFButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9175454D225FFBA400DB77EE /* MFButtons.swift */; };
 		918660C8225FA99D00E158D2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 918660C7225FA99D00E158D2 /* GoogleService-Info.plist */; };
 		918F2651225D7F4D00D6056C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 918F2650225D7F4D00D6056C /* AppDelegate.swift */; };
 		918F2653225D7F4D00D6056C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 918F2652225D7F4D00D6056C /* ViewController.swift */; };
@@ -37,6 +39,8 @@
 		72FD7613EF597AFE296EFD75 /* Pods-feedthebot.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-feedthebot.debug.xcconfig"; path = "Target Support Files/Pods-feedthebot/Pods-feedthebot.debug.xcconfig"; sourceTree = "<group>"; };
 		87411C17685D37C0183DF149 /* Pods-feedthebotTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-feedthebotTests.debug.xcconfig"; path = "Target Support Files/Pods-feedthebotTests/Pods-feedthebotTests.debug.xcconfig"; sourceTree = "<group>"; };
 		91754549225FBB2A00DB77EE /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
+		9175454B225FFA2400DB77EE /* MFColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MFColors.swift; sourceTree = "<group>"; };
+		9175454D225FFBA400DB77EE /* MFButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MFButtons.swift; sourceTree = "<group>"; };
 		918660C7225FA99D00E158D2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		918F264D225D7F4D00D6056C /* feedthebot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = feedthebot.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		918F2650225D7F4D00D6056C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -126,6 +130,8 @@
 				918F2675225D857900D6056C /* TrainViewController.swift */,
 				918F2677225DA65F00D6056C /* TextViewController.swift */,
 				91754549225FBB2A00DB77EE /* UserManager.swift */,
+				9175454B225FFA2400DB77EE /* MFColors.swift */,
+				9175454D225FFBA400DB77EE /* MFButtons.swift */,
 				918F2654225D7F4D00D6056C /* Main.storyboard */,
 				918F2657225D7F4F00D6056C /* Assets.xcassets */,
 				918F2659225D7F4F00D6056C /* LaunchScreen.storyboard */,
@@ -406,8 +412,10 @@
 			files = (
 				918F2653225D7F4D00D6056C /* ViewController.swift in Sources */,
 				918F2651225D7F4D00D6056C /* AppDelegate.swift in Sources */,
+				9175454C225FFA2400DB77EE /* MFColors.swift in Sources */,
 				918F2676225D857900D6056C /* TrainViewController.swift in Sources */,
 				9175454A225FBB2A00DB77EE /* UserManager.swift in Sources */,
+				9175454E225FFBA400DB77EE /* MFButtons.swift in Sources */,
 				918F2678225DA65F00D6056C /* TextViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
