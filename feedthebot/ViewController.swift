@@ -12,8 +12,10 @@ class ViewController: UIViewController {
     @IBAction func doTrainButton(_ sender: Any) {
     }
     @IBAction func doPlayButton(_ sender: Any) {
+        UserManager.sharedInstance.updatePointsTotal(100)
     }
     @IBAction func doPayoutButton(_ sender: Any) {
+        UserManager.sharedInstance.doResetAccount()
     }
     
     override func viewDidLoad() {

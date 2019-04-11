@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Firebase
+
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -15,7 +17,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+
+        FirebaseApp.configure()
+        
+        UserManager.sharedInstance.refreshUserData { (error) in
+            if (error != nil) {
+                // Try logging in anonymously
+                if (error!._code == -101) {
+                    UserManager.sharedInstance.doAnonymousLogin()
+                }
+                else {
+                    print("Refresh error: ",error!.localizedDescription)
+                }
+            }
+        }
+        let uuid = UserManager.sharedInstance.getUUID()
+        print("Authentication uuid: ",uuid)
+        
         return true
     }
 
