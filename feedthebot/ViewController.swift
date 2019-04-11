@@ -18,9 +18,27 @@ class ViewController: UIViewController {
         UserManager.sharedInstance.doResetAccount()
     }
     
+    
+    @IBOutlet weak var pointsLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+    
+        UserManager.sharedInstance.refreshUserData { (error) in
+            if (error == nil) {
+                DispatchQueue.main.async {
+                    let points = UserManager.sharedInstance.getUserTotalPoints()
+                    self.pointsLabel.text = "+ \(points)"
+                    
+                }
+            }
+        }
     }
 
 
