@@ -436,6 +436,7 @@
                             <constraint firstItem="8za-yA-Bbs" firstAttribute="top" secondItem="iz8-KD-rMI" secondAttribute="bottom" constant="10" id="CnY-RR-sBF"/>
                             <constraint firstItem="r5o-ks-FMU" firstAttribute="leading" secondItem="nGi-Vt-ZTt" secondAttribute="leading" constant="44" id="EGK-XY-saP"/>
                             <constraint firstItem="vJy-Fm-Nzh" firstAttribute="centerX" secondItem="Gde-Bz-krd" secondAttribute="centerX" id="EiA-1Z-eZk"/>
+                            <constraint firstItem="gEG-vC-zdA" firstAttribute="top" secondItem="nGi-Vt-ZTt" secondAttribute="bottom" constant="-168" id="Fnz-kO-yMC"/>
                             <constraint firstItem="loU-69-wnU" firstAttribute="bottom" secondItem="Gde-Bz-krd" secondAttribute="bottom" id="KDs-jO-dmg"/>
                             <constraint firstItem="gEG-vC-zdA" firstAttribute="leading" secondItem="nGi-Vt-ZTt" secondAttribute="leading" constant="22" id="KkW-ig-lMn"/>
                             <constraint firstItem="iz8-KD-rMI" firstAttribute="top" secondItem="Gde-Bz-krd" secondAttribute="top" constant="10" id="PyE-fE-bQ9"/>
@@ -443,7 +444,6 @@
                             <constraint firstItem="loU-69-wnU" firstAttribute="trailing" secondItem="Gde-Bz-krd" secondAttribute="trailing" id="Uw2-6c-oZH"/>
                             <constraint firstItem="nGi-Vt-ZTt" firstAttribute="trailing" secondItem="iz8-KD-rMI" secondAttribute="trailing" constant="22" id="W93-fV-67D"/>
                             <constraint firstItem="oQP-St-2Du" firstAttribute="top" secondItem="Gde-Bz-krd" secondAttribute="top" constant="10" id="dcf-Vt-Ja1"/>
-                            <constraint firstItem="gEG-vC-zdA" firstAttribute="top" secondItem="FB7-Ah-Er5" secondAttribute="bottom" constant="44" id="hk2-LM-DDv"/>
                             <constraint firstItem="loU-69-wnU" firstAttribute="top" secondItem="Gde-Bz-krd" secondAttribute="top" id="oa9-QH-2Y2"/>
                             <constraint firstItem="nGi-Vt-ZTt" firstAttribute="trailing" secondItem="vrV-cz-c8p" secondAttribute="trailing" constant="44" id="rbK-FW-gf9"/>
                             <constraint firstItem="vJy-Fm-Nzh" firstAttribute="top" secondItem="nGi-Vt-ZTt" secondAttribute="top" constant="22" id="uwM-3T-fwO"/>
@@ -458,6 +458,7 @@
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="trainTextField" destination="gEG-vC-zdA" id="miq-E6-aP5"/>
+                        <outlet property="trainTextV" destination="Fnz-kO-yMC" id="OfT-F0-Csf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="29x-9H-OEg" sceneMemberID="firstResponder"/>

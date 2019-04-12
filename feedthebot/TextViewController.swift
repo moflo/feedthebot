@@ -17,6 +17,7 @@ class TextViewController: UIViewController {
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var trainTextField: MFFormTextField1!
+    @IBOutlet weak var trainTextV: NSLayoutConstraint!
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -38,6 +39,10 @@ class TextViewController: UIViewController {
         NotificationCenter.default.removeObserver(self)
     }
     
+    override var prefersStatusBarHidden : Bool {
+        return true
+    }
+
     // MARK: Keyboard View observers
     
     @objc func keyboardWillShow(_ notification: Notification) {
@@ -51,12 +56,34 @@ class TextViewController: UIViewController {
         
         let frameH = self.view.frame.size.height
         let keyboardH = keyboardFrame.height
+        let scale = UIScreen.main.scale
         
+        print("keyboardWillShow: ",frameH, keyboardH, scale)
         // -60px offset for toolbar...
-        print(frameH-keyboardH-60.0)
+//        animateToolbar(frameH-keyboardH-60.0)
+        animateToolbar(keyboardH)
+
     }
     
 
+    func animateToolbar(_ height: CGFloat) {
+        UIView.animate(withDuration: 0.33, delay: 0.1, options: .curveEaseOut, animations: { () -> Void in
+            
+            print("animateToolbar: ",self.trainTextV?.constant ?? 0,height)
+            
+            // Animate underLine position
+            self.trainTextV?.constant = -height
+            self.view.layoutIfNeeded()
+
+            
+        }, completion: { (done) -> Void in
+            // Set underLine width
+            
+        })
+
+    }
+    
+    
     /*
     // MARK: - Navigation
 
