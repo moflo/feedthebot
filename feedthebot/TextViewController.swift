@@ -16,10 +16,44 @@ class TextViewController: UIViewController {
     }
     
     @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var trainTextField: MFFormTextField1!
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        
+        // Register for keyboard notifications
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(_:)), name:
+            UIResponder.keyboardWillShowNotification, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(_:)), name:
+            UIResponder.keyboardWillChangeFrameNotification, object: nil)
+        
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    // MARK: Keyboard View observers
+    
+    @objc func keyboardWillShow(_ notification: Notification) {
+        // Activate the second textField
+        self.trainTextField.becomeFirstResponder()
+        
+        // Show the last text cell
+        let info = (notification as NSNotification).userInfo as NSDictionary!
+        
+        let keyboardFrame = (info?[UIResponder.keyboardFrameBeginUserInfoKey] as! NSValue).cgRectValue
+        
+        let frameH = self.view.frame.size.height
+        let keyboardH = keyboardFrame.height
+        
+        // -60px offset for toolbar...
+        print(frameH-keyboardH-60.0)
     }
     
 
