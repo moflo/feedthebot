@@ -22,6 +22,7 @@
 		918F2666225D7F4F00D6056C /* feedthebotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 918F2665225D7F4F00D6056C /* feedthebotTests.swift */; };
 		918F2676225D857900D6056C /* TrainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 918F2675225D857900D6056C /* TrainViewController.swift */; };
 		918F2678225DA65F00D6056C /* TextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 918F2677225DA65F00D6056C /* TextViewController.swift */; };
+		91CD057B22604B570085614D /* PayoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91CD057A22604B570085614D /* PayoutViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +59,7 @@
 		918F2673225D801500D6056C /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
 		918F2675225D857900D6056C /* TrainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainViewController.swift; sourceTree = "<group>"; };
 		918F2677225DA65F00D6056C /* TextViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextViewController.swift; sourceTree = "<group>"; };
+		91CD057A22604B570085614D /* PayoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayoutViewController.swift; sourceTree = "<group>"; };
 		B57A0CCBB9083A30FDD77040 /* Pods_feedthebotTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_feedthebotTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B814180C7B6B52D249EDF334 /* Pods-feedthebot.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-feedthebot.release.xcconfig"; path = "Target Support Files/Pods-feedthebot/Pods-feedthebot.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -131,6 +133,7 @@
 				918F2652225D7F4D00D6056C /* ViewController.swift */,
 				918F2675225D857900D6056C /* TrainViewController.swift */,
 				918F2677225DA65F00D6056C /* TextViewController.swift */,
+				91CD057A22604B570085614D /* PayoutViewController.swift */,
 				91754549225FBB2A00DB77EE /* UserManager.swift */,
 				9175454B225FFA2400DB77EE /* MFColors.swift */,
 				9175454D225FFBA400DB77EE /* MFButtons.swift */,
@@ -418,6 +421,7 @@
 				91754550226008D400DB77EE /* MFForms.swift in Sources */,
 				9175454C225FFA2400DB77EE /* MFColors.swift in Sources */,
 				918F2676225D857900D6056C /* TrainViewController.swift in Sources */,
+				91CD057B22604B570085614D /* PayoutViewController.swift in Sources */,
 				9175454A225FBB2A00DB77EE /* UserManager.swift in Sources */,
 				9175454E225FFBA400DB77EE /* MFButtons.swift in Sources */,
 				918F2678225DA65F00D6056C /* TextViewController.swift in Sources */,

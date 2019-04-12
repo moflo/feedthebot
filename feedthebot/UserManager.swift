@@ -69,6 +69,54 @@ struct MFUser {
 }
 
 
+class MFActivity {
+    var uuid :String = UUID().uuidString
+    var points :Int = 0
+    var trainingType :String
+    var updatedAt :Date = Date()
+    
+    var dictionary: [String: Any] {
+        return [
+            "uuid": self.uuid,
+            "points": self.points,
+            "training_type": self.trainingType,
+            "updatedAt": Date()
+        ]
+    }
+    
+    init() {
+        self.uuid = ""; self.trainingType = "Text";
+    }
+    
+    convenience init(uuid: String, points: Int) {
+        self.init()
+        self.uuid = uuid
+        self.points = points
+    }
+    
+    
+    convenience init?(dictionary: [String: Any] ) {
+        guard let dict = dictionary as [String: Any]? else { return nil }
+        guard let uuid = dict["uuid"] as? String else { return nil }
+        guard let points = dict["points"] as? Int else { return nil }
+        
+        self.init(uuid: uuid, points: points)
+        
+        if let training_type = dict["training_type"] as? String { self.trainingType = training_type }
+        
+        
+        if let timestamp = dict["updatedAt"] as? Timestamp {
+            self.updatedAt = timestamp.dateValue()
+        }
+        
+    }
+    
+    func getImage() -> UIImage {
+        return UIImage(named: "icon_text")!
+    }
+}
+
+
 class UserManager : NSObject {
     static let sharedInstance = UserManager()
 
@@ -179,7 +227,17 @@ class UserManager : NSObject {
         
         
     }
+    
+    // MARK: - Test Methods
 
+    func getTestActivity(_ count:Int = 2) -> [MFActivity] {
+        var activityList = [MFActivity]()
+        for i in 1...count {
+            let activity = MFActivity(uuid: "\(i)", points: i*32)
+            activityList.append(activity)
+        }
+        return activityList
+    }
 }
 
 
