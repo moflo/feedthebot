@@ -8,16 +8,6 @@
 
 import UIKit
 
-//
-//  TextViewController.swift
-//  feedthebot
-//
-//  Created by d. nye on 4/9/19.
-//  Copyright © 2019 Mobile Flow LLC. All rights reserved.
-//
-
-import UIKit
-
 
 class MFPayoutCell : UITableViewCell {
     @IBOutlet weak var icon: UIImageView!
@@ -57,6 +47,7 @@ class PayoutViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
 
     @IBAction func doPayoutButton(_ sender: Any) {
+
     }
     
     @IBOutlet weak var titleLabel: UILabel!

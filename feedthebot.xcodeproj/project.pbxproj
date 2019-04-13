@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		3D4E6D827958EEA4FAC3E2B9 /* Pods_feedthebotTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B57A0CCBB9083A30FDD77040 /* Pods_feedthebotTests.framework */; };
 		82486DD38D487BF29872D135 /* Pods_feedthebot.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BD871FF00F2B2AB6FA97E91 /* Pods_feedthebot.framework */; };
+		914C7186226109AC00AF9099 /* DataSetManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 914C7185226109AC00AF9099 /* DataSetManager.swift */; };
+		914C718822616C0900AF9099 /* CardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 914C718722616C0900AF9099 /* CardViewController.swift */; };
 		9175454A225FBB2A00DB77EE /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91754549225FBB2A00DB77EE /* UserManager.swift */; };
 		9175454C225FFA2400DB77EE /* MFColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9175454B225FFA2400DB77EE /* MFColors.swift */; };
 		9175454E225FFBA400DB77EE /* MFButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9175454D225FFBA400DB77EE /* MFButtons.swift */; };
@@ -40,6 +42,8 @@
 		375C55B3352D64CFFFEED065 /* Pods-feedthebotTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-feedthebotTests.release.xcconfig"; path = "Target Support Files/Pods-feedthebotTests/Pods-feedthebotTests.release.xcconfig"; sourceTree = "<group>"; };
 		72FD7613EF597AFE296EFD75 /* Pods-feedthebot.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-feedthebot.debug.xcconfig"; path = "Target Support Files/Pods-feedthebot/Pods-feedthebot.debug.xcconfig"; sourceTree = "<group>"; };
 		87411C17685D37C0183DF149 /* Pods-feedthebotTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-feedthebotTests.debug.xcconfig"; path = "Target Support Files/Pods-feedthebotTests/Pods-feedthebotTests.debug.xcconfig"; sourceTree = "<group>"; };
+		914C7185226109AC00AF9099 /* DataSetManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSetManager.swift; sourceTree = "<group>"; };
+		914C718722616C0900AF9099 /* CardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewController.swift; sourceTree = "<group>"; };
 		91754549225FBB2A00DB77EE /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		9175454B225FFA2400DB77EE /* MFColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MFColors.swift; sourceTree = "<group>"; };
 		9175454D225FFBA400DB77EE /* MFButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MFButtons.swift; sourceTree = "<group>"; };
@@ -134,7 +138,9 @@
 				918F2675225D857900D6056C /* TrainViewController.swift */,
 				918F2677225DA65F00D6056C /* TextViewController.swift */,
 				91CD057A22604B570085614D /* PayoutViewController.swift */,
+				914C718722616C0900AF9099 /* CardViewController.swift */,
 				91754549225FBB2A00DB77EE /* UserManager.swift */,
+				914C7185226109AC00AF9099 /* DataSetManager.swift */,
 				9175454B225FFA2400DB77EE /* MFColors.swift */,
 				9175454D225FFBA400DB77EE /* MFButtons.swift */,
 				9175454F226008D400DB77EE /* MFForms.swift */,
@@ -424,6 +430,8 @@
 				91CD057B22604B570085614D /* PayoutViewController.swift in Sources */,
 				9175454A225FBB2A00DB77EE /* UserManager.swift in Sources */,
 				9175454E225FFBA400DB77EE /* MFButtons.swift in Sources */,
+				914C718822616C0900AF9099 /* CardViewController.swift in Sources */,
+				914C7186226109AC00AF9099 /* DataSetManager.swift in Sources */,
 				918F2678225DA65F00D6056C /* TextViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -597,7 +605,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.mobileflowllc.feedthebot;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -616,7 +624,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.mobileflowllc.feedthebot;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
