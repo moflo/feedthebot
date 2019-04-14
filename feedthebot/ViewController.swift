@@ -29,6 +29,9 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let points = 1234
+        self.pointsLabel.text = "\(points)"
+
         setupStatButtons()
         
     }
@@ -47,7 +50,7 @@ class ViewController: UIViewController {
             if (error == nil) {
                 DispatchQueue.main.async {
                     let points = UserManager.sharedInstance.getUserTotalPoints()
-                    self.pointsLabel.text = "+ \(points)"
+                    self.pointsLabel.text = "\(points)"
                     
                 }
             }

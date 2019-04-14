@@ -23,17 +23,13 @@ class MFPayoutCell : UITableViewCell {
         
         icon.image = icon_image
         trainingType.text = type
-        amount.text = "\(points)"
+        let price = String(format: "%.2f", Double(points)*0.1)
+        amount.text = "$\(price)"
         dateLabel.text = date_string
     }
     
     func setBackground(_ row: Int) {
-        if (row % 2 == 0) {
-            self.backgroundColor = MFGreen()
-        }
-        else {
-            self.backgroundColor = MFDarkBlue()
-        }
+        self.backgroundColor = MFDarkBlue()
         trainingType.textColor = .white
         amount.textColor = .white
     }
