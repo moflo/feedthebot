@@ -28,7 +28,9 @@ class TextViewController: UIViewController {
     @IBOutlet weak var trainTextV: NSLayoutConstraint!
     
     var dataSetObj :MFDataSet? = nil
-    
+    var gameTimer : Timer? = nil
+    var gameTimeSeconds : Int = 0
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -56,6 +58,7 @@ class TextViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         NotificationCenter.default.removeObserver(self)
+        gameTimer?.invalidate()
     }
     
     override var prefersStatusBarHidden : Bool {
@@ -75,17 +78,78 @@ class TextViewController: UIViewController {
         
         pointsLabel.text = "\(data.points)"
         progressLabel.text = "0/\(data.eventCount)"
+        gameTimeSeconds = data.limitSeconds
         timeLabel.text = "00:00"
-
+        updateTimerLabel()
+        
         let alert = MFAlertTrainView(title: "Goal",
                                      icon: "",
                                      info: "This should be long texst which describes the type of training data.",
                                      prompt: "Call to Action") { (category, buttonIndex) in
+                                        
             print("Completion: ",category, buttonIndex)
+            self.startGameTimer()
+                                        
         }
         alert.show()
 
     }
+    
+    // MARK: Timer methods
+    
+    func startGameTimer() {
+        // Start the game timer
+        if gameTimer == nil {
+            let fireDate = Date()
+            gameTimer = Timer.scheduledTimer(timeInterval: 1.0,
+                                             target: self,
+                                             selector: #selector(self.timerCountdown),
+                                             userInfo: fireDate,
+                                             repeats: true)
+            }
+    }
+    
+    func stopGameTimer() {
+        // Terminate game timer
+        if (self.gameTimer?.isValid != nil) {
+            self.gameTimer?.invalidate()
+            self.gameTimer = nil
+        }
+    }
+    
+    func updateGameTime() {
+        // Method to update the gameTimeSeconds using count down method, stop clock and advance period
+        
+        gameTimeSeconds -= 1
+        
+        if ( gameTimeSeconds <= 0 ) {
+            gameTimeSeconds = 0
+            stopGameTimer()
+        }
+    }
+    
+    func updateTimerLabel() {
+        let minute = gameTimeSeconds / 60
+        let second = gameTimeSeconds % 60
+        
+        let min = NSString(format:"%02d",minute)
+        let sec = NSString(format:"%02d",second)
+        
+        let timeString = "\(min):\(sec)"
+        
+        timeLabel.text = timeString
+    }
+    
+    @objc func timerCountdown() {
+        // Method to update the UINavigationItem prompt with the elapsed time
+        if (gameTimer?.isValid != nil) {
+
+            updateGameTime()
+            updateTimerLabel()
+            
+        }
+    }
+    
     
     // MARK: Keyboard View observers
     

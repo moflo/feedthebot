@@ -66,6 +66,7 @@ class MFDataSet {
     var multiplier :Float = 1.0
     var trainingType :String
     var eventCount :Int = 10
+    var limitSeconds :Int = 60*2
     var dataURLArray :[String] = [String]()
     var categoryArray :[String] = [String]()
     var responseArray :[MFResponse] = [MFResponse]()
@@ -78,6 +79,7 @@ class MFDataSet {
             "multiplier": self.multiplier,
             "training_type": self.trainingType,
             "eventCount": self.eventCount,
+            "limitSeconds": self.limitSeconds,
             "dataURLArray": self.dataURLArray,
             "categoryArray": self.categoryArray,
 //            "responseArray": self.responseArray,
