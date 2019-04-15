@@ -15,6 +15,11 @@ class TextViewController: UIViewController {
     @IBAction func doSkipButton(_ sender: Any) {
     }
     
+    @IBAction func doTrainSkipButton(_ sender: Any) {
+    }
+    @IBAction func doTrainDoneButton(_ sender: Any) {
+    }
+
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var trainTextField: MFFormTextField1!
     @IBOutlet weak var trainTextV: NSLayoutConstraint!
@@ -50,7 +55,7 @@ class TextViewController: UIViewController {
         self.trainTextField.becomeFirstResponder()
         
         // Show the last text cell
-        let info = (notification as NSNotification).userInfo as NSDictionary!
+        let info = (notification as NSNotification).userInfo
         
         let keyboardFrame = (info?[UIResponder.keyboardFrameBeginUserInfoKey] as! NSValue).cgRectValue
         
@@ -72,7 +77,7 @@ class TextViewController: UIViewController {
             print("animateToolbar: ",self.trainTextV?.constant ?? 0,height)
             
             // Animate underLine position
-            self.trainTextV?.constant = -height
+            self.trainTextV?.constant = height
             self.view.layoutIfNeeded()
 
             

@@ -410,35 +410,41 @@
                                     <constraint firstAttribute="height" constant="8" id="ICu-NK-qkV"/>
                                 </constraints>
                             </view>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Teach me..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gEG-vC-zdA" customClass="MFFormTextField1" customModule="feedthebot">
-                                <rect key="frame" x="60" y="417" width="255" height="44"/>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Teach me..." textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="gEG-vC-zdA" customClass="MFFormTextField1" customModule="feedthebot">
+                                <rect key="frame" x="60" y="423" width="255" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="Whn-JM-ELy"/>
                                 </constraints>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="done" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
                                 <connections>
                                     <outlet property="delegate" destination="KKT-yN-f9Z" id="Luc-b3-JlR"/>
                                 </connections>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AIR-K4-iIO">
-                                <rect key="frame" x="8" y="417" width="44" height="44"/>
-                                <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <rect key="frame" x="8" y="423" width="44" height="44"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="44" id="SnP-eh-9cs"/>
                                     <constraint firstAttribute="height" constant="44" id="UGm-cq-778"/>
                                 </constraints>
-                                <state key="normal" image="icon_redo"/>
+                                <state key="normal" image="tool_skip"/>
+                                <connections>
+                                    <action selector="doTrainSkipButton:" destination="KKT-yN-f9Z" eventType="touchUpInside" id="FSK-9R-JR5"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JAq-XW-gy7">
-                                <rect key="frame" x="323" y="417" width="44" height="44"/>
-                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <rect key="frame" x="323" y="423" width="44" height="44"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="44" id="VLA-bU-ogP"/>
                                     <constraint firstAttribute="height" constant="44" id="jwV-RE-DOb"/>
                                 </constraints>
-                                <state key="normal" image="icon_redo"/>
+                                <state key="normal" image="tool_check"/>
+                                <connections>
+                                    <action selector="doTrainDoneButton:" destination="KKT-yN-f9Z" eventType="touchUpInside" id="YQt-5Y-WM6"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -459,7 +465,6 @@
                             <constraint firstItem="r5o-ks-FMU" firstAttribute="leading" secondItem="nGi-Vt-ZTt" secondAttribute="leading" constant="44" id="EGK-XY-saP"/>
                             <constraint firstItem="vJy-Fm-Nzh" firstAttribute="centerX" secondItem="Gde-Bz-krd" secondAttribute="centerX" id="EiA-1Z-eZk"/>
                             <constraint firstItem="nGi-Vt-ZTt" firstAttribute="trailing" secondItem="JAq-XW-gy7" secondAttribute="trailing" constant="8" id="FPQ-y2-FuU"/>
-                            <constraint firstItem="gEG-vC-zdA" firstAttribute="top" secondItem="nGi-Vt-ZTt" secondAttribute="bottom" constant="-250" id="Fnz-kO-yMC"/>
                             <constraint firstItem="AIR-K4-iIO" firstAttribute="leading" secondItem="nGi-Vt-ZTt" secondAttribute="leading" constant="8" id="IQE-gf-l33"/>
                             <constraint firstItem="loU-69-wnU" firstAttribute="bottom" secondItem="Gde-Bz-krd" secondAttribute="bottom" id="KDs-jO-dmg"/>
                             <constraint firstItem="gEG-vC-zdA" firstAttribute="leading" secondItem="nGi-Vt-ZTt" secondAttribute="leading" constant="60" id="KkW-ig-lMn"/>
@@ -472,6 +477,7 @@
                             <constraint firstItem="gEG-vC-zdA" firstAttribute="leading" secondItem="AIR-K4-iIO" secondAttribute="trailing" constant="8" symbolic="YES" id="fq6-qY-SH5"/>
                             <constraint firstItem="AIR-K4-iIO" firstAttribute="leading" secondItem="nGi-Vt-ZTt" secondAttribute="leading" constant="8" id="lib-Wk-aQS"/>
                             <constraint firstItem="JAq-XW-gy7" firstAttribute="leading" secondItem="gEG-vC-zdA" secondAttribute="trailing" constant="8" id="n9o-A7-QJU"/>
+                            <constraint firstAttribute="bottom" secondItem="gEG-vC-zdA" secondAttribute="bottom" constant="200" id="nfy-Rn-V9O"/>
                             <constraint firstItem="loU-69-wnU" firstAttribute="top" secondItem="Gde-Bz-krd" secondAttribute="top" id="oa9-QH-2Y2"/>
                             <constraint firstItem="nGi-Vt-ZTt" firstAttribute="trailing" secondItem="vrV-cz-c8p" secondAttribute="trailing" constant="44" id="rbK-FW-gf9"/>
                             <constraint firstItem="JAq-XW-gy7" firstAttribute="centerY" secondItem="gEG-vC-zdA" secondAttribute="centerY" id="tiL-3p-Rzt"/>
@@ -488,7 +494,7 @@
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="trainTextField" destination="gEG-vC-zdA" id="miq-E6-aP5"/>
-                        <outlet property="trainTextV" destination="Fnz-kO-yMC" id="OfT-F0-Csf"/>
+                        <outlet property="trainTextV" destination="nfy-Rn-V9O" id="zPz-3B-oxX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="29x-9H-OEg" sceneMemberID="firstResponder"/>
@@ -931,5 +937,7 @@
         <image name="icon_settings" width="64" height="64"/>
         <image name="icon_text" width="64" height="64"/>
         <image name="powered_by_stripe" width="149" height="41"/>
+        <image name="tool_check" width="64" height="64"/>
+        <image name="tool_skip" width="64" height="64"/>
     </resources>
 </document>
