@@ -121,5 +121,11 @@ class MFDataSet {
 class DataSetManager : NSObject {
     static let sharedInstance = DataSetManager()
 
+    
+    func demoDataSet(_ trainingType :String) -> MFDataSet {
+        let data = MFDataSet(uuid: "DEADBEEF", points: 30)
+        
+        return data
+    }
 }
 

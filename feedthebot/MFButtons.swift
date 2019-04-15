@@ -263,3 +263,134 @@ class MFRoundedButton : UIButton {
     
 }
 
+// MARK: - MFAlertButton
+
+class MFAlertButton : UIButton {
+    // UIButton subclass to mimic the UIAlert button
+    
+    var borderWidth : CGFloat! = 0.5
+    var insetWidth : CGFloat! = 0.5
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        self.initialize()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        self.initialize()
+    }
+    
+    func initialize()
+    {
+        self.titleLabel?.font = UIFont(name: "HelveticaNeue", size: 15.0)
+        self.setTitleColor(.white, for: .normal)
+        self.setTitleColor(.darkGray, for: .highlighted)
+        self.titleEdgeInsets = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 8)
+        self.layer.contentsScale = UIScreen.main.scale
+        self.backgroundColor = MFGreen()
+    }
+    
+    fileprivate var borderLayer: CAShapeLayer?
+    fileprivate func layoutOutlineLayer() {
+        if let existingLayer = borderLayer {
+            existingLayer.removeFromSuperlayer()
+        }
+        let outlineShape = CAShapeLayer()
+        let w = self.frame.size.width
+        let h = CGFloat(0.1)
+        let frame = CGRect(x: 0.0, y: 0.0, width: w, height: h)
+        outlineShape.frame = frame
+        outlineShape.path = UIBezierPath(roundedRect: frame, cornerRadius: 0.0).cgPath
+        outlineShape.fillColor = MFGreen().cgColor
+        outlineShape.strokeColor = UIColor.lightGray.cgColor
+        outlineShape.lineWidth = 0.5
+        self.layer.insertSublayer(outlineShape, at: 0)
+        self.borderLayer = outlineShape
+    }
+    
+    override func draw(_ rect :CGRect) {
+        let ctx = UIGraphicsGetCurrentContext() //as CGContextRef
+        
+        let strokeColor = UIColor.clear.cgColor
+        let fillColor = MFGreen().cgColor
+        
+        
+        ctx?.setFillColor(fillColor)
+        ctx?.setStrokeColor(strokeColor)
+        ctx?.saveGState()
+        
+        //        CGContextSetLineWidth(ctx, self.borderWidth)
+        //
+        ////        let outlinePath = UIBezierPath(roundedRect: CGRectInset(self.bounds, self.borderWidth, self.borderWidth), cornerRadius: 0.0)
+        //
+        //        CGContextAddPath(ctx, outlinePath.CGPath)
+        //        CGContextStrokePath(ctx)
+        //
+        //        CGContextRestoreGState(ctx)
+        
+        if (self.isHighlighted || self.isSelected) {
+            ctx?.saveGState()
+            let fillPath = UIBezierPath(roundedRect:self.bounds.insetBy(dx: self.insetWidth, dy: self.insetWidth), cornerRadius:0.0)
+            
+            ctx?.addPath(fillPath.cgPath)
+            ctx?.fillPath()
+            
+            ctx?.restoreGState()
+        }
+        
+    }
+    
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        self.layoutOutlineLayer()
+        self.setNeedsDisplay()
+    }
+    
+    override var isHighlighted: Bool {
+        didSet {
+            self.setNeedsDisplay()
+        }
+    }
+    
+    override var isSelected: Bool {
+        didSet {
+            self.setNeedsDisplay()
+        }
+    }
+    
+    override var isEnabled: Bool {
+        didSet {
+            self.setNeedsDisplay()
+        }
+    }
+    
+    
+}
+
+// MARK: - Device Types
+
+enum UIUserInterfaceIdiom : Int
+{
+    case unspecified
+    case phone
+    case pad
+}
+
+struct ScreenSize
+{
+    static let SCREEN_WIDTH         = UIScreen.main.bounds.size.width
+    static let SCREEN_HEIGHT        = UIScreen.main.bounds.size.height
+    static let SCREEN_MAX_LENGTH    = max(ScreenSize.SCREEN_WIDTH, ScreenSize.SCREEN_HEIGHT)
+    static let SCREEN_MIN_LENGTH    = min(ScreenSize.SCREEN_WIDTH, ScreenSize.SCREEN_HEIGHT)
+}
+
+struct DeviceType
+{
+    static let IS_IPHONE_4_OR_LESS  = UIDevice.current.userInterfaceIdiom == .phone && ScreenSize.SCREEN_MAX_LENGTH < 568.0
+    static let IS_IPHONE_5          = UIDevice.current.userInterfaceIdiom == .phone && ScreenSize.SCREEN_MAX_LENGTH == 568.0
+    static let IS_IPHONE_6          = UIDevice.current.userInterfaceIdiom == .phone && ScreenSize.SCREEN_MAX_LENGTH == 667.0
+    static let IS_IPHONE_6P         = UIDevice.current.userInterfaceIdiom == .phone && ScreenSize.SCREEN_MAX_LENGTH == 736.0
+    static let IS_IPAD              = UIDevice.current.userInterfaceIdiom == .pad && ScreenSize.SCREEN_MAX_LENGTH == 1024.0
+}

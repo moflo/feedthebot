@@ -59,4 +59,12 @@ func MFBlueEnd() -> UIColor {
     return UIColor(hex:0xCDE7F2)
 }
 
+// MARK: - MFAlert colors
+func MFAlertBlue() -> UIColor {
+    return UIColor(hex:0x0078ff)
+}
+
+func MFAlertGrayFill() -> UIColor {
+    return UIColor(hex:0xe5e5e5)
+}
 

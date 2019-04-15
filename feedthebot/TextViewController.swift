@@ -20,13 +20,22 @@ class TextViewController: UIViewController {
     @IBAction func doTrainDoneButton(_ sender: Any) {
     }
 
-    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var pointsLabel: UILabel!
+    @IBOutlet weak var progressLabel: UILabel!
+    @IBOutlet weak var timeLabel: UILabel!
+
     @IBOutlet weak var trainTextField: MFFormTextField1!
     @IBOutlet weak var trainTextV: NSLayoutConstraint!
+    
+    var dataSetObj :MFDataSet? = nil
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        if (dataSetObj == nil) {
+            dataSetObj = DataSetManager.sharedInstance.demoDataSet("Text OCR")
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -38,6 +47,11 @@ class TextViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(_:)), name:
             UIResponder.keyboardWillChangeFrameNotification, object: nil)
         
+        doPreloadDataSet()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        doLoadDataSet()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -47,7 +61,32 @@ class TextViewController: UIViewController {
     override var prefersStatusBarHidden : Bool {
         return true
     }
+    
+    // MARK: Dataset methods
+    
+    func doPreloadDataSet() {
+        guard let data = dataSetObj else { return }
+        
+        pointsLabel.text = "\(data.points)"
+    }
 
+    func doLoadDataSet() {
+        guard let data = dataSetObj else { return }
+        
+        pointsLabel.text = "\(data.points)"
+        progressLabel.text = "0/\(data.eventCount)"
+        timeLabel.text = "00:00"
+
+        let alert = MFAlertTrainView(title: "Goal",
+                                     icon: "",
+                                     info: "This should be long texst which describes the type of training data.",
+                                     prompt: "Call to Action") { (category, buttonIndex) in
+            print("Completion: ",category, buttonIndex)
+        }
+        alert.show()
+
+    }
+    
     // MARK: Keyboard View observers
     
     @objc func keyboardWillShow(_ notification: Notification) {

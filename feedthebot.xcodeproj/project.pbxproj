@@ -11,6 +11,7 @@
 		82486DD38D487BF29872D135 /* Pods_feedthebot.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BD871FF00F2B2AB6FA97E91 /* Pods_feedthebot.framework */; };
 		914C7186226109AC00AF9099 /* DataSetManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 914C7185226109AC00AF9099 /* DataSetManager.swift */; };
 		914C718822616C0900AF9099 /* CardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 914C718722616C0900AF9099 /* CardViewController.swift */; };
+		914C718B2264EC0E00AF9099 /* MFAlerts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 914C718A2264EC0E00AF9099 /* MFAlerts.swift */; };
 		9175454A225FBB2A00DB77EE /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91754549225FBB2A00DB77EE /* UserManager.swift */; };
 		9175454C225FFA2400DB77EE /* MFColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9175454B225FFA2400DB77EE /* MFColors.swift */; };
 		9175454E225FFBA400DB77EE /* MFButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9175454D225FFBA400DB77EE /* MFButtons.swift */; };
@@ -45,6 +46,7 @@
 		914C7185226109AC00AF9099 /* DataSetManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSetManager.swift; sourceTree = "<group>"; };
 		914C718722616C0900AF9099 /* CardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewController.swift; sourceTree = "<group>"; };
 		914C71892261A29F00AF9099 /* feedthebot.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = feedthebot.entitlements; sourceTree = "<group>"; };
+		914C718A2264EC0E00AF9099 /* MFAlerts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MFAlerts.swift; sourceTree = "<group>"; };
 		91754549225FBB2A00DB77EE /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		9175454B225FFA2400DB77EE /* MFColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MFColors.swift; sourceTree = "<group>"; };
 		9175454D225FFBA400DB77EE /* MFButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MFButtons.swift; sourceTree = "<group>"; };
@@ -145,6 +147,7 @@
 				9175454B225FFA2400DB77EE /* MFColors.swift */,
 				9175454D225FFBA400DB77EE /* MFButtons.swift */,
 				9175454F226008D400DB77EE /* MFForms.swift */,
+				914C718A2264EC0E00AF9099 /* MFAlerts.swift */,
 				918F2654225D7F4D00D6056C /* Main.storyboard */,
 				918F2657225D7F4F00D6056C /* Assets.xcassets */,
 				918F2659225D7F4F00D6056C /* LaunchScreen.storyboard */,
@@ -440,6 +443,7 @@
 				914C718822616C0900AF9099 /* CardViewController.swift in Sources */,
 				914C7186226109AC00AF9099 /* DataSetManager.swift in Sources */,
 				918F2678225DA65F00D6056C /* TextViewController.swift in Sources */,
+				914C718B2264EC0E00AF9099 /* MFAlerts.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
