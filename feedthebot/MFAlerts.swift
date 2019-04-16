@@ -227,23 +227,23 @@ class MFAlertCompleteView: UIView {
         
         // Add Next button
         let nextFrame = CGRect(x: 0.0, y: nextOffset, width: buttonHeight*4, height: buttonHeight*4)
-        let nextButton = MFRoundedButton(frame: nextFrame)
-        nextButton.tag = 101
+        let nextButton = MFRectIconButton(frame: nextFrame)
+        nextButton.configure("Title1",icon:"icon_bounding",tag:101)
         nextButton.addTarget(self, action: #selector(self.doNextButton(_:)), for: .touchUpInside)
         self.addSubview(nextButton)
         
         // Add Prompt view
         let repeatFrame = CGRect(x: 0.0, y: buttonHeight*5, width: buttonHeight*2, height: buttonHeight*2)
-        let repeatButton = MFRoundedButton(frame: repeatFrame)
-        repeatButton.tag = 101
+        let repeatButton = MFRectIconButton(frame: repeatFrame)
+        repeatButton.configure("Title2",icon:"icon_bounding",tag:102)
         repeatButton.addTarget(self, action: #selector(self.doRepeatButton(_:)), for: .touchUpInside)
         self.addSubview(repeatButton)
         
         
         // Add Cancel button
         let quitFrame = CGRect(x: viewWidth * 0.5, y: buttonHeight*5, width: buttonHeight*2, height: buttonHeight*2)
-        let quitButton = MFRoundedButton(frame: quitFrame)
-        quitButton.tag = 101
+        let quitButton = MFRectIconButton(frame: quitFrame)
+        quitButton.configure("Title3",icon:"icon_bounding",tag:103)
         quitButton.addTarget(self, action: #selector(self.doCancelButton(_:)), for: .touchUpInside)
         self.addSubview(quitButton)
         
