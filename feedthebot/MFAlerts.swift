@@ -207,7 +207,7 @@ class MFAlertCompleteView: UIView {
     func configure(_ title: String) {
         
         // Create & size the alert UIView based on the button & text settings
-        var viewHeight :CGFloat = 280.0
+        var viewHeight :CGFloat = 350.0
         let viewWidth :CGFloat = 250.0
         
         let titleHeight :CGFloat = 35.0
@@ -222,34 +222,45 @@ class MFAlertCompleteView: UIView {
         let titleLabel = UILabel(frame: CGRect(x: 0.0, y: 10.0, width: viewWidth, height: titleHeight))
         titleLabel.text = title
         titleLabel.font = UIFont.boldSystemFont(ofSize: 14)
+        titleLabel.textColor = .white
         titleLabel.textAlignment = .center
         self.addSubview(titleLabel)
         
         // Add Next button
         let nextFrame = CGRect(x: 0.0, y: nextOffset, width: buttonHeight*4, height: buttonHeight*4)
         let nextButton = MFRectIconButton(frame: nextFrame)
-        nextButton.configure("Title1",icon:"icon_bounding",tag:101)
+        nextButton.configure("Next Set",icon:"icon_right_arrow",tag:100)
         nextButton.addTarget(self, action: #selector(self.doNextButton(_:)), for: .touchUpInside)
+        nextButton.imageEdgeInsets = UIEdgeInsets(top: -100, left: 48, bottom: -40, right: 0)
+        nextButton.titleEdgeInsets = UIEdgeInsets(top: 50, left: -70, bottom: 0, right: 0)
+        nextButton.center = CGPoint(x: self.center.x, y: nextButton.center.y)
         self.addSubview(nextButton)
         
         // Add Prompt view
-        let repeatFrame = CGRect(x: 0.0, y: buttonHeight*5, width: buttonHeight*2, height: buttonHeight*2)
+        let subBtnSize = buttonHeight*1.8
+        let subBtnX = nextButton.frame.origin.x
+        let repeatFrame = CGRect(x: subBtnX, y: buttonHeight*6, width: subBtnSize, height: subBtnSize)
         let repeatButton = MFRectIconButton(frame: repeatFrame)
-        repeatButton.configure("Title2",icon:"icon_bounding",tag:102)
+        repeatButton.configure("Repeat",icon:"icon_redo",tag:103)
+        repeatButton.fontSize = 12.0
         repeatButton.addTarget(self, action: #selector(self.doRepeatButton(_:)), for: .touchUpInside)
+        repeatButton.imageEdgeInsets = UIEdgeInsets(top: -60, left: 20, bottom: -40, right: 20)
+        repeatButton.titleEdgeInsets = UIEdgeInsets(top: 26, left: -60, bottom: 0, right: 0)
         self.addSubview(repeatButton)
         
         
         // Add Cancel button
-        let quitFrame = CGRect(x: viewWidth * 0.5, y: buttonHeight*5, width: buttonHeight*2, height: buttonHeight*2)
+        let subBtnX2 = subBtnX + nextButton.frame.size.width - subBtnSize
+        let quitFrame = CGRect(x: subBtnX2, y: buttonHeight*6, width: subBtnSize, height: subBtnSize)
         let quitButton = MFRectIconButton(frame: quitFrame)
-        quitButton.configure("Title3",icon:"icon_bounding",tag:103)
+        quitButton.configure("Exit",icon:"icon_close",tag:102)
+        quitButton.fontSize = 12.0
         quitButton.addTarget(self, action: #selector(self.doCancelButton(_:)), for: .touchUpInside)
+        quitButton.imageEdgeInsets = UIEdgeInsets(top: -60, left: 20, bottom: -40, right: 20)
+        quitButton.titleEdgeInsets = UIEdgeInsets(top: 26, left: -65, bottom: 0, right: 0)
         self.addSubview(quitButton)
         
 
-        
-        
         
         // Magic code to force a rounded rectangle mask on the layer...
         self.layer.cornerRadius = 8.0

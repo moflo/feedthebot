@@ -287,6 +287,11 @@ class MFRectIconButton : UIButton {
             self.setNeedsDisplay()
         }
     }
+    var fontSize : CGFloat! = 22.0 {
+        didSet {
+            self.setNeedsDisplay()
+        }
+    }
     func configure(_ title:String, icon:String, tag:Int) {
         self.setTitle(title, for: .normal)
         self.setTitle(title, for: .highlighted)
@@ -312,10 +317,16 @@ class MFRectIconButton : UIButton {
     {
         self.setTitleColor(UIColor.black, for: UIControl.State())
         self.setTitleColor(UIColor.black, for: .highlighted)
-        self.titleEdgeInsets = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 8)
+        
+        self.imageView?.contentMode = .scaleAspectFit
+        self.contentMode = .center
+        
         self.borderWidth = 2
         self.insetWidth = self.borderWidth! * 2.5
         self.layer.contentsScale = UIScreen.main.scale
+        
+        // Arrange icon & text
+        
     }
     
     override func draw(_ rect :CGRect) {
@@ -353,7 +364,7 @@ class MFRectIconButton : UIButton {
             self.setTitleColor(.black, for: UIControl.State())
             self.setTitleColor(.black, for: .highlighted)
             self.setTitleColor(.black, for: .disabled)
-            self.titleLabel?.font = UIFont.systemFont(ofSize: 22)
+            self.titleLabel?.font = UIFont.systemFont(ofSize: fontSize)
             
             switch (self.state) {
             case UIControl.State.highlighted:
@@ -382,7 +393,7 @@ class MFRectIconButton : UIButton {
             self.insetWidth = 0.0
             self.setTitleColor(UIColor.white, for: UIControl.State())
             self.setTitleColor(UIColor.black, for: .highlighted)
-            self.titleLabel?.font = UIFont.systemFont(ofSize: 22)
+            self.titleLabel?.font = UIFont.systemFont(ofSize: fontSize)
             
             switch (self.state) {
             case UIControl.State.highlighted:
@@ -407,7 +418,7 @@ class MFRectIconButton : UIButton {
             self.setTitleColor(UIColor.white, for: UIControl.State())
             self.setTitleColor(UIColor.white, for: .highlighted)
             self.setTitleColor(MFRed(), for: .disabled)
-            self.titleLabel?.font = UIFont.systemFont(ofSize: 22)
+            self.titleLabel?.font = UIFont.systemFont(ofSize: fontSize)
             
             switch (self.state) {
             case UIControl.State.highlighted:
@@ -433,7 +444,7 @@ class MFRectIconButton : UIButton {
             self.setTitleColor(.white, for: UIControl.State())
             self.setTitleColor(.white, for: .highlighted)
             self.setTitleColor(.white, for: .disabled)
-            self.titleLabel?.font = UIFont.systemFont(ofSize: 22)
+            self.titleLabel?.font = UIFont.systemFont(ofSize: fontSize)
             
             switch (self.state) {
             case UIControl.State.highlighted:
