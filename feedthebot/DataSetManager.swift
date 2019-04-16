@@ -65,6 +65,7 @@ class MFDataSet {
     var points :Int = 0
     var multiplier :Float = 1.0
     var trainingType :String
+    var instruction :String = "This should be long texst which describes the type of training data."
     var eventCount :Int = 10
     var limitSeconds :Int = 60*2
     var dataURLArray :[String] = [String]()
@@ -78,6 +79,7 @@ class MFDataSet {
             "points": self.points,
             "multiplier": self.multiplier,
             "training_type": self.trainingType,
+            "instruction": self.instruction,
             "eventCount": self.eventCount,
             "limitSeconds": self.limitSeconds,
             "dataURLArray": self.dataURLArray,
@@ -106,7 +108,8 @@ class MFDataSet {
         self.init(uuid: uuid, points: points)
         
         if let training_type = dict["training_type"] as? String { self.trainingType = training_type }
-        
+        if let instruction = dict["instruction"] as? String { self.instruction = instruction }
+
         
         if let timestamp = dict["updatedAt"] as? Timestamp {
             self.updatedAt = timestamp.dateValue()
@@ -128,6 +131,14 @@ class DataSetManager : NSObject {
         let data = MFDataSet(uuid: "DEADBEEF", points: 30)
         
         return data
+    }
+    
+    
+    // MARK: - Server Methods
+    
+    func postTraining(_ data:MFDataSet?) {
+        guard data != nil else { return }
+        
     }
 }
 

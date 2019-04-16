@@ -13,11 +13,14 @@ class TextViewController: UIViewController {
         self.navigationController?.dismiss(animated: true, completion: nil)
     }
     @IBAction func doSkipButton(_ sender: Any) {
+        doSaveTrainingEvent("")
     }
     
     @IBAction func doTrainSkipButton(_ sender: Any) {
+        doSaveTrainingEvent("")
     }
     @IBAction func doTrainDoneButton(_ sender: Any) {
+        doSaveTrainingEvent(trainTextField.text!)
     }
 
     @IBOutlet weak var pointsLabel: UILabel!
@@ -28,8 +31,11 @@ class TextViewController: UIViewController {
     @IBOutlet weak var trainTextV: NSLayoutConstraint!
     
     var dataSetObj :MFDataSet? = nil
+    var trainingCount :Int = 0
     var gameTimer : Timer? = nil
     var gameTimeSeconds : Int = 0
+    
+    var responseStrings: [String]? = nil
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -77,17 +83,21 @@ class TextViewController: UIViewController {
         guard let data = dataSetObj else { return }
         
         pointsLabel.text = "\(data.points)"
-        progressLabel.text = "0/\(data.eventCount)"
+        trainingCount = 0
+        progressLabel.text = "\(trainingCount)/\(data.eventCount)"
+        
+        responseStrings = [String].init(repeating: "", count: data.eventCount)
+        
         gameTimeSeconds = data.limitSeconds
+        let prompt = "You have \(gameTimeSeconds/60) minutes"
         timeLabel.text = "00:00"
         updateTimerLabel()
         
-        let alert = MFAlertTrainView(title: "Goal",
+        let alert = MFAlertTrainView(title: "Text Recognition",
                                      icon: "",
-                                     info: "This should be long texst which describes the type of training data.",
-                                     prompt: "Call to Action") { (category, buttonIndex) in
+                                     info: data.instruction,
+                                     prompt: prompt) { (category, buttonIndex) in
                                         
-            print("Completion: ",category, buttonIndex)
             self.startGameTimer()
                                         
         }
@@ -95,6 +105,44 @@ class TextViewController: UIViewController {
 
     }
     
+    func doSaveTrainingEvent(_ text:String) {
+        guard let data = dataSetObj else { return }
+        guard responseStrings != nil else { return }
+        guard responseStrings!.count <= data.eventCount else { return }
+        
+        responseStrings![trainingCount] = text
+        
+        trainingCount = trainingCount + 1
+        
+        DispatchQueue.main.async {
+            self.progressLabel.text = "\(self.trainingCount)/\(data.eventCount)"
+        }
+
+        // Check for game over
+        if trainingCount >= data.eventCount {
+            doEndGame()
+        }
+    }
+    
+    func doEndGame() {
+        stopGameTimer()
+        
+        DataSetManager.sharedInstance.postTraining(dataSetObj)
+        
+        let alert = MFAlertCompleteView(title: "Training Done") { (buttonIndex) in
+            
+            switch buttonIndex {
+            case 0: self.doDoneButton(self)
+//            case 1:
+//            case 2:
+            default :
+                print("DoEndGame: ", buttonIndex)
+            }
+            
+        }
+        alert.show()
+
+    }
     // MARK: Timer methods
     
     func startGameTimer() {
