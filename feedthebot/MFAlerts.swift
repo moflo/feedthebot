@@ -227,30 +227,26 @@ class MFAlertCompleteView: UIView {
         
         // Add Next button
         let nextFrame = CGRect(x: 0.0, y: nextOffset, width: buttonHeight*4, height: buttonHeight*4)
-        if let nextButton = MFRoundedButton(coder: NSCoder.init()) {
-            nextButton.frame = nextFrame
-            nextButton.tag = 101
-            nextButton.addTarget(self, action: #selector(self.doNextButton(_:)), for: .touchUpInside)
-            self.addSubview(nextButton)
-        }
+        let nextButton = MFRoundedButton(frame: nextFrame)
+        nextButton.tag = 101
+        nextButton.addTarget(self, action: #selector(self.doNextButton(_:)), for: .touchUpInside)
+        self.addSubview(nextButton)
         
         // Add Prompt view
         let repeatFrame = CGRect(x: 0.0, y: buttonHeight*5, width: buttonHeight*2, height: buttonHeight*2)
-        if let repeatButton = MFRoundedButton(coder: NSCoder.init()) {
-            repeatButton.frame = repeatFrame
-            repeatButton.tag = 101
-            repeatButton.addTarget(self, action: #selector(self.doRepeatButton(_:)), for: .touchUpInside)
-            self.addSubview(repeatButton)
-        }
+        let repeatButton = MFRoundedButton(frame: repeatFrame)
+        repeatButton.tag = 101
+        repeatButton.addTarget(self, action: #selector(self.doRepeatButton(_:)), for: .touchUpInside)
+        self.addSubview(repeatButton)
+        
         
         // Add Cancel button
         let quitFrame = CGRect(x: viewWidth * 0.5, y: buttonHeight*5, width: buttonHeight*2, height: buttonHeight*2)
-        if let quitButton = MFRoundedButton(coder: NSCoder.init()) {
-            quitButton.frame = quitFrame
-            quitButton.tag = 101
-            quitButton.addTarget(self, action: #selector(self.doCancelButton(_:)), for: .touchUpInside)
-            self.addSubview(quitButton)
-        }
+        let quitButton = MFRoundedButton(frame: quitFrame)
+        quitButton.tag = 101
+        quitButton.addTarget(self, action: #selector(self.doCancelButton(_:)), for: .touchUpInside)
+        self.addSubview(quitButton)
+        
 
         
         

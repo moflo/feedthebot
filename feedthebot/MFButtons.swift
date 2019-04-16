@@ -25,6 +25,11 @@ class MFRoundedButton : UIButton {
         }
     }
     
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        self.awakeFromNib()
+    }
+
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
