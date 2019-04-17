@@ -52,6 +52,7 @@ class MFAlertTrainView: UIView {
         let textField = UITextView(frame: textFrame)
         textField.text = info
         textField.isEditable = false
+        textField.font = UIFont.systemFont(ofSize: 22)
         textField.backgroundColor = .clear
         self.addSubview(textField)
         
@@ -117,7 +118,7 @@ class MFAlertTrainView: UIView {
         
     }
     
-    // MARK: - Display methods
+    // MARK: Display methods
     
     func show() {
         // Method to display a previously initialized view
@@ -184,7 +185,7 @@ class MFAlertTrainView: UIView {
     
 }
 
-
+// MARK: - MFAlertCompleteView
 
 class MFAlertCompleteView: UIView {
     
@@ -302,7 +303,7 @@ class MFAlertCompleteView: UIView {
         
     }
     
-    // MARK: - Display methods
+    // MARK: Display methods
     
     func show() {
         // Method to display a previously initialized view

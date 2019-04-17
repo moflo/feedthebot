@@ -445,7 +445,7 @@
                                     <constraint firstAttribute="width" constant="44" id="SnP-eh-9cs"/>
                                     <constraint firstAttribute="height" constant="44" id="UGm-cq-778"/>
                                 </constraints>
-                                <state key="normal" image="tool_skip"/>
+                                <state key="normal" image="tool_question"/>
                                 <connections>
                                     <action selector="doTrainSkipButton:" destination="KKT-yN-f9Z" eventType="touchUpInside" id="FSK-9R-JR5"/>
                                 </connections>
@@ -1059,9 +1059,6 @@
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="done" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
-                                <connections>
-                                    <outlet property="delegate" destination="qqN-KW-gGJ" id="Krz-0Z-N6g"/>
-                                </connections>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0cJ-DH-UXq">
                                 <rect key="frame" x="8" y="613" width="44" height="44"/>
@@ -1070,7 +1067,7 @@
                                     <constraint firstAttribute="height" constant="44" id="2gc-pZ-xJh"/>
                                     <constraint firstAttribute="width" constant="44" id="a3O-lL-cBZ"/>
                                 </constraints>
-                                <state key="normal" image="tool_skip"/>
+                                <state key="normal" image="tool_question"/>
                                 <connections>
                                     <action selector="doTrainSkipButton:" destination="qqN-KW-gGJ" eventType="touchUpInside" id="Fqx-I3-Flt"/>
                                 </connections>
@@ -1138,6 +1135,7 @@
                     <nil key="simulatedTopBarMetrics"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="categoryLabel" destination="k9n-xE-JHu" id="I1V-gp-YqH"/>
                         <outlet property="pointsLabel" destination="cwq-YW-3Eb" id="2DO-nz-8N5"/>
                         <outlet property="progressLabel" destination="vGJ-ez-9J8" id="mli-iX-0yy"/>
                         <outlet property="timeLabel" destination="hUf-hu-x3R" id="25G-af-j6Z"/>
@@ -1177,6 +1175,6 @@
         <image name="icon_text" width="64" height="64"/>
         <image name="powered_by_stripe" width="149" height="41"/>
         <image name="tool_check" width="64" height="64"/>
-        <image name="tool_skip" width="64" height="64"/>
+        <image name="tool_question" width="64" height="64"/>
     </resources>
 </document>

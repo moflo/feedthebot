@@ -20,13 +20,15 @@ class CategoryViewController: UIViewController {
         doSaveTrainingEvent("")
     }
     @IBAction func doTrainDoneButton(_ sender: Any) {
-        doSaveTrainingEvent("")
+        let category = categoryLabel.text ?? ""
+        doSaveTrainingEvent(category)
     }
     
     @IBOutlet weak var pointsLabel: UILabel!
     @IBOutlet weak var progressLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
     
+    @IBOutlet weak var categoryLabel: MFFormTextField1!
     @IBOutlet weak var trainingButtonView: MFTrainingButtonView!
 
     var dataSetObj :MFDataSet? = nil
@@ -40,6 +42,9 @@ class CategoryViewController: UIViewController {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
+        categoryLabel.isEnabled = false
+        categoryLabel.isHidden = true
+        
         if (dataSetObj == nil) {
             dataSetObj = DataSetManager.sharedInstance.demoDataSet("Text OCR")
         }
@@ -197,22 +202,29 @@ class CategoryViewController: UIViewController {
     }
     
     // MARK: Category button methods
+    func showSelectedCateogory(_ identifier: String) {
+        DispatchQueue.main.async {
+            self.categoryLabel.text = identifier
+            self.categoryLabel.isHidden = false
+        }
+    }
     
     func setupStatButtons() {
         
         var buttons = [MFTrainButton]()
-        let buttonShot = MFTrainButton(title: "TEXT", icon: "icon_text")
+        let buttonShot = MFTrainButton(title: "CATEGORY1", icon: "icon_text")
         buttonShot.completionHandler = { (sender) in
-            print(sender)
+            self.showSelectedCateogory("CATEGORY ONE")
         }
         buttons.append(buttonShot)
         
-        let buttonCorner = MFTrainButton(title: "BOUNDING BOX", icon: "icon_bounding")
+        let buttonCorner = MFTrainButton(title: "CATEGORY2", icon: "icon_bounding")
         buttonCorner.completionHandler = { (sender) in
-            print(sender)
+            self.showSelectedCateogory("CATEGORY TWO")
         }
         buttons.append(buttonCorner)
 
+        trainingButtonView.menuType = .DarkBlue
         trainingButtonView.menuButtons = buttons
 
     }

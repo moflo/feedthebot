@@ -65,7 +65,7 @@ class MFDataSet {
     var points :Int = 0
     var multiplier :Float = 1.0
     var trainingType :String
-    var instruction :String = "This should be long texst which describes the type of training data."
+    var instruction :String = "This should be long text which describes the type of training data."
     var eventCount :Int = 10
     var limitSeconds :Int = 60*2
     var dataURLArray :[String] = [String]()

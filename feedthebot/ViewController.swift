@@ -103,8 +103,7 @@ class ViewController: UIViewController {
             self.showTrainingController("TEXTTRAINING")
         }
         buttons.append(buttonOff)
-        
-        trainingButtonView.menuType = .DarkBlue
+
         trainingButtonView.menuButtons = buttons
         
     }
