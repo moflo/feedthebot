@@ -219,9 +219,10 @@ class MFAlertCompleteView: UIView {
         self.frame = CGRect(x: 0.0, y: 0.0, width: viewWidth, height: viewHeight)
         
         // Add title label
-        let titleLabel = UILabel(frame: CGRect(x: 0.0, y: 10.0, width: viewWidth, height: titleHeight))
+        let titleLabel = UILabel(frame: CGRect(x: 10.0, y: 10.0, width: viewWidth-10.0, height: titleHeight))
         titleLabel.text = title
-        titleLabel.font = UIFont.boldSystemFont(ofSize: 14)
+        titleLabel.font = UIFont.boldSystemFont(ofSize: 18)
+        titleLabel.adjustsFontSizeToFitWidth = true
         titleLabel.textColor = .white
         titleLabel.textAlignment = .center
         self.addSubview(titleLabel)
@@ -241,13 +242,12 @@ class MFAlertCompleteView: UIView {
         let subBtnX = nextButton.frame.origin.x
         let repeatFrame = CGRect(x: subBtnX, y: buttonHeight*6, width: subBtnSize, height: subBtnSize)
         let repeatButton = MFRectIconButton(frame: repeatFrame)
-        repeatButton.configure("Repeat",icon:"icon_redo",tag:103)
+        repeatButton.configure("Repeat",icon:"icon_redo",tag:101)
         repeatButton.fontSize = 12.0
         repeatButton.addTarget(self, action: #selector(self.doRepeatButton(_:)), for: .touchUpInside)
         repeatButton.imageEdgeInsets = UIEdgeInsets(top: -60, left: 20, bottom: -40, right: 20)
         repeatButton.titleEdgeInsets = UIEdgeInsets(top: 26, left: -60, bottom: 0, right: 0)
         self.addSubview(repeatButton)
-        
         
         // Add Cancel button
         let subBtnX2 = subBtnX + nextButton.frame.size.width - subBtnSize
@@ -263,6 +263,7 @@ class MFAlertCompleteView: UIView {
 
         
         // Magic code to force a rounded rectangle mask on the layer...
+        /*
         self.layer.cornerRadius = 8.0
         self.layer.masksToBounds = true
         
@@ -275,7 +276,7 @@ class MFAlertCompleteView: UIView {
         self.layer.shadowRadius = 2.0
         
         self.backgroundColor = MFBlueStart()
-        
+        */
         
         // Create backing view
         let window :UIWindow = UIApplication.shared.keyWindow!

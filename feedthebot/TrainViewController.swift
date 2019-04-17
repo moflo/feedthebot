@@ -67,7 +67,7 @@ class TrainViewController: UIViewController {
         let buttonTurnover = MFTrainButton(title: "CLASSIFICATION", icon: "icon_classify")
         buttonTurnover.completionHandler = { (sender) in
             print(sender)
-            self.showTrainingController("TEXTTRAINING")
+            self.showTrainingController("CATEGORYTRAINING")
         }
         buttons.append(buttonTurnover)
         
@@ -93,6 +93,11 @@ class TrainViewController: UIViewController {
     }
     */
 
+}
+
+enum MFTrainButtonType {
+    case Orange
+    case DarkBlue
 }
 
 class MFTrainButton {
@@ -121,6 +126,12 @@ class MFTrainingButtonView : UIView, UICollectionViewDataSource, UICollectionVie
     var collectionView :UICollectionView!
     
     var menuButtons :[MFTrainButton]? = nil {
+        didSet {
+            self.awakeFromNib()
+        }
+    }
+    
+    var menuType :MFTrainButtonType = .Orange {
         didSet {
             self.awakeFromNib()
         }
@@ -208,9 +219,11 @@ class MFTrainingButtonView : UIView, UICollectionViewDataSource, UICollectionVie
         var icon: UIImageView!
         var btn: UIView!
         var enabled: Bool = true
+        var buttonType :MFTrainButtonType = .Orange
         
         override func prepareForReuse() {
             super.prepareForReuse()
+//            print("Cell prepare for reuse")
             
             title.text = ""
             title.textColor = UIColor.white
@@ -219,10 +232,16 @@ class MFTrainingButtonView : UIView, UICollectionViewDataSource, UICollectionVie
         }
         
         func initialize() {
-            //            print(self.bounds)
+//            print("Cell initialize: ",buttonType)
             
             self.isSelected = false
             
+        }
+        
+        func configure(_ menuType: MFTrainButtonType) {
+            buttonType = menuType
+            print("Cell configure: ",buttonType)
+
             let iconSize = CGFloat(64)
             
             btn = UIView(frame: CGRect(x: 0, y: 0, width: bounds.width*0.9, height: bounds.width*0.9))
@@ -279,20 +298,20 @@ class MFTrainingButtonView : UIView, UICollectionViewDataSource, UICollectionVie
         override var isSelected : Bool {
             didSet {
                 //                self.backgroundColor = isSelected ? UIColor.lightGray : UIColor.white
-                self.title?.textColor = isSelected ? UIColor.white : UIColor.lightGray
+                self.title?.textColor = isSelected ? UIColor.darkGray : UIColor.blue
                 
             }
         }
         
         override init(frame: CGRect) {
             super.init(frame: frame)
-            
+
             initialize()
         }
         
         required init?(coder aDecoder: NSCoder) {
             super.init(coder: aDecoder)
-            
+
             initialize()
         }
         
@@ -330,8 +349,9 @@ class MFTrainingButtonView : UIView, UICollectionViewDataSource, UICollectionVie
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MFTrainButtonCell", for: indexPath) as! MFTrainButtonCell
-        
+        cell.configure(self.menuType)
         self.configureCell(cell, atIndexPath: indexPath)
+
         
         return cell
     }

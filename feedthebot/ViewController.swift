@@ -76,6 +76,13 @@ class ViewController: UIViewController {
         }
         buttons.append(buttonShot)
         
+        let buttonTurnover = MFTrainButton(title: "CLASSIFICATION", icon: "icon_classify")
+        buttonTurnover.completionHandler = { (sender) in
+            print(sender)
+            self.showTrainingController("CATEGORYTRAINING")
+        }
+        buttons.append(buttonTurnover)
+        
         let buttonCorner = MFTrainButton(title: "BOUNDING BOX", icon: "icon_bounding")
         buttonCorner.completionHandler = { (sender) in
             print(sender)
@@ -90,13 +97,6 @@ class ViewController: UIViewController {
         }
         buttons.append(buttonGoal)
         
-        let buttonTurnover = MFTrainButton(title: "CLASSIFICATION", icon: "icon_classify")
-        buttonTurnover.completionHandler = { (sender) in
-            print(sender)
-            self.showTrainingController("TEXTTRAINING")
-        }
-        buttons.append(buttonTurnover)
-        
         let buttonOff = MFTrainButton(title: "PIXEL By PIXEL", icon: "icon_pixelwise")
         buttonOff.completionHandler = { (sender) in
             print(sender)
@@ -104,7 +104,7 @@ class ViewController: UIViewController {
         }
         buttons.append(buttonOff)
         
-        
+        trainingButtonView.menuType = .DarkBlue
         trainingButtonView.menuButtons = buttons
         
     }
