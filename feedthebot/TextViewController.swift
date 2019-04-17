@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TextViewController: UIViewController {
+class TextViewController: UIViewController, UIScrollViewDelegate {
     @IBAction func doDoneButton(_ sender: Any) {
         self.navigationController?.dismiss(animated: true, completion: nil)
     }
@@ -27,6 +27,9 @@ class TextViewController: UIViewController {
     @IBOutlet weak var progressLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
 
+    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var imageView: UIImageView!
+
     @IBOutlet weak var trainTextField: MFFormTextField1!
     @IBOutlet weak var trainTextV: NSLayoutConstraint!
     
@@ -39,6 +42,9 @@ class TextViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        scrollView.minimumZoomScale = 1.0
+        scrollView.maximumZoomScale = 6.0
 
         // Do any additional setup after loading the view.
         if (dataSetObj == nil) {
@@ -71,6 +77,13 @@ class TextViewController: UIViewController {
         return true
     }
     
+    // MARK: ScrollView methods
+    
+    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+        
+        return imageView
+    }
+
     // MARK: Dataset methods
     
     func doPreloadDataSet() {

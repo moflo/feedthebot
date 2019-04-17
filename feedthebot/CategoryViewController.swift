@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CategoryViewController: UIViewController {
+class CategoryViewController: UIViewController, UIScrollViewDelegate {
     @IBAction func doDoneButton(_ sender: Any) {
         self.navigationController?.dismiss(animated: true, completion: nil)
     }
@@ -40,6 +40,9 @@ class CategoryViewController: UIViewController {
     @IBOutlet weak var progressLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
     
+    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var imageView: UIImageView!
+
     @IBOutlet weak var categoryLabel: MFFormTextField1!
     @IBOutlet weak var trainingButtonView: MFTrainingButtonView!
     @IBOutlet weak var trainDoneButton: UIButton!
@@ -55,6 +58,9 @@ class CategoryViewController: UIViewController {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
+        scrollView.minimumZoomScale = 1.0
+        scrollView.maximumZoomScale = 6.0
+        
         categoryLabel.isEnabled = false
         categoryLabel.isHidden = true
         trainDoneButton.isEnabled = false
@@ -88,6 +94,13 @@ class CategoryViewController: UIViewController {
         return true
     }
     
+    // MARK: ScrollView methods
+    
+    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+        
+        return imageView
+    }
+
     // MARK: Dataset methods
     
     func doPreloadDataSet() {

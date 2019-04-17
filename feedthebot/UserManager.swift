@@ -138,6 +138,9 @@ class UserManager : NSObject {
         return self.userPoints
     }
     
+    func shouldDoubleTapToSelect() -> Bool {
+        return true
+    }
     // MARK: - Server Methods
     
     func doAnonymousLogin() {
