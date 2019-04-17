@@ -26,6 +26,8 @@ class CategoryViewController: UIViewController {
         UIView.animate(withDuration: 0.33, delay: 0.1, options: .curveEaseOut, animations: { () -> Void in
             
             self.categoryLabel.isHidden = true
+            self.trainDoneButton.isEnabled = false
+            self.trainingButtonView.reset()
             
         }, completion: { (done) -> Void in
             // Set underLine width
@@ -40,6 +42,7 @@ class CategoryViewController: UIViewController {
     
     @IBOutlet weak var categoryLabel: MFFormTextField1!
     @IBOutlet weak var trainingButtonView: MFTrainingButtonView!
+    @IBOutlet weak var trainDoneButton: UIButton!
 
     var dataSetObj :MFDataSet? = nil
     var trainingCount :Int = 0
@@ -54,7 +57,8 @@ class CategoryViewController: UIViewController {
         // Do any additional setup after loading the view.
         categoryLabel.isEnabled = false
         categoryLabel.isHidden = true
-        
+        trainDoneButton.isEnabled = false
+
         if (dataSetObj == nil) {
             dataSetObj = DataSetManager.sharedInstance.demoDataSet("Text OCR")
         }
@@ -218,6 +222,7 @@ class CategoryViewController: UIViewController {
                 
                 self.categoryLabel.text = identifier
                 self.categoryLabel.isHidden = false
+                self.trainDoneButton.isEnabled = true
 
                 
             }, completion: { (done) -> Void in

@@ -1139,6 +1139,7 @@
                         <outlet property="pointsLabel" destination="cwq-YW-3Eb" id="2DO-nz-8N5"/>
                         <outlet property="progressLabel" destination="vGJ-ez-9J8" id="mli-iX-0yy"/>
                         <outlet property="timeLabel" destination="hUf-hu-x3R" id="25G-af-j6Z"/>
+                        <outlet property="trainDoneButton" destination="emM-Bt-M81" id="CDx-oU-dXd"/>
                         <outlet property="trainingButtonView" destination="y4I-Mf-IDB" id="OIf-jL-VkA"/>
                     </connections>
                 </viewController>

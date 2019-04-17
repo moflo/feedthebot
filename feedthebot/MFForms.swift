@@ -24,7 +24,7 @@ class MFFormTextField1 : UITextField {
     override func awakeFromNib() {
         let placeholderFont = UIFont(name: "HelveticaNeue-Bold", size: 14)
         self.font = placeholderFont ?? UIFont.systemFont(ofSize: 14)
-        self.textColor = UIColor.white
+        self.textColor = MFGreen()
         self.backgroundColor = MFDarkBlue()
         
         self.drawOutlineRect()

@@ -707,7 +707,6 @@ class MFTrainingButtonView : UIView, UICollectionViewDataSource, UICollectionVie
         self.awakeFromNib()
     }
     
-    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
@@ -775,9 +774,13 @@ class MFTrainingButtonView : UIView, UICollectionViewDataSource, UICollectionVie
         
         collectionView.setContentOffset(CGPoint(x:0,y:0), animated: true)
         
-        //        self.collectionView?.scrollToItem(at: IndexPath(row: 0, section: 0),
-        //                                          at: .top,
-        //                                          animated: true)
+        if let paths = collectionView.indexPathsForSelectedItems {
+            for indexPath in paths {
+                if let cell = collectionView.cellForItem(at: indexPath) {
+                    cell.isSelected = false
+                }
+            }
+        }
         
     }
     // UICollectionCell
