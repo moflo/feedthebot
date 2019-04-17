@@ -1,14 +1,14 @@
 //
-//  CategoryViewController.swift
+//  BBoxViewController.swift
 //  feedthebot
 //
-//  Created by d. nye on 4/16/19.
+//  Created by d. nye on 4/17/19.
 //  Copyright © 2019 Mobile Flow LLC. All rights reserved.
 //
 
 import UIKit
 
-class CategoryViewController: UIViewController {
+class BBoxViewController: UIViewController {
     @IBAction func doDoneButton(_ sender: Any) {
         self.navigationController?.dismiss(animated: true, completion: nil)
     }
@@ -16,32 +16,22 @@ class CategoryViewController: UIViewController {
         doSaveTrainingEvent("")
     }
     
-    @IBAction func doTrainSkipButton(_ sender: Any) {
-        doSaveTrainingEvent("")
+    @IBAction func doTrainAddButton(_ sender: Any) {
+    }
+    @IBAction func doTrainRemoveButton(_ sender: Any) {
     }
     @IBAction func doTrainDoneButton(_ sender: Any) {
-        let category = categoryLabel.text ?? ""
-       doSaveTrainingEvent(category)
-        
-        UIView.animate(withDuration: 0.33, delay: 0.1, options: .curveEaseOut, animations: { () -> Void in
-            
-            self.categoryLabel.isHidden = true
-            self.trainDoneButton.isEnabled = false
-            self.trainingButtonView.reset()
-            
-        }, completion: { (done) -> Void in
-            // Set underLine width
-            
-        })
-
+        doSaveTrainingEvent("")
     }
     
     @IBOutlet weak var pointsLabel: UILabel!
     @IBOutlet weak var progressLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
     
-    @IBOutlet weak var categoryLabel: MFFormTextField1!
-    @IBOutlet weak var trainingButtonView: MFTrainingButtonView!
+    @IBOutlet weak var trainingImage: UIImageView!
+
+    @IBOutlet weak var trainAddButton: UIButton!
+    @IBOutlet weak var trainRemoveButton: UIButton!
     @IBOutlet weak var trainDoneButton: UIButton!
 
     var dataSetObj :MFDataSet? = nil
@@ -55,10 +45,6 @@ class CategoryViewController: UIViewController {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
-        categoryLabel.isEnabled = false
-        categoryLabel.isHidden = true
-        trainDoneButton.isEnabled = false
-        
         if (dataSetObj == nil) {
             dataSetObj = DataSetManager.sharedInstance.demoDataSet("Text OCR")
         }
@@ -67,16 +53,11 @@ class CategoryViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         
         doPreloadDataSet()
-        
-        setupStatButtons()
-
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        
         doLoadDataSet()
-
-        // Adjust menu
-         trainingButtonView.reset()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -110,7 +91,7 @@ class CategoryViewController: UIViewController {
         timeLabel.text = "00:00"
         updateTimerLabel()
         
-        let alert = MFAlertTrainView(title: "Image Classification",
+        let alert = MFAlertTrainView(title: "Text Recognition",
                                      icon: "",
                                      info: data.instruction,
                                      prompt: prompt) { (category, buttonIndex) in
@@ -213,43 +194,6 @@ class CategoryViewController: UIViewController {
             updateTimerLabel()
             
         }
-    }
-    
-    // MARK: Category button methods
-    func showSelectedCateogory(_ identifier: String) {
-        DispatchQueue.main.async {
-            UIView.animate(withDuration: 0.33, delay: 0.1, options: .curveEaseOut, animations: { () -> Void in
-                
-                self.categoryLabel.text = identifier
-                self.categoryLabel.isHidden = false
-                self.trainDoneButton.isEnabled = true
-
-                
-            }, completion: { (done) -> Void in
-                // Set underLine width
-                
-            })
-        }
-    }
-    
-    func setupStatButtons() {
-        
-        var buttons = [MFTrainButton]()
-        let buttonShot = MFTrainButton(title: "CATEGORY1", icon: "icon_text")
-        buttonShot.completionHandler = { (sender) in
-            self.showSelectedCateogory("CATEGORY ONE")
-        }
-        buttons.append(buttonShot)
-        
-        let buttonCorner = MFTrainButton(title: "CATEGORY2", icon: "icon_bounding")
-        buttonCorner.completionHandler = { (sender) in
-            self.showSelectedCateogory("CATEGORY TWO")
-        }
-        buttons.append(buttonCorner)
-
-        trainingButtonView.menuType = .DarkBlue
-        trainingButtonView.menuButtons = buttons
-
     }
     
     

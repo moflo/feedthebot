@@ -755,6 +755,10 @@ class MFTrainingButtonView : UIView, UICollectionViewDataSource, UICollectionVie
         layout.minimumInteritemSpacing = 0.0
         layout.scrollDirection = .horizontal
         
+        if menuType == .DarkBlue {
+            layout.scrollDirection = .vertical
+        }
+        
         self.collectionView = UICollectionView(frame: rect, collectionViewLayout: layout)
         self.collectionView.backgroundColor = .clear
         self.collectionView.delegate = self

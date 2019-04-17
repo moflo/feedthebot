@@ -23,6 +23,7 @@ class ViewController: UIViewController {
     }
     
     
+    @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var pointsLabel: UILabel!
     @IBOutlet weak var trainingButtonView: MFTrainingButtonView!
     
@@ -32,6 +33,18 @@ class ViewController: UIViewController {
         let points = 1234
         self.pointsLabel.text = "\(points)"
 
+        if let placeholderFont = UIFont(name: "Impact", size: 42) {
+            let strokeTextAttributes = [
+                NSAttributedString.Key.strokeColor : UIColor.white,
+                NSAttributedString.Key.foregroundColor : UIColor.black,
+                NSAttributedString.Key.strokeWidth : -6.0,
+                NSAttributedString.Key.kern: -2.0,
+                NSAttributedString.Key.font : placeholderFont]
+                as [NSAttributedString.Key : Any]
+            
+            titleLabel.attributedText = NSMutableAttributedString(string: "Feed  The  Bot", attributes: strokeTextAttributes)
+        }
+        
         setupStatButtons()
         
     }
@@ -69,6 +82,7 @@ class ViewController: UIViewController {
     func setupStatButtons() {
         
         var buttons = [MFTrainButton]()
+        
         let buttonShot = MFTrainButton(title: "TEXT", icon: "icon_text")
         buttonShot.completionHandler = { (sender) in
             print(sender)
@@ -83,10 +97,17 @@ class ViewController: UIViewController {
         }
         buttons.append(buttonTurnover)
         
+        let buttonSentiment = MFTrainButton(title: "SENTIMENT", icon: "icon_text")
+        buttonSentiment.completionHandler = { (sender) in
+            print(sender)
+            self.showTrainingController("SENTIMENTTRAINING")
+        }
+        buttons.append(buttonSentiment)
+        
         let buttonCorner = MFTrainButton(title: "BOUNDING BOX", icon: "icon_bounding")
         buttonCorner.completionHandler = { (sender) in
             print(sender)
-            self.showTrainingController("TEXTTRAINING")
+            self.showTrainingController("BBOXTRAINING")
         }
         buttons.append(buttonCorner)
         

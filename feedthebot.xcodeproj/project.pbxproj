@@ -13,6 +13,9 @@
 		914C718822616C0900AF9099 /* CardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 914C718722616C0900AF9099 /* CardViewController.swift */; };
 		914C718B2264EC0E00AF9099 /* MFAlerts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 914C718A2264EC0E00AF9099 /* MFAlerts.swift */; };
 		914C718D226685D600AF9099 /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 914C718C226685D600AF9099 /* CategoryViewController.swift */; };
+		914C718F2267A31E00AF9099 /* SetimentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 914C718E2267A31D00AF9099 /* SetimentViewController.swift */; };
+		914C71912267AA4A00AF9099 /* BBoxViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 914C71902267AA4A00AF9099 /* BBoxViewController.swift */; };
+		914C71932267AEFA00AF9099 /* Impact.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 914C71922267AEF900AF9099 /* Impact.ttf */; };
 		9175454A225FBB2A00DB77EE /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91754549225FBB2A00DB77EE /* UserManager.swift */; };
 		9175454C225FFA2400DB77EE /* MFColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9175454B225FFA2400DB77EE /* MFColors.swift */; };
 		9175454E225FFBA400DB77EE /* MFButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9175454D225FFBA400DB77EE /* MFButtons.swift */; };
@@ -49,6 +52,9 @@
 		914C71892261A29F00AF9099 /* feedthebot.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = feedthebot.entitlements; sourceTree = "<group>"; };
 		914C718A2264EC0E00AF9099 /* MFAlerts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MFAlerts.swift; sourceTree = "<group>"; };
 		914C718C226685D600AF9099 /* CategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
+		914C718E2267A31D00AF9099 /* SetimentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetimentViewController.swift; sourceTree = "<group>"; };
+		914C71902267AA4A00AF9099 /* BBoxViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBoxViewController.swift; sourceTree = "<group>"; };
+		914C71922267AEF900AF9099 /* Impact.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Impact.ttf; sourceTree = "<group>"; };
 		91754549225FBB2A00DB77EE /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		9175454B225FFA2400DB77EE /* MFColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MFColors.swift; sourceTree = "<group>"; };
 		9175454D225FFBA400DB77EE /* MFButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MFButtons.swift; sourceTree = "<group>"; };
@@ -142,7 +148,9 @@
 				918F2652225D7F4D00D6056C /* ViewController.swift */,
 				918F2675225D857900D6056C /* TrainViewController.swift */,
 				918F2677225DA65F00D6056C /* TextViewController.swift */,
+				914C71902267AA4A00AF9099 /* BBoxViewController.swift */,
 				914C718C226685D600AF9099 /* CategoryViewController.swift */,
+				914C718E2267A31D00AF9099 /* SetimentViewController.swift */,
 				91CD057A22604B570085614D /* PayoutViewController.swift */,
 				914C718722616C0900AF9099 /* CardViewController.swift */,
 				91754549225FBB2A00DB77EE /* UserManager.swift */,
@@ -155,6 +163,7 @@
 				918F2657225D7F4F00D6056C /* Assets.xcassets */,
 				918F2659225D7F4F00D6056C /* LaunchScreen.storyboard */,
 				918F265C225D7F4F00D6056C /* Info.plist */,
+				914C71922267AEF900AF9099 /* Impact.ttf */,
 				914C71892261A29F00AF9099 /* feedthebot.entitlements */,
 				918660C7225FA99D00E158D2 /* GoogleService-Info.plist */,
 			);
@@ -266,6 +275,7 @@
 				918660C8225FA99D00E158D2 /* GoogleService-Info.plist in Resources */,
 				918F2658225D7F4F00D6056C /* Assets.xcassets in Resources */,
 				918F2656225D7F4D00D6056C /* Main.storyboard in Resources */,
+				914C71932267AEFA00AF9099 /* Impact.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -442,8 +452,10 @@
 				918F2676225D857900D6056C /* TrainViewController.swift in Sources */,
 				91CD057B22604B570085614D /* PayoutViewController.swift in Sources */,
 				9175454A225FBB2A00DB77EE /* UserManager.swift in Sources */,
+				914C718F2267A31E00AF9099 /* SetimentViewController.swift in Sources */,
 				9175454E225FFBA400DB77EE /* MFButtons.swift in Sources */,
 				914C718822616C0900AF9099 /* CardViewController.swift in Sources */,
+				914C71912267AA4A00AF9099 /* BBoxViewController.swift in Sources */,
 				914C7186226109AC00AF9099 /* DataSetManager.swift in Sources */,
 				914C718D226685D600AF9099 /* CategoryViewController.swift in Sources */,
 				918F2678225DA65F00D6056C /* TextViewController.swift in Sources */,

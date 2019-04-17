@@ -53,9 +53,16 @@ class TrainViewController: UIViewController {
         let buttonCorner = MFTrainButton(title: "BOUNDING BOX", icon: "icon_bounding")
         buttonCorner.completionHandler = { (sender) in
             print(sender)
-            self.showTrainingController("TEXTTRAINING")
+            self.showTrainingController("BBOXTRAINING")
         }
         buttons.append(buttonCorner)
+        
+        let buttonSentiment = MFTrainButton(title: "SENTIMENT", icon: "icon_text")
+        buttonSentiment.completionHandler = { (sender) in
+            print(sender)
+            self.showTrainingController("SENTIMENTTRAINING")
+        }
+        buttons.append(buttonSentiment)
         
         let buttonGoal = MFTrainButton(title: "POLYGON LABEL", icon: "icon_polygon")
         buttonGoal.completionHandler = { (sender) in

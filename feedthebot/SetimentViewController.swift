@@ -1,14 +1,14 @@
 //
-//  CategoryViewController.swift
+//  SetimentViewController.swift
 //  feedthebot
 //
-//  Created by d. nye on 4/16/19.
+//  Created by d. nye on 4/17/19.
 //  Copyright © 2019 Mobile Flow LLC. All rights reserved.
 //
 
 import UIKit
 
-class CategoryViewController: UIViewController {
+class SentimentViewController: UIViewController {
     @IBAction func doDoneButton(_ sender: Any) {
         self.navigationController?.dismiss(animated: true, completion: nil)
     }
@@ -21,7 +21,7 @@ class CategoryViewController: UIViewController {
     }
     @IBAction func doTrainDoneButton(_ sender: Any) {
         let category = categoryLabel.text ?? ""
-       doSaveTrainingEvent(category)
+        doSaveTrainingEvent(category)
         
         UIView.animate(withDuration: 0.33, delay: 0.1, options: .curveEaseOut, animations: { () -> Void in
             
@@ -33,17 +33,19 @@ class CategoryViewController: UIViewController {
             // Set underLine width
             
         })
-
+        
     }
     
     @IBOutlet weak var pointsLabel: UILabel!
     @IBOutlet weak var progressLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
-    
+
+    @IBOutlet weak var textView: UITextView!
+
     @IBOutlet weak var categoryLabel: MFFormTextField1!
     @IBOutlet weak var trainingButtonView: MFTrainingButtonView!
     @IBOutlet weak var trainDoneButton: UIButton!
-
+    
     var dataSetObj :MFDataSet? = nil
     var trainingCount :Int = 0
     var gameTimer : Timer? = nil
@@ -69,14 +71,14 @@ class CategoryViewController: UIViewController {
         doPreloadDataSet()
         
         setupStatButtons()
-
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
         doLoadDataSet()
-
+        
         // Adjust menu
-         trainingButtonView.reset()
+        trainingButtonView.reset()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -103,6 +105,8 @@ class CategoryViewController: UIViewController {
         trainingCount = 0
         progressLabel.text = "\(trainingCount)/\(data.eventCount)"
         
+        textView.text = "Sample textual data goes here for sentiment analysis."
+        
         responseStrings = [String].init(repeating: "", count: data.eventCount)
         
         gameTimeSeconds = data.limitSeconds
@@ -110,7 +114,7 @@ class CategoryViewController: UIViewController {
         timeLabel.text = "00:00"
         updateTimerLabel()
         
-        let alert = MFAlertTrainView(title: "Image Classification",
+        let alert = MFAlertTrainView(title: "Sentiment Analysis",
                                      icon: "",
                                      info: data.instruction,
                                      prompt: prompt) { (category, buttonIndex) in
@@ -223,7 +227,7 @@ class CategoryViewController: UIViewController {
                 self.categoryLabel.text = identifier
                 self.categoryLabel.isHidden = false
                 self.trainDoneButton.isEnabled = true
-
+                
                 
             }, completion: { (done) -> Void in
                 // Set underLine width
@@ -246,10 +250,10 @@ class CategoryViewController: UIViewController {
             self.showSelectedCateogory("CATEGORY TWO")
         }
         buttons.append(buttonCorner)
-
+        
         trainingButtonView.menuType = .DarkBlue
         trainingButtonView.menuButtons = buttons
-
+        
     }
     
     
