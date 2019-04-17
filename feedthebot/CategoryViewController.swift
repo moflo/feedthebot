@@ -21,7 +21,17 @@ class CategoryViewController: UIViewController {
     }
     @IBAction func doTrainDoneButton(_ sender: Any) {
         let category = categoryLabel.text ?? ""
-        doSaveTrainingEvent(category)
+       doSaveTrainingEvent(category)
+        
+        UIView.animate(withDuration: 0.33, delay: 0.1, options: .curveEaseOut, animations: { () -> Void in
+            
+            self.categoryLabel.isHidden = true
+            
+        }, completion: { (done) -> Void in
+            // Set underLine width
+            
+        })
+
     }
     
     @IBOutlet weak var pointsLabel: UILabel!
@@ -204,8 +214,16 @@ class CategoryViewController: UIViewController {
     // MARK: Category button methods
     func showSelectedCateogory(_ identifier: String) {
         DispatchQueue.main.async {
-            self.categoryLabel.text = identifier
-            self.categoryLabel.isHidden = false
+            UIView.animate(withDuration: 0.33, delay: 0.1, options: .curveEaseOut, animations: { () -> Void in
+                
+                self.categoryLabel.text = identifier
+                self.categoryLabel.isHidden = false
+
+                
+            }, completion: { (done) -> Void in
+                // Set underLine width
+                
+            })
         }
     }
     

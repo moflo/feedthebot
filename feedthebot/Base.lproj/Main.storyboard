@@ -1052,7 +1052,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <textField hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Teach me..." textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="k9n-xE-JHu" customClass="MFFormTextField1" customModule="feedthebot">
-                                <rect key="frame" x="60" y="613" width="255" height="44"/>
+                                <rect key="frame" x="60" y="603" width="255" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="jq0-7k-pN5"/>
                                 </constraints>
@@ -1061,7 +1061,7 @@
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="done" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0cJ-DH-UXq">
-                                <rect key="frame" x="8" y="613" width="44" height="44"/>
+                                <rect key="frame" x="8" y="603" width="44" height="44"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="2gc-pZ-xJh"/>
@@ -1073,7 +1073,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="emM-Bt-M81">
-                                <rect key="frame" x="323" y="613" width="44" height="44"/>
+                                <rect key="frame" x="323" y="603" width="44" height="44"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="6jT-nj-HjZ"/>
@@ -1100,7 +1100,7 @@
                             <constraint firstItem="8He-CG-E6r" firstAttribute="trailing" secondItem="bw8-bc-Oe8" secondAttribute="trailing" id="G04-x9-JBR"/>
                             <constraint firstItem="cwq-YW-3Eb" firstAttribute="leading" secondItem="bw8-bc-Oe8" secondAttribute="leading" constant="136" id="G2o-Ef-FIs"/>
                             <constraint firstItem="PDf-DW-Zob" firstAttribute="top" secondItem="xr8-1C-wi3" secondAttribute="top" id="HCU-hL-BXC"/>
-                            <constraint firstAttribute="bottom" secondItem="k9n-xE-JHu" secondAttribute="bottom" constant="10" id="Ljl-eo-cs4"/>
+                            <constraint firstAttribute="bottom" secondItem="k9n-xE-JHu" secondAttribute="bottom" constant="20" id="Ljl-eo-cs4"/>
                             <constraint firstItem="TvE-JG-N3l" firstAttribute="centerX" secondItem="xr8-1C-wi3" secondAttribute="centerX" id="MRo-Qq-8nh"/>
                             <constraint firstItem="bw8-bc-Oe8" firstAttribute="trailing" secondItem="5vF-kY-ebd" secondAttribute="trailing" constant="22" id="N6f-Yn-bcW"/>
                             <constraint firstItem="k9n-xE-JHu" firstAttribute="leading" secondItem="0cJ-DH-UXq" secondAttribute="trailing" constant="8" symbolic="YES" id="NCt-OC-IkW"/>

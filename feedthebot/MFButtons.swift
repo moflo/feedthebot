@@ -917,9 +917,13 @@ class MFTrainingButtonView : UIView, UICollectionViewDataSource, UICollectionVie
         
         override var isSelected : Bool {
             didSet {
-                //                self.backgroundColor = isSelected ? UIColor.lightGray : UIColor.white
-                self.title?.textColor = isSelected ? UIColor.darkGray : UIColor.blue
-                
+
+                if buttonType == .Orange {
+                    self.title?.textColor = isSelected ? UIColor.darkGray : UIColor.blue
+                }
+                if buttonType == .DarkBlue {
+                    self.title?.textColor = isSelected ? MFGreen() : UIColor.white
+                }
             }
         }
         
