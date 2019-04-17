@@ -375,7 +375,8 @@ class BoundingBoxView : UIImageView {
     fileprivate var markLayer: CALayer?
     fileprivate func layoutMarkLayer() {
         if let existingLayer = markLayer {
-            existingLayer.removeFromSuperlayer()
+            // Testing
+//            existingLayer.removeFromSuperlayer()
         }
         
         if self.tapStart != nil {
@@ -476,6 +477,7 @@ class BoundingBoxView : UIImageView {
         markShape.fillColor = type.fillColor()
         markShape.strokeColor = type.strokeColor()
         markShape.lineWidth = 0.5
+        
         self.markerLayer?.insertSublayer(markShape, at: 1)
         
     }
@@ -491,20 +493,20 @@ class BoundingBoxView : UIImageView {
         }
         let doubleClick :Bool = UserManager.sharedInstance.shouldDoubleTapToSelect()
         if doubleClick && self.tapStart != nil {
-            let labelText = CATextLayer()
-            labelText.contentsScale = UIScreen.main.scale
-            let w = self.frame.size.width
-            let h = self.frame.size.height
-            let yOff = h*0.1
-            let xOff = w*0.5 - 45.0
-            labelText.frame = CGRect(x: xOff, y: yOff, width: 90.0, height: 12)
-            labelText.string = "Tap Twice to Save"
-            labelText.fontSize = 11.0
-            labelText.font = CTFontCreateWithName("ArialMT" as CFString, 12, nil)
-            labelText.alignmentMode = CATextLayerAlignmentMode.center
-            labelText.foregroundColor = UIColor.lightGray.cgColor
-            self.layer.insertSublayer(labelText, at: 2)
-            self.textLayer = labelText
+//            let labelText = CATextLayer()
+//            labelText.contentsScale = UIScreen.main.scale
+//            let w = self.frame.size.width
+//            let h = self.frame.size.height
+//            let yOff = h*0.1
+//            let xOff = w*0.5 - 45.0
+//            labelText.frame = CGRect(x: xOff, y: yOff, width: 90.0, height: 12)
+//            labelText.string = "Tap Twice to Save"
+//            labelText.fontSize = 11.0
+//            labelText.font = CTFontCreateWithName("ArialMT" as CFString, 12, nil)
+//            labelText.alignmentMode = CATextLayerAlignmentMode.center
+//            labelText.foregroundColor = UIColor.lightGray.cgColor
+//            self.layer.insertSublayer(labelText, at: 2)
+//            self.textLayer = labelText
         }
     }
     

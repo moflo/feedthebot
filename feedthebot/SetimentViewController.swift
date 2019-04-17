@@ -96,6 +96,7 @@ class SentimentViewController: UIViewController {
         guard let data = dataSetObj else { return }
         
         pointsLabel.text = "\(data.points)"
+        textView.text = "Loading..."
     }
     
     func doLoadDataSet() {

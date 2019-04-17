@@ -1080,7 +1080,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="y4I-Mf-IDB" customClass="MFTrainingButtonView" customModule="feedthebot" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="455" width="375" height="162"/>
+                                <rect key="frame" x="0.0" y="484" width="375" height="133"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <textField hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Teach me..." textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="k9n-xE-JHu" customClass="MFFormTextField1" customModule="feedthebot">
@@ -1152,7 +1152,7 @@
                             <constraint firstItem="0cJ-DH-UXq" firstAttribute="leading" secondItem="bw8-bc-Oe8" secondAttribute="leading" constant="8" id="cNP-WU-LBV"/>
                             <constraint firstItem="0cJ-DH-UXq" firstAttribute="leading" secondItem="bw8-bc-Oe8" secondAttribute="leading" constant="8" id="czb-oK-8Mc"/>
                             <constraint firstItem="zNF-RM-cZX" firstAttribute="top" secondItem="xr8-1C-wi3" secondAttribute="top" constant="10" id="h5t-zk-ILi"/>
-                            <constraint firstItem="y4I-Mf-IDB" firstAttribute="top" secondItem="XsF-D6-eEZ" secondAttribute="bottom" constant="-19" id="h9F-aF-K1I"/>
+                            <constraint firstItem="y4I-Mf-IDB" firstAttribute="top" secondItem="XsF-D6-eEZ" secondAttribute="bottom" constant="10" id="h9F-aF-K1I"/>
                             <constraint firstItem="bw8-bc-Oe8" firstAttribute="trailing" secondItem="emM-Bt-M81" secondAttribute="trailing" constant="8" id="hbp-kj-e9h"/>
                             <constraint firstItem="0cJ-DH-UXq" firstAttribute="centerY" secondItem="k9n-xE-JHu" secondAttribute="centerY" id="l7F-EH-DdD"/>
                             <constraint firstItem="vGJ-ez-9J8" firstAttribute="top" secondItem="zNF-RM-cZX" secondAttribute="bottom" constant="10" id="pUI-jp-Fem"/>
@@ -1488,7 +1488,7 @@
                                 <rect key="frame" x="0.0" y="98" width="375" height="569"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="bounding_box" translatesAutoresizingMaskIntoConstraints="NO" id="mK3-58-kAj" customClass="BoundingBoxView" customModule="feedthebot" customModuleProvider="target">
-                                        <rect key="frame" x="-58" y="-220" width="355" height="567"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="703" height="569"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
                                 </subviews>
