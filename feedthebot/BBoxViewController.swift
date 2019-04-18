@@ -302,6 +302,8 @@ class BoundingBoxView : UIImageView {
         
         addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(BoundingBoxView.handleTap(_:))))
         
+        addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(BoundingBoxView.handlePan(_:))))
+
     }
     
     override init(image: UIImage?) {
@@ -310,11 +312,36 @@ class BoundingBoxView : UIImageView {
         self.isUserInteractionEnabled = true
         
         addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(BoundingBoxView.handleTap(_:))))
-        
+
+        addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(BoundingBoxView.handlePan(_:))))
+
+    }
+
+    @objc func handlePan(_ sender:UITapGestureRecognizer!) {
+        if sender.state == UIGestureRecognizer.State.began {
+            let point = sender.location(in: self)
+
+            print("handlePan: start", point)
+        }
     }
     
     @objc func handleTap(_ sender:UITapGestureRecognizer!) {
         if sender.state == UIGestureRecognizer.State.ended {
+            
+            // Testing hit points
+            let point = sender.location(in: self)
+
+            if let layer = self.layer.hitTest(point) as? CAShapeLayer { // Check for Shapelayer
+                if let sublayers = self.layer.sublayers as? [CAShapeLayer] {
+                    for sub in sublayers {
+//                        if let path = layer.path, path.contains(point) {
+                        if sub == layer {
+                            print("handleTap: ended", point, layer)
+                        }
+                    }
+                }
+            }
+
             // Recieved a tap, mark the origin and check for two consecuitive taps in the same region
             let doubleClick :Bool = UserManager.sharedInstance.shouldDoubleTapToSelect()
             if doubleClick {
