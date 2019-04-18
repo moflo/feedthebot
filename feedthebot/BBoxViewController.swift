@@ -233,6 +233,38 @@ extension BBoxViewController : BoundingBoxViewDelegate {
 // Subclass of UIViewImage which tracks a users touches to draw a bounding box around
 // relative points on the underlying image
 
+/*
+    BoundingBox UIImageView subclass tracks creation, deletion and update of multiple
+    polygons superimposed on an UIImage, used for identifying points of interest in the underlying
+    image.
+ 
+    polyArray - an array of identified polygons, ordered list of verticies (>= 4) and category
+ 
+    category - a category type and corresponding color
+ 
+ Processes :
+ 
+    1) Create -
+        a) Respond to tap down (confirm tap is not update request, not within existing polygon / handle)
+        b) Add CAShapeLayer (anchor) at tap point
+        c) Wait for additional tap down
+        d1) If creating a rectangle, add a second CAShapeLayer (anchor) and a colored polygon (rectangle)
+        d2) If creating a polygon, add a second CAShapeLayer (anchor) and go to (c)
+        e) Finalize polygon
+        e1) If creating a rectangle, finalize creation if a user presses a third time
+        e2) If creating a polygon, finaize creation if a user pressed the "Add (+)" key
+ 
+    2) Update -
+        a) User can drag an existing anchor (un-finalized creation)
+        b) Selecting an existing polygon will "activate" that polygon (ie., show anchor points)
+        c) Dragging (panning) an existing anhor updates the polygon in realtime
+ 
+    3) Delete -
+        a) User presses the "Delete (X)" key
+        b) Active polygon and anchor points are deleted
+ 
+ */
+
 protocol BoundingBoxViewDelegate {
     //    func didFinishTouch(distance :Float, angle :Float)
     func didFinishTouch(_ positionX: Float, positionY: Float)
@@ -246,7 +278,7 @@ enum BoundingBoxShotType {
         case .none :
             return UIColor.clear.cgColor
         case .mark :
-            return UIColor.lightGray.cgColor
+            return MFDarkBlue().cgColor
         case .goal :
             return UIColor.green.cgColor
         case .allowed :
@@ -280,20 +312,31 @@ enum BoundingBoxShotType {
     }
 }
 
+enum BoundingBoxState {
+    case quescient, first_tap, add_tap, finalize, update, delete
+}
+
+struct BoundingBoxPoly {
+    var category : BoundingBoxShotType = .none
+    var points : [CGPoint]? = nil
+    var anchorLayers : [CALayer?]? = nil
+    var polyLayer : CALayer? = nil
+}
 
 class BoundingBoxView : UIImageView {
+    var drawState : BoundingBoxState = .quescient
+    var polyArray = [BoundingBoxPoly]()
     var tapStart : CGPoint? = nil
+    var dragStart : CGPoint? = nil
+    var locInView : CGPoint? = nil
+    var activePoly : BoundingBoxPoly? = nil
+    var delegate : BoundingBoxViewDelegate? = nil
+    
     var tapType : BoundingBoxShotType! = BoundingBoxShotType.mark {
         didSet {
             self.setNeedsLayout()
         }
     }
-    
-    var dragStart : CGPoint? = nil
-    var locInView : CGPoint? = nil
-    var delegate : BoundingBoxViewDelegate? = nil
-    var isPointInGoal : Bool = false
-    var isPointInMiss : Bool = false
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -302,7 +345,7 @@ class BoundingBoxView : UIImageView {
         
         addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(BoundingBoxView.handleTap(_:))))
         
-        addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(BoundingBoxView.handlePan(_:))))
+//        addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(BoundingBoxView.handlePan(_:))))
 
     }
     
@@ -313,7 +356,7 @@ class BoundingBoxView : UIImageView {
         
         addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(BoundingBoxView.handleTap(_:))))
 
-        addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(BoundingBoxView.handlePan(_:))))
+//        addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(BoundingBoxView.handlePan(_:))))
 
     }
 
@@ -341,54 +384,173 @@ class BoundingBoxView : UIImageView {
                     }
                 }
             }
+            
+            // Add new polygon
+            if drawState == .quescient {
+                drawState = .first_tap
+                
+                updatePolygon(point)
+            }
+            else if drawState == .add_tap {
+                // Assume rectangles
+                if let active = activePoly, let points = active.points, points.count == 2 {
+                    updatePolyArray(active)
+                    drawPolyArray()
+                    // remote previous anchors?
+                    drawState = .first_tap
+                }
+                updatePolygon(point)
+            }
 
-            // Recieved a tap, mark the origin and check for two consecuitive taps in the same region
-            let doubleClick :Bool = UserManager.sharedInstance.shouldDoubleTapToSelect()
-            if doubleClick {
-                if self.tapStart != nil {
-                    // compare first tap to current tap location
-                    let newTapPoint = sender.location(in: self)
-                    let xDist = newTapPoint.x - self.tapStart!.x
-                    let yDist = newTapPoint.y - self.tapStart!.y
-                    let distance = sqrt((xDist * xDist) + (yDist * yDist))
-                    if distance < self.frame.size.height * 0.05 {
-                        // Second tap was on top of first tap, show shot mark
-                        self.tapType = BoundingBoxShotType.mark
-                        self.setNeedsLayout()
-                        if self.delegate != nil {
-                            let shotVector = self.calcLocationPosition()
-                            self.delegate?.didFinishTouch(shotVector.horizontal, positionY: shotVector.vertical)
-                        }
+        }
+    }
+    
+    func updatePolygon(_ point:CGPoint) {
+        if drawState == .first_tap {
+            drawState = .add_tap
+            
+            // Initalize new activePoly
+            activePoly = BoundingBoxPoly()
+            activePoly?.category = tapType
+            activePoly?.points = [CGPoint]()
+            activePoly?.points?.append(point)
+            activePoly?.anchorLayers = [CALayer?]()
+            activePoly?.anchorLayers?.append(nil)
+        }
+        else if drawState == .add_tap {
+            guard activePoly != nil else { return }
+            
+            // Add new anchor point
+            activePoly!.points?.append(point)
+            activePoly!.anchorLayers?.append(nil)
+
+            // Assumes rectangles
+            if activePoly!.points!.count == 2 {
+                drawPoly(activePoly!)
+            }
+        }
+        
+        drawActivePoly()
+        
+    }
+
+    func updatePolyArray(_ poly:BoundingBoxPoly) {
+        // Add active polygon to polyArray
+        polyArray.append(poly)
+        
+    }
+    
+    func drawActivePoly() {
+        guard var poly = activePoly, poly.points != nil else { return }
+        
+        for (i,point) in poly.points!.enumerated() {
+            let nativeScreenW = UIScreen.main.nativeBounds.size.width
+            let radii_scale :CGFloat = nativeScreenW < 1400.0 ? 0.04 : 0.04
+            
+            let radii = self.frame.size.height * radii_scale
+            let xOff = point.x - radii*0.5
+            let yOff = point.y - radii*0.5
+            _ = CGRect(x: xOff, y: yOff, width: radii, height: radii)
+            
+            let markShape = CAShapeLayer()
+            markShape.contentsScale = UIScreen.main.scale
+            markShape.frame = CGRect(x: xOff, y: yOff, width: radii, height: radii)
+            
+            let roundRect = CGRect(x: 0.0, y: 0.0, width: radii, height: radii)
+            markShape.path = UIBezierPath(roundedRect: roundRect, cornerRadius: radii).cgPath
+            markShape.fillColor = self.tapType.fillColor()
+            markShape.strokeColor = self.tapType.strokeColor()
+            markShape.lineWidth = 1.5
+            
+            // Remove older layer, save and draw new one
+            if poly.anchorLayers != nil && poly.anchorLayers!.count < i {
+                let existingLayer = poly.anchorLayers![i]
+                existingLayer?.removeFromSuperlayer()
+                poly.anchorLayers![i] = markShape
+            }
+            
+            self.layer.insertSublayer(markShape, at: 3)
+        }
+        
+    }
+    
+    func drawPolyArray() {
+        guard polyArray.count > 0 else { return }
+    
+        for poly in polyArray {
+            drawPoly(poly)
+        }
+    }
+    
+    func drawPoly(_ poly:BoundingBoxPoly) {
+        // Assume rectangles
+        guard let points = poly.points, points.count >= 2 else { return }
+        
+        let start = points[0]
+        let end = points[1]
+        let w = end.x-start.x
+        let h = end.y-start.y
+        
+        let polyShape = CAShapeLayer()
+        polyShape.contentsScale = UIScreen.main.scale
+        polyShape.frame = CGRect(x: start.x, y: start.y, width: w, height: h)
+        
+        let roundRect = CGRect(x: 0.0, y: 0.0, width: w, height: h)
+        polyShape.path = UIBezierPath(roundedRect: roundRect, cornerRadius: 8.0).cgPath
+        polyShape.fillColor = poly.category.fillColor()
+        polyShape.strokeColor = poly.category.strokeColor()
+        polyShape.lineWidth = 2.5
+        self.layer.insertSublayer(polyShape, at: 1)
+
+    }
+    
+    func testDouble(_ sender:UITapGestureRecognizer!) {
+        // Recieved a tap, mark the origin and check for two consecuitive taps in the same region
+        let doubleClick :Bool = UserManager.sharedInstance.shouldDoubleTapToSelect()
+        if doubleClick {
+            if self.tapStart != nil {
+                // compare first tap to current tap location
+                let newTapPoint = sender.location(in: self)
+                let xDist = newTapPoint.x - self.tapStart!.x
+                let yDist = newTapPoint.y - self.tapStart!.y
+                let distance = sqrt((xDist * xDist) + (yDist * yDist))
+                if distance < self.frame.size.height * 0.05 {
+                    // Second tap was on top of first tap, show shot mark
+                    self.tapType = BoundingBoxShotType.mark
+                    self.setNeedsLayout()
+                    if self.delegate != nil {
+                        let shotVector = self.calcLocationPosition()
+                        self.delegate?.didFinishTouch(shotVector.horizontal, positionY: shotVector.vertical)
                     }
-                    else {
-                        self.tapStart = sender.location(in: self)
-                        self.tapType = BoundingBoxShotType.mark
-                        self.setNeedsLayout()
-                        
-                    }
-                    
                 }
                 else {
-                    // Record first tap
                     self.tapStart = sender.location(in: self)
                     self.tapType = BoundingBoxShotType.mark
                     self.setNeedsLayout()
                     
                 }
+                
             }
             else {
-                // Single click
+                // Record first tap
                 self.tapStart = sender.location(in: self)
                 self.tapType = BoundingBoxShotType.mark
                 self.setNeedsLayout()
-                if self.delegate != nil {
-                    let shotVector = self.calcLocationPosition()
-                    self.delegate?.didFinishTouch(shotVector.horizontal, positionY: shotVector.vertical)
-                }
                 
+            }
+        }
+        else {
+            // Single click
+            self.tapStart = sender.location(in: self)
+            self.tapType = BoundingBoxShotType.mark
+            self.setNeedsLayout()
+            if self.delegate != nil {
+                let shotVector = self.calcLocationPosition()
+                self.delegate?.didFinishTouch(shotVector.horizontal, positionY: shotVector.vertical)
             }
             
         }
+        
     }
     
     
@@ -408,7 +570,7 @@ class BoundingBoxView : UIImageView {
         
         if self.tapStart != nil {
             let nativeScreenW = UIScreen.main.nativeBounds.size.width
-            let radii_scale :CGFloat = nativeScreenW < 1400.0 ? 0.06 : 0.04
+            let radii_scale :CGFloat = nativeScreenW < 1400.0 ? 0.04 : 0.04
             
             let radii = self.frame.size.height * radii_scale
             let xOff = self.tapStart!.x - radii*0.5
@@ -427,9 +589,6 @@ class BoundingBoxView : UIImageView {
             self.layer.insertSublayer(markShape, at: 3)
             self.markLayer = markShape
         }
-        else {
-            self.isPointInGoal = false
-        }
         
     }
     fileprivate var goalLayer: CALayer?
@@ -443,7 +602,6 @@ class BoundingBoxView : UIImageView {
         let frameRect = CGRect(x: xOff, y: yOff, width: radii, height: radii)
         
         if self.locInView != nil && frameRect.contains(self.locInView!) {
-            self.isPointInGoal = true
             let goalShape = CAShapeLayer()
             goalShape.contentsScale = UIScreen.main.scale
             goalShape.frame = CGRect(x: xOff, y: yOff, width: radii, height: radii)
@@ -455,9 +613,6 @@ class BoundingBoxView : UIImageView {
             goalShape.lineWidth = 0.5
             self.layer.insertSublayer(goalShape, at: 3)
             self.goalLayer = goalShape
-        }
-        else {
-            self.isPointInGoal = false
         }
         
     }
