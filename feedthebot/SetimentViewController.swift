@@ -118,6 +118,7 @@ class SentimentViewController: UIViewController {
         progressLabel.text = "\(trainingCount)/\(data.eventCount)"
         
         textView.text = "Sample textual data goes here for sentiment analysis."
+        textView.centerVertically()
         
         responseStrings = [String].init(repeating: "", count: data.eventCount)
         
@@ -279,5 +280,17 @@ class SentimentViewController: UIViewController {
      // Pass the selected object to the new view controller.
      }
      */
+    
+}
+
+extension UITextView {
+    
+    func centerVertically() {
+        let fittingSize = CGSize(width: bounds.width, height: CGFloat.greatestFiniteMagnitude)
+        let size = sizeThatFits(fittingSize)
+        let topOffset = (bounds.size.height - size.height * zoomScale) / 2
+        let positiveTopOffset = max(1, topOffset)
+        contentOffset.y = -positiveTopOffset
+    }
     
 }

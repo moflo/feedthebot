@@ -10,8 +10,17 @@ import UIKit
 
 class ViewController: UIViewController {
     @IBAction func doAccountButton(_ sender: Any) {
+        let alert = MFAlertTrainView(title: "Feed Me!",
+                                     icon: "",
+                                     info: "Welcome! Try a demo, or select an activity to earn points which you can then redeem for cash.",
+                                     prompt: .SELECT_SOMETHING) { (category, buttonIndex) in
+                                        
+        }
+        alert.show()
+
     }
     @IBAction func doSettingsButton(_ sender: Any) {
+        self.performSegue(withIdentifier: "payoutSegue", sender: self)
     }
     @IBAction func doTrainButton(_ sender: Any) {
     }
@@ -83,35 +92,35 @@ class ViewController: UIViewController {
         
         var buttons = [MFTrainButton]()
         
-        let buttonShot = MFTrainButton(title: "TEXT", icon: "icon_text")
+        let buttonShot = MFTrainButton(title: .TEXT, icon: "icon_text")
         buttonShot.completionHandler = { (sender) in
             print(sender)
             self.showTrainingController("TEXTTRAINING")
         }
         buttons.append(buttonShot)
         
-        let buttonTurnover = MFTrainButton(title: "CLASSIFICATION", icon: "icon_classify")
+        let buttonTurnover = MFTrainButton(title: .CLASSIFICATION, icon: "icon_classify")
         buttonTurnover.completionHandler = { (sender) in
             print(sender)
             self.showTrainingController("CATEGORYTRAINING")
         }
         buttons.append(buttonTurnover)
         
-        let buttonSentiment = MFTrainButton(title: "SENTIMENT", icon: "icon_text")
+        let buttonSentiment = MFTrainButton(title: .SENTIMENT, icon: "icon_text")
         buttonSentiment.completionHandler = { (sender) in
             print(sender)
             self.showTrainingController("SENTIMENTTRAINING")
         }
         buttons.append(buttonSentiment)
         
-        let buttonCorner = MFTrainButton(title: "BOUNDING BOX", icon: "icon_bounding")
+        let buttonCorner = MFTrainButton(title: .BOUNDINGBOX, icon: "icon_bounding")
         buttonCorner.completionHandler = { (sender) in
             print(sender)
             self.showTrainingController("BBOXTRAINING")
         }
         buttons.append(buttonCorner)
         
-        let buttonGoal = MFTrainButton(title: "POLYGON LABEL", icon: "icon_polygon")
+        let buttonGoal = MFTrainButton(title: .POLYGONLABEL, icon: "icon_polygon")
         buttonGoal.completionHandler = { (sender) in
             print(sender)
             self.showTrainingController("POLYTRAINING")

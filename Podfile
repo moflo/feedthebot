@@ -12,7 +12,8 @@ target 'feedthebot' do
     pod 'Fabric'
     pod 'Crashlytics'
 
-
+    pod 'SDWebImage'
+    
     target 'feedthebotTests' do
         inherit! :search_paths
         # Pods for testing

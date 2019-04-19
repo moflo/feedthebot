@@ -1,0 +1,19 @@
+/* 
+  Localizable.strings
+  feedthebot
+
+  Created by d. nye on 4/19/19.
+  Copyright © 2019 Mobile Flow LLC. All rights reserved.
+*/
+
+// MARK: Button titles
+"TEXT" = "TEXT";
+"CLASSIFICATION" = "CLASSIFICATION";
+"SENTIMENT" = "SENTIMENT";
+"BOUNDING BOX" = "BOUNDING BOX";
+"POLYGON LABEL" = "POLYGON LABEL";
+
+// MARK: Prompts
+"Type some text!" = "Type some text!";
+"Select Training Type" = "Select Training Type";
+

@@ -40,7 +40,7 @@
                                 </state>
                                 <connections>
                                     <action selector="doTrainButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="rdG-3g-2P5"/>
-                                    <segue destination="gvT-y6-Iew" kind="show" id="9pa-5q-ciG"/>
+                                    <segue destination="gvT-y6-Iew" kind="show" identifier="demoSegue" id="9pa-5q-ciG"/>
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bot_small_white" translatesAutoresizingMaskIntoConstraints="NO" id="cU9-xb-3k3">
@@ -64,7 +64,7 @@
                                 </state>
                                 <connections>
                                     <action selector="doPayoutButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="TGx-DC-4qO"/>
-                                    <segue destination="Phq-2b-sGZ" kind="show" id="Ugn-9s-4bs"/>
+                                    <segue destination="Phq-2b-sGZ" kind="show" identifier="payoutSegue" id="Ugn-9s-4bs"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Feed The Bot" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d8e-bk-QO9">
@@ -397,12 +397,12 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fwv-xX-TFv">
                                 <rect key="frame" x="0.0" y="101" width="375" height="375"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bounding_box" translatesAutoresizingMaskIntoConstraints="NO" id="FB7-Ah-Er5">
-                                        <rect key="frame" x="0.0" y="0.0" width="680" height="375"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="bounding_box" translatesAutoresizingMaskIntoConstraints="NO" id="FB7-Ah-Er5">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="375"/>
                                     </imageView>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="FB7-Ah-Er5" secondAttribute="trailing" constant="-305" id="E4K-6q-aJ7"/>
+                                    <constraint firstAttribute="trailing" secondItem="FB7-Ah-Er5" secondAttribute="trailing" id="E4K-6q-aJ7"/>
                                     <constraint firstItem="FB7-Ah-Er5" firstAttribute="top" secondItem="fwv-xX-TFv" secondAttribute="top" id="TTq-cJ-rlb"/>
                                     <constraint firstItem="FB7-Ah-Er5" firstAttribute="centerY" secondItem="fwv-xX-TFv" secondAttribute="centerY" id="gLf-AZ-qfj"/>
                                     <constraint firstAttribute="bottom" secondItem="FB7-Ah-Er5" secondAttribute="bottom" id="rBg-G3-YaL"/>

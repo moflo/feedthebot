@@ -45,35 +45,35 @@ class TrainViewController: UIViewController {
     func setupStatButtons() {
         
         var buttons = [MFTrainButton]()
-        let buttonShot = MFTrainButton(title: "TEXT", icon: "icon_text")
+        let buttonShot = MFTrainButton(title: .TEXT, icon: "icon_text")
         buttonShot.completionHandler = { (sender) in
             print(sender)
             self.showTrainingController("TEXTTRAINING")
         }
         buttons.append(buttonShot)
         
-        let buttonCorner = MFTrainButton(title: "BOUNDING BOX", icon: "icon_bounding")
+        let buttonCorner = MFTrainButton(title: .BOUNDINGBOX, icon: "icon_bounding")
         buttonCorner.completionHandler = { (sender) in
             print(sender)
             self.showTrainingController("BBOXTRAINING")
         }
         buttons.append(buttonCorner)
         
-        let buttonSentiment = MFTrainButton(title: "SENTIMENT", icon: "icon_text")
+        let buttonSentiment = MFTrainButton(title: .SENTIMENT, icon: "icon_text")
         buttonSentiment.completionHandler = { (sender) in
             print(sender)
             self.showTrainingController("SENTIMENTTRAINING")
         }
         buttons.append(buttonSentiment)
         
-        let buttonGoal = MFTrainButton(title: "POLYGON LABEL", icon: "icon_polygon")
+        let buttonGoal = MFTrainButton(title: .POLYGONLABEL, icon: "icon_polygon")
         buttonGoal.completionHandler = { (sender) in
             print(sender)
             self.showTrainingController("POLYTRAINING")
         }
         buttons.append(buttonGoal)
         
-        let buttonTurnover = MFTrainButton(title: "CLASSIFICATION", icon: "icon_classify")
+        let buttonTurnover = MFTrainButton(title: .CLASSIFICATION, icon: "icon_classify")
         buttonTurnover.completionHandler = { (sender) in
             print(sender)
             self.showTrainingController("CATEGORYTRAINING")

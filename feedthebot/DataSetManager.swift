@@ -60,11 +60,34 @@ struct MFResponse  {
     
 }
 
+enum MFTrainingType :String {
+    case textOCR = "textOCR"
+    case textSentiment = "textSentiment"
+    case imageCategory = "imageCategory"
+    case imageBBox = "imageBBox"
+    case imageBBoxCategory = "imageBBoxCategory"
+    case imagePolygon = "imagePolygon"
+    case other = ""
+    
+    func detail() -> String {
+        switch self {
+        case .textOCR : return "Text Recognition"
+        case .textSentiment : return "Text Sentiment"
+        case .imageCategory : return "Image Category"
+        case .imageBBox : return "Image Bounding Box"
+        case .imageBBoxCategory : return "Image Bounding Categories"
+        case .imagePolygon : return "Image Polygon"
+        default : return "Training"
+        }
+    }
+}
+
 class MFDataSet {
     var uuid :String = UUID().uuidString
     var points :Int = 0
     var multiplier :Float = 1.0
     var trainingType :String
+    var training_type :MFTrainingType
     var instruction :String = "This should be long text which describes the type of training data."
     var eventCount :Int = 10
     var limitSeconds :Int = 60*2
@@ -90,7 +113,7 @@ class MFDataSet {
     }
     
     init() {
-        self.uuid = ""; self.trainingType = "Text";
+        self.uuid = ""; self.trainingType = "Text"; self.training_type = .textOCR
     }
     
     convenience init(uuid: String, points: Int) {
@@ -129,6 +152,9 @@ class DataSetManager : NSObject {
     
     func demoDataSet(_ trainingType :String) -> MFDataSet {
         let data = MFDataSet(uuid: "DEADBEEF", points: 30)
+        
+        data.dataURLArray.append("https://github.com/wangpengnorman/SAR-Strong-Baseline-for-Text-Recognition/blob/master/data/beach.jpg?raw=true")
+        data.dataURLArray.append("https://github.com/wangpengnorman/SAR-Strong-Baseline-for-Text-Recognition/blob/master/data/united.jpg?raw=true")
         
         return data
     }
