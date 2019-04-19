@@ -76,8 +76,6 @@ class PolyCatViewController: UIViewController, UIScrollViewDelegate {
         scrollView.minimumZoomScale = 1.0
         scrollView.maximumZoomScale = 6.0
         
-        categoryLabel.isEnabled = false
-        categoryLabel.isHidden = true
         trainDoneButton.isEnabled = false
         
         if (dataSetObj == nil) {
@@ -248,8 +246,6 @@ class PolyCatViewController: UIViewController, UIScrollViewDelegate {
         DispatchQueue.main.async {
             UIView.animate(withDuration: 0.33, delay: 0.1, options: .curveEaseOut, animations: { () -> Void in
                 
-                self.categoryLabel.text = identifier
-                self.categoryLabel.isHidden = false
                 self.trainDoneButton.isEnabled = true
                 
                 
