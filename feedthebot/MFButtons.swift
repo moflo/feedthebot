@@ -669,6 +669,7 @@ class MFTrainButton {
     
     var title: String!
     var icon_name :String!
+    var category :BoundingBoxShotType = .mark
     
     init() {
         title = "Text"
@@ -681,7 +682,14 @@ class MFTrainButton {
         self.title = title
         self.icon_name = icon
     }
-    
+
+    convenience init(title: String, icon: String, category: BoundingBoxShotType) {
+        self.init()
+        self.title = title
+        self.icon_name = icon
+        self.category = category
+    }
+
 }
 
 class MFTrainingButtonView : UIView, UICollectionViewDataSource, UICollectionViewDelegate {
@@ -795,6 +803,8 @@ class MFTrainingButtonView : UIView, UICollectionViewDataSource, UICollectionVie
         var btn: UIView!
         var enabled: Bool = true
         var buttonType :MFTrainButtonType = .Orange
+        var buttonColor: UIColor = MFDarkBlue()
+        var textColor: UIColor = .white
         
         override func prepareForReuse() {
             super.prepareForReuse()
@@ -815,7 +825,7 @@ class MFTrainingButtonView : UIView, UICollectionViewDataSource, UICollectionVie
         
         func configure(_ menuType: MFTrainButtonType) {
             buttonType = menuType
-            print("Cell configure: ",buttonType)
+//            print("Cell configure: ",buttonType)
             
             if buttonType == .Orange {
             let iconSize = CGFloat(64)
@@ -874,7 +884,7 @@ class MFTrainingButtonView : UIView, UICollectionViewDataSource, UICollectionVie
                 let iconSize = CGFloat(22)
                 
                 btn = UIView(frame: CGRect(x: 0, y: 0, width: bounds.width*0.9, height: 44))
-                btn.backgroundColor = MFDarkBlue()
+                btn.backgroundColor = self.buttonColor
                 
                 let radius :CGFloat = 0.25 * btn.frame.size.height
                 btn.layer.cornerRadius = radius
@@ -900,7 +910,7 @@ class MFTrainingButtonView : UIView, UICollectionViewDataSource, UICollectionVie
                 title.numberOfLines = 1
                 title.translatesAutoresizingMaskIntoConstraints = false
                 title.font = UIFont(name: "HelveticaNeue", size: fontSize)
-                title.textColor = UIColor.white
+                title.textColor = self.textColor
                 btn.addSubview(title)
                 
                 // Auto layout
@@ -980,19 +990,22 @@ class MFTrainingButtonView : UIView, UICollectionViewDataSource, UICollectionVie
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MFTrainButtonCell", for: indexPath) as! MFTrainButtonCell
-        cell.configure(self.menuType)
         self.configureCell(cell, atIndexPath: indexPath)
-        
+
         
         return cell
     }
     
     func configureCell(_ cell: MFTrainButtonCell, atIndexPath indexPath: IndexPath) {
-        
+        cell.configure(self.menuType)
+
         let item = (indexPath as NSIndexPath).item
         if let button = menuButtons?[item] {
-            cell.title.text = button.title
-            cell.icon.image = UIImage(named: button.icon_name)
+            cell.title?.text = button.title
+            cell.icon?.image = UIImage(named: button.icon_name)
+            if self.menuType == .DarkBlue {
+                cell.buttonColor = UIColor(cgColor: button.category.fillColor())
+            }
         }
         else {
             cell.title.text = "Test Button"

@@ -1,14 +1,14 @@
 //
-//  CategoryViewController.swift
+//  PolyCatViewController.swift
 //  feedthebot
 //
-//  Created by d. nye on 4/16/19.
+//  Created by d. nye on 4/18/19.
 //  Copyright © 2019 Mobile Flow LLC. All rights reserved.
 //
 
 import UIKit
 
-class CategoryViewController: UIViewController, UIScrollViewDelegate {
+class PolyCatViewController: UIViewController, UIScrollViewDelegate {
     @IBAction func doDoneButton(_ sender: Any) {
         self.navigationController?.dismiss(animated: true, completion: nil)
     }
@@ -16,16 +16,32 @@ class CategoryViewController: UIViewController, UIScrollViewDelegate {
         doSaveTrainingEvent("")
     }
     
-    @IBAction func doTrainSkipButton(_ sender: Any) {
-        doSaveTrainingEvent("")
+    @IBAction func doTrainAddButton(_ sender: Any) {
+        
+        let alert = MFAlertTrainView(title: "Bounding Category",
+                                     icon: "",
+                                     info: "Tap on the image to add the first point in a rectangle. Tap a second location to draw a box. You can change the box size by dragging the anchor points around.",
+                                     prompt: "Add some boxes") { (category, buttonIndex) in
+                                        
+                                        
+        }
+        alert.show()
+        
+    }
+    @IBAction func doTrainRemoveButton(_ sender: Any) {
+        imageView.reset()
     }
     @IBAction func doTrainDoneButton(_ sender: Any) {
-        let category = categoryLabel.text ?? ""
-       doSaveTrainingEvent(category)
+        let polyArray = imageView.resetAndGetPolyArray()
+        if polyArray.count > 0 {
+            print("PolyArray ", polyArray)
+            doSaveTrainingEvent("")
+        }
+
+        doSaveTrainingEvent("")
         
         UIView.animate(withDuration: 0.33, delay: 0.1, options: .curveEaseOut, animations: { () -> Void in
             
-            self.categoryLabel.isHidden = true
             self.trainDoneButton.isEnabled = false
             self.trainingButtonView.reset()
             
@@ -33,7 +49,7 @@ class CategoryViewController: UIViewController, UIScrollViewDelegate {
             // Set underLine width
             
         })
-
+        
     }
     
     @IBOutlet weak var pointsLabel: UILabel!
@@ -41,12 +57,11 @@ class CategoryViewController: UIViewController, UIScrollViewDelegate {
     @IBOutlet weak var timeLabel: UILabel!
     
     @IBOutlet weak var scrollView: UIScrollView!
-    @IBOutlet weak var imageView: UIImageView!
-
-    @IBOutlet weak var categoryLabel: MFFormTextField1!
+    @IBOutlet weak var imageView: BoundingBoxView!
+    
     @IBOutlet weak var trainingButtonView: MFTrainingButtonView!
     @IBOutlet weak var trainDoneButton: UIButton!
-
+    
     var dataSetObj :MFDataSet? = nil
     var trainingCount :Int = 0
     var gameTimer : Timer? = nil
@@ -75,14 +90,14 @@ class CategoryViewController: UIViewController, UIScrollViewDelegate {
         doPreloadDataSet()
         
         setupStatButtons()
-
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
         doLoadDataSet()
-
+        
         // Adjust menu
-         trainingButtonView.reset()
+        trainingButtonView.reset()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -100,7 +115,7 @@ class CategoryViewController: UIViewController, UIScrollViewDelegate {
         
         return imageView
     }
-
+    
     // MARK: Dataset methods
     
     func doPreloadDataSet() {
@@ -236,7 +251,7 @@ class CategoryViewController: UIViewController, UIScrollViewDelegate {
                 self.categoryLabel.text = identifier
                 self.categoryLabel.isHidden = false
                 self.trainDoneButton.isEnabled = true
-
+                
                 
             }, completion: { (done) -> Void in
                 // Set underLine width
@@ -259,10 +274,10 @@ class CategoryViewController: UIViewController, UIScrollViewDelegate {
             self.showSelectedCateogory("CATEGORY TWO")
         }
         buttons.append(buttonCorner)
-
+        
         trainingButtonView.menuType = .DarkBlue
         trainingButtonView.menuButtons = buttons
-
+        
     }
     
     

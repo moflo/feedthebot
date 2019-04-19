@@ -17,11 +17,26 @@ class BBoxViewController: UIViewController, UIScrollViewDelegate {
     }
     
     @IBAction func doTrainAddButton(_ sender: Any) {
+        
+        let alert = MFAlertTrainView(title: "Bounding Box",
+                                     icon: "",
+                                     info: "Tap on the image to add the first point in a rectangle. Tap a second location to draw a box. You can change the box size by dragging the anchor points around.",
+                                     prompt: "Add some boxes") { (category, buttonIndex) in
+                                        
+                                        
+        }
+        alert.show()
+
     }
     @IBAction func doTrainRemoveButton(_ sender: Any) {
+        trainingImage.reset()
     }
     @IBAction func doTrainDoneButton(_ sender: Any) {
-        doSaveTrainingEvent("")
+        let polyArray = trainingImage.resetAndGetPolyArray()
+        if polyArray.count > 0 {
+            print("PolyArray ", polyArray)
+            doSaveTrainingEvent("")
+        }
     }
     
     @IBOutlet weak var pointsLabel: UILabel!
@@ -278,13 +293,13 @@ enum BoundingBoxShotType {
         case .none :
             return UIColor.clear.cgColor
         case .mark :
-            return MFDarkBlue().cgColor
+            return MFGreen().cgColor
         case .goal :
-            return UIColor.green.cgColor
+            return MFYellow().cgColor
         case .allowed :
-            return UIColor.red.cgColor
+            return MFRed().cgColor
         case .miss :
-            return UIColor.yellow.cgColor
+            return MFBlue().cgColor
         case .block :
             return UIColor.darkGray.cgColor
         }
@@ -295,7 +310,7 @@ enum BoundingBoxShotType {
         case .none :
             return UIColor.clear.cgColor
         case .mark :
-            return UIColor.black.cgColor
+            return MFDarkBlue().cgColor
         case .goal :
             return UIColor.darkGray.cgColor
         case .allowed :
@@ -340,9 +355,6 @@ struct BoundingBoxPoly {
 class BoundingBoxView : UIImageView {
     var drawState : BoundingBoxState = .quescient
     var polyArray = [BoundingBoxPoly]()
-    var tapStart : CGPoint? = nil
-    var dragStart : CGPoint? = nil
-    var locInView : CGPoint? = nil
     var activePoly : BoundingBoxPoly? = nil
     var delegate : BoundingBoxViewDelegate? = nil
     
@@ -374,11 +386,19 @@ class BoundingBoxView : UIImageView {
     
     func resetAndGetPolyArray() -> [BoundingBoxPoly] {
         if let poly = activePoly { polyArray.append(poly) }
+        let newArray = [BoundingBoxPoly].init(polyArray)
         reset()
-        return polyArray
+        
+        return newArray
     }
     
     func reset() {
+        // Data reset
+        polyArray.removeAll()
+        activePoly = nil
+        drawState = .quescient
+        
+        // UI reset
         self.subviews.forEach { $0.removeFromSuperview() }
         self.layer.sublayers?.forEach { $0.removeFromSuperlayer() }
     }

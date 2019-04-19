@@ -30,6 +30,7 @@
 		918F2676225D857900D6056C /* TrainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 918F2675225D857900D6056C /* TrainViewController.swift */; };
 		918F2678225DA65F00D6056C /* TextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 918F2677225DA65F00D6056C /* TextViewController.swift */; };
 		91CD057B22604B570085614D /* PayoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91CD057A22604B570085614D /* PayoutViewController.swift */; };
+		91D35D012269923A00C53BCF /* PolyCatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91D35D002269923900C53BCF /* PolyCatViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,6 +76,7 @@
 		918F2675225D857900D6056C /* TrainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainViewController.swift; sourceTree = "<group>"; };
 		918F2677225DA65F00D6056C /* TextViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextViewController.swift; sourceTree = "<group>"; };
 		91CD057A22604B570085614D /* PayoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayoutViewController.swift; sourceTree = "<group>"; };
+		91D35D002269923900C53BCF /* PolyCatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolyCatViewController.swift; sourceTree = "<group>"; };
 		B57A0CCBB9083A30FDD77040 /* Pods_feedthebotTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_feedthebotTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B814180C7B6B52D249EDF334 /* Pods-feedthebot.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-feedthebot.release.xcconfig"; path = "Target Support Files/Pods-feedthebot/Pods-feedthebot.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -150,6 +152,7 @@
 				918F2677225DA65F00D6056C /* TextViewController.swift */,
 				914C71902267AA4A00AF9099 /* BBoxViewController.swift */,
 				914C718C226685D600AF9099 /* CategoryViewController.swift */,
+				91D35D002269923900C53BCF /* PolyCatViewController.swift */,
 				914C718E2267A31D00AF9099 /* SetimentViewController.swift */,
 				91CD057A22604B570085614D /* PayoutViewController.swift */,
 				914C718722616C0900AF9099 /* CardViewController.swift */,
@@ -446,6 +449,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				918F2653225D7F4D00D6056C /* ViewController.swift in Sources */,
+				91D35D012269923A00C53BCF /* PolyCatViewController.swift in Sources */,
 				918F2651225D7F4D00D6056C /* AppDelegate.swift in Sources */,
 				91754550226008D400DB77EE /* MFForms.swift in Sources */,
 				9175454C225FFA2400DB77EE /* MFColors.swift in Sources */,

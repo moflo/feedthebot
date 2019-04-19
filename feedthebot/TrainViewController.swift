@@ -67,7 +67,7 @@ class TrainViewController: UIViewController {
         let buttonGoal = MFTrainButton(title: "POLYGON LABEL", icon: "icon_polygon")
         buttonGoal.completionHandler = { (sender) in
             print(sender)
-            self.showTrainingController("TEXTTRAINING")
+            self.showTrainingController("POLYTRAINING")
         }
         buttons.append(buttonGoal)
         
