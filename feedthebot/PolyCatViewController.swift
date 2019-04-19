@@ -259,14 +259,16 @@ class PolyCatViewController: UIViewController, UIScrollViewDelegate {
     func setupStatButtons() {
         
         var buttons = [MFTrainButton]()
-        let buttonShot = MFTrainButton(title: "CATEGORY1", icon: "icon_text", category: .mark)
+        let buttonShot = MFTrainButton(title: "CATEGORY ONE", icon: "icon_text", category: .mark)
         buttonShot.completionHandler = { (sender) in
+            self.imageView?.setTypeColor(.mark)
             self.showSelectedCateogory("CATEGORY ONE")
         }
         buttons.append(buttonShot)
         
-        let buttonCorner = MFTrainButton(title: "CATEGORY2", icon: "icon_bounding", category: .goal)
+        let buttonCorner = MFTrainButton(title: "CATEGORY TWO", icon: "icon_bounding", category: .goal)
         buttonCorner.completionHandler = { (sender) in
+            self.imageView?.setTypeColor(.goal)
             self.showSelectedCateogory("CATEGORY TWO")
         }
         buttons.append(buttonCorner)

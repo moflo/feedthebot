@@ -823,8 +823,10 @@ class MFTrainingButtonView : UIView, UICollectionViewDataSource, UICollectionVie
             
         }
         
-        func configure(_ menuType: MFTrainButtonType) {
+        func configure(_ menuType: MFTrainButtonType, category: BoundingBoxShotType = .none) {
             buttonType = menuType
+            buttonColor = UIColor(cgColor: category.fillColor())
+            
 //            print("Cell configure: ",buttonType)
             
             if buttonType == .Orange {
@@ -997,17 +999,18 @@ class MFTrainingButtonView : UIView, UICollectionViewDataSource, UICollectionVie
     }
     
     func configureCell(_ cell: MFTrainButtonCell, atIndexPath indexPath: IndexPath) {
-        cell.configure(self.menuType)
 
         let item = (indexPath as NSIndexPath).item
         if let button = menuButtons?[item] {
+            let category = self.menuType == .DarkBlue ? button.category : .none
+            cell.configure(self.menuType, category: category)
+            
             cell.title?.text = button.title
             cell.icon?.image = UIImage(named: button.icon_name)
-            if self.menuType == .DarkBlue {
-                cell.buttonColor = UIColor(cgColor: button.category.fillColor())
-            }
         }
         else {
+            cell.configure(self.menuType)
+            
             cell.title.text = "Test Button"
             cell.icon.image = UIImage(named: "square_goal")
             

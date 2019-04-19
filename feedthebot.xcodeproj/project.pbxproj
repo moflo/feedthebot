@@ -31,6 +31,7 @@
 		918F2678225DA65F00D6056C /* TextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 918F2677225DA65F00D6056C /* TextViewController.swift */; };
 		91CD057B22604B570085614D /* PayoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91CD057A22604B570085614D /* PayoutViewController.swift */; };
 		91D35D012269923A00C53BCF /* PolyCatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91D35D002269923900C53BCF /* PolyCatViewController.swift */; };
+		91D35D03226A241500C53BCF /* MFPolyEdit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91D35D02226A241500C53BCF /* MFPolyEdit.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,6 +78,7 @@
 		918F2677225DA65F00D6056C /* TextViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextViewController.swift; sourceTree = "<group>"; };
 		91CD057A22604B570085614D /* PayoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayoutViewController.swift; sourceTree = "<group>"; };
 		91D35D002269923900C53BCF /* PolyCatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolyCatViewController.swift; sourceTree = "<group>"; };
+		91D35D02226A241500C53BCF /* MFPolyEdit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MFPolyEdit.swift; sourceTree = "<group>"; };
 		B57A0CCBB9083A30FDD77040 /* Pods_feedthebotTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_feedthebotTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B814180C7B6B52D249EDF334 /* Pods-feedthebot.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-feedthebot.release.xcconfig"; path = "Target Support Files/Pods-feedthebot/Pods-feedthebot.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -160,6 +162,7 @@
 				914C7185226109AC00AF9099 /* DataSetManager.swift */,
 				9175454B225FFA2400DB77EE /* MFColors.swift */,
 				9175454D225FFBA400DB77EE /* MFButtons.swift */,
+				91D35D02226A241500C53BCF /* MFPolyEdit.swift */,
 				9175454F226008D400DB77EE /* MFForms.swift */,
 				914C718A2264EC0E00AF9099 /* MFAlerts.swift */,
 				918F2654225D7F4D00D6056C /* Main.storyboard */,
@@ -461,6 +464,7 @@
 				914C718822616C0900AF9099 /* CardViewController.swift in Sources */,
 				914C71912267AA4A00AF9099 /* BBoxViewController.swift in Sources */,
 				914C7186226109AC00AF9099 /* DataSetManager.swift in Sources */,
+				91D35D03226A241500C53BCF /* MFPolyEdit.swift in Sources */,
 				914C718D226685D600AF9099 /* CategoryViewController.swift in Sources */,
 				918F2678225DA65F00D6056C /* TextViewController.swift in Sources */,
 				914C718B2264EC0E00AF9099 /* MFAlerts.swift in Sources */,
