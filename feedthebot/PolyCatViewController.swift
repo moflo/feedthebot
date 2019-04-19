@@ -259,19 +259,47 @@ class PolyCatViewController: UIViewController, UIScrollViewDelegate {
     func setupStatButtons() {
         
         var buttons = [MFTrainButton]()
-        let buttonShot = MFTrainButton(title: "CATEGORY ONE", icon: "icon_text", category: .mark)
-        buttonShot.completionHandler = { (sender) in
-            self.imageView?.setTypeColor(.mark)
+        let buttonNone = MFTrainButton(title: "CATEGORY ONE", icon: "icon_text", category: .none)
+        buttonNone.completionHandler = { (sender) in
+            self.imageView?.setTypeColor(.none)
             self.showSelectedCateogory("CATEGORY ONE")
         }
-        buttons.append(buttonShot)
+        buttons.append(buttonNone)
         
-        let buttonCorner = MFTrainButton(title: "CATEGORY TWO", icon: "icon_bounding", category: .goal)
-        buttonCorner.completionHandler = { (sender) in
-            self.imageView?.setTypeColor(.goal)
+        let buttonMark = MFTrainButton(title: "CATEGORY TWO", icon: "icon_bounding", category: .mark)
+        buttonMark.completionHandler = { (sender) in
+            self.imageView?.setTypeColor(.mark)
             self.showSelectedCateogory("CATEGORY TWO")
         }
-        buttons.append(buttonCorner)
+        buttons.append(buttonMark)
+        
+        let buttonGoal = MFTrainButton(title: "CATEGORY THREE", icon: "icon_bounding", category: .goal)
+        buttonGoal.completionHandler = { (sender) in
+            self.imageView?.setTypeColor(.goal)
+            self.showSelectedCateogory("CATEGORY THREE")
+        }
+        buttons.append(buttonGoal)
+        
+        let buttonAllow = MFTrainButton(title: "CATEGORY FOUR", icon: "icon_bounding", category: .allowed)
+        buttonAllow.completionHandler = { (sender) in
+            self.imageView?.setTypeColor(.allowed)
+            self.showSelectedCateogory("CATEGORY FOUR")
+        }
+        buttons.append(buttonAllow)
+        
+        let buttonMiss = MFTrainButton(title: "CATEGORY FIVE", icon: "icon_bounding", category: .miss)
+        buttonMiss.completionHandler = { (sender) in
+            self.imageView?.setTypeColor(.miss)
+            self.showSelectedCateogory("CATEGORY FIVE")
+        }
+        buttons.append(buttonMiss)
+        
+        let buttonBlock = MFTrainButton(title: "CATEGORY SIX", icon: "icon_bounding", category: .block)
+        buttonBlock.completionHandler = { (sender) in
+            self.imageView?.setTypeColor(.block)
+            self.showSelectedCateogory("CATEGORY SIX")
+        }
+        buttons.append(buttonBlock)
         
         trainingButtonView.menuType = .DarkBlue
         trainingButtonView.menuButtons = buttons

@@ -407,14 +407,14 @@ class BoundingBoxView : UIImageView {
         
         poly.polyLayer?.removeFromSuperlayer()
         
-        let start = points[0]
-        let end = points[1]
-        let w = end.x-start.x
-        let h = end.y-start.y
+        let x = min(points[0].x,points[1].x)
+        let y = min(points[0].y,points[1].y)
+        let w = abs(points[0].x-points[1].x)
+        let h = abs(points[0].y-points[1].y)
         
         let polyShape = CAShapeLayer()
         polyShape.contentsScale = UIScreen.main.scale
-        polyShape.frame = CGRect(x: start.x, y: start.y, width: w, height: h)
+        polyShape.frame = CGRect(x: x, y: y, width: w, height: h)
         
         let roundRect = CGRect(x: 0.0, y: 0.0, width: w, height: h)
         polyShape.path = UIBezierPath(roundedRect: roundRect, cornerRadius: 3.0).cgPath
