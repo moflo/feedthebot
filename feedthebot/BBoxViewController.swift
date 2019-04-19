@@ -359,8 +359,6 @@ class BoundingBoxView : UIImageView {
         
         addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(BoundingBoxView.handleTap(_:))))
         
-//        addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(BoundingBoxView.handlePan(_:))))
-
     }
     
     override init(image: UIImage?) {
@@ -370,17 +368,50 @@ class BoundingBoxView : UIImageView {
         
         addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(BoundingBoxView.handleTap(_:))))
 
-//        addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(BoundingBoxView.handlePan(_:))))
-
     }
+    
+    // MARK: Data methods
+    
+    func resetAndGetPolyArray() -> [BoundingBoxPoly] {
+        if let poly = activePoly { polyArray.append(poly) }
+        reset()
+        return polyArray
+    }
+    
+    func reset() {
+        self.subviews.forEach { $0.removeFromSuperview() }
+        self.layer.sublayers?.forEach { $0.removeFromSuperlayer() }
+    }
+    
+    func clearActive() {
+        guard let poly = activePoly else { return }
+        
+        poly.polyLayer?.removeFromSuperlayer()
+        poly.anchorLayers?.forEach { $0?.removeFromSuperlayer() }
+        activePoly = nil
+        
+        drawState = .quescient
+    }
+    
+    func undoAnchor() {
+        guard let poly = activePoly, poly.points != nil, poly.points!.count > 0 else { return }
 
-    @objc func handlePan(_ sender:UITapGestureRecognizer!) {
-        if sender.state == UIGestureRecognizer.State.began {
-            let point = sender.location(in: self)
-
-            print("handlePan: start", point)
+        poly.polyLayer?.removeFromSuperlayer()
+        activePoly!.points?.removeLast()
+        
+        activePoly!.anchorLayers?.last??.removeFromSuperlayer()
+        activePoly!.anchorLayers?.removeLast()
+        
+        // Redraw if points >= 2 (ie., rectangle and poly)
+        if poly.points!.count >= 2 {
+            activePoly!.polyLayer = drawPoly(poly)
         }
+        
+        drawState = (poly.points!.count == 1 ? .first_tap : .add_tap)
+        
     }
+    
+    // MARK: UI Methods
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
 //        print("TouchesMoved ",touches.first?.location(in: self) ?? "none")
