@@ -42,8 +42,10 @@ func MFPurple() -> UIColor {
     return UIColor(hex:0x99056B)
 }
 
-func MFDarkBlue() -> UIColor {
-    return UIColor(hex:0x1C276E)
+func MFDarkBlue(_ alpha :CGFloat = 1.0) -> UIColor {
+    let c = UIColor(hex:0x1C276E)
+    if alpha == 1.0 { return c }
+    return c.withAlphaComponent(alpha)
 }
 
 func MFYellow() -> UIColor {
