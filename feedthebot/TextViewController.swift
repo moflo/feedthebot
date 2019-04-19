@@ -9,6 +9,16 @@
 import UIKit
 
 class TextViewController: UIViewController, UIScrollViewDelegate {
+    @IBAction func doSettingsButton(_ sender: Any) {
+        let alert = MFAlertTrainView(title: "Text Recognition",
+                                     icon: "",
+                                     info: "Type in the text as you understand it. Press check (√) to confirm.",
+                                     prompt: "Type some text!") { (category, buttonIndex) in
+                                        
+                                        
+        }
+        alert.show()
+    }
     @IBAction func doDoneButton(_ sender: Any) {
         self.navigationController?.dismiss(animated: true, completion: nil)
     }
@@ -17,7 +27,8 @@ class TextViewController: UIViewController, UIScrollViewDelegate {
     }
     
     @IBAction func doTrainSkipButton(_ sender: Any) {
-        doSaveTrainingEvent("")
+//        doSaveTrainingEvent("")
+        
     }
     @IBAction func doTrainDoneButton(_ sender: Any) {
         doSaveTrainingEvent(trainTextField.text!)

@@ -211,6 +211,13 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="app_launch" translatesAutoresizingMaskIntoConstraints="NO" id="Vau-fQ-sY3">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bot_small_white" translatesAutoresizingMaskIntoConstraints="NO" id="z6n-Vj-jJb">
+                                <rect key="frame" x="155.5" y="64" width="64" height="64"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="64" id="8Ok-U6-JUk"/>
+                                    <constraint firstAttribute="height" constant="64" id="cd1-Ua-1U1"/>
+                                </constraints>
+                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XGv-A3-usb">
                                 <rect key="frame" x="321" y="44" width="32" height="32"/>
                                 <constraints>
@@ -221,10 +228,10 @@
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <action selector="doSettingsButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="6as-KS-Mfr"/>
+                                    <action selector="doDoneButton:" destination="gvT-y6-Iew" eventType="touchUpInside" id="t2s-vR-TAd"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wWL-2B-ucj">
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wWL-2B-ucj">
                                 <rect key="frame" x="32" y="44" width="32" height="32"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="32" id="QyR-2K-DT5"/>
@@ -235,17 +242,6 @@
                                 </state>
                                 <connections>
                                     <action selector="doAccountButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="7oo-V3-bFj"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4dV-vu-SaS" customClass="MFRoundedButton" customModule="feedthebot">
-                                <rect key="frame" x="126" y="44" width="123" height="43"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="123" id="EYU-dI-wZe"/>
-                                    <constraint firstAttribute="height" constant="43" id="lZB-HA-cCX"/>
-                                </constraints>
-                                <state key="normal" title=" "/>
-                                <connections>
-                                    <action selector="doPayoutButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="IrI-uX-Doj"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3kr-37-6gJ">
@@ -265,23 +261,23 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lH8-i6-MJt" customClass="MFTrainingButtonView" customModule="feedthebot" customModuleProvider="target">
-                                <rect key="frame" x="10" y="153" width="355" height="388"/>
+                                <rect key="frame" x="10" y="194" width="355" height="325"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="lH8-i6-MJt" firstAttribute="leading" secondItem="BXf-ow-8gp" secondAttribute="leading" constant="10" id="3Ur-qw-eJB"/>
-                            <constraint firstItem="lH8-i6-MJt" firstAttribute="top" secondItem="4dV-vu-SaS" secondAttribute="bottom" constant="66" id="9Rv-cU-BoV"/>
+                            <constraint firstItem="z6n-Vj-jJb" firstAttribute="centerX" secondItem="jab-jm-dFB" secondAttribute="centerX" id="BJC-tD-nMq"/>
                             <constraint firstItem="Vau-fQ-sY3" firstAttribute="bottom" secondItem="jab-jm-dFB" secondAttribute="bottom" id="Eyy-J4-oC5"/>
                             <constraint firstItem="BXf-ow-8gp" firstAttribute="trailing" secondItem="lH8-i6-MJt" secondAttribute="trailing" constant="10" id="FO4-c0-sJe"/>
                             <constraint firstItem="wWL-2B-ucj" firstAttribute="leading" secondItem="BXf-ow-8gp" secondAttribute="leading" constant="32" id="FVy-YD-MRY"/>
                             <constraint firstItem="Vau-fQ-sY3" firstAttribute="leading" secondItem="jab-jm-dFB" secondAttribute="leading" id="GUv-KC-fhN"/>
                             <constraint firstAttribute="bottom" secondItem="3kr-37-6gJ" secondAttribute="bottom" constant="44" id="INl-07-wip"/>
-                            <constraint firstItem="3kr-37-6gJ" firstAttribute="top" secondItem="lH8-i6-MJt" secondAttribute="bottom" constant="22" id="IVW-fO-cqs"/>
+                            <constraint firstItem="3kr-37-6gJ" firstAttribute="top" secondItem="lH8-i6-MJt" secondAttribute="bottom" constant="44" id="IVW-fO-cqs"/>
                             <constraint firstItem="BXf-ow-8gp" firstAttribute="trailing" secondItem="XGv-A3-usb" secondAttribute="trailing" constant="22" id="MOM-yF-kS4"/>
-                            <constraint firstItem="4dV-vu-SaS" firstAttribute="top" secondItem="jab-jm-dFB" secondAttribute="top" constant="44" id="bRM-DF-uyK"/>
-                            <constraint firstItem="4dV-vu-SaS" firstAttribute="centerX" secondItem="jab-jm-dFB" secondAttribute="centerX" id="oOe-ap-xyt"/>
+                            <constraint firstItem="z6n-Vj-jJb" firstAttribute="top" secondItem="BXf-ow-8gp" secondAttribute="top" constant="44" id="goI-nv-sI1"/>
+                            <constraint firstItem="lH8-i6-MJt" firstAttribute="top" secondItem="z6n-Vj-jJb" secondAttribute="bottom" constant="66" id="h3N-Ru-xyH"/>
                             <constraint firstItem="Vau-fQ-sY3" firstAttribute="trailing" secondItem="jab-jm-dFB" secondAttribute="trailing" id="r9n-FV-bJy"/>
                             <constraint firstItem="Vau-fQ-sY3" firstAttribute="top" secondItem="jab-jm-dFB" secondAttribute="top" id="saI-CR-Ogj"/>
                             <constraint firstItem="wWL-2B-ucj" firstAttribute="top" secondItem="jab-jm-dFB" secondAttribute="top" constant="44" id="tIA-Fx-Kj5"/>
@@ -299,7 +295,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sFB-Pz-Fq5" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="956" y="-283"/>
+            <point key="canvasLocation" x="956" y="-283.80809595202402"/>
         </scene>
         <!--Text View Controller-->
         <scene sceneID="AC1-jH-2js">
@@ -335,7 +331,7 @@
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <action selector="doAccountButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ajz-0H-gXU"/>
+                                    <action selector="doSettingsButton:" destination="KKT-yN-f9Z" eventType="touchUpInside" id="9e8-h5-zLg"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vJy-Fm-Nzh" customClass="MFRoundedButton" customModule="feedthebot">
@@ -366,7 +362,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vYk-Su-ubO">
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vYk-Su-ubO">
                                 <rect key="frame" x="44" y="563" width="121" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="121" id="R83-o0-vAO"/>
@@ -382,7 +378,7 @@
                                     <action selector="doDoneButton:" destination="KKT-yN-f9Z" eventType="touchUpInside" id="r40-dK-gH7"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vrV-cz-c8p">
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vrV-cz-c8p">
                                 <rect key="frame" x="210" y="563" width="121" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="Tq2-83-ll0"/>
@@ -1003,7 +999,7 @@
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <action selector="doAccountButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="UWY-SY-b4X"/>
+                                    <action selector="doSettingsButton:" destination="qqN-KW-gGJ" eventType="touchUpInside" id="iFI-Pa-dcv"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TvE-JG-N3l" customClass="MFRoundedButton" customModule="feedthebot">
@@ -1232,7 +1228,7 @@
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <action selector="doAccountButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Yle-6E-f4g"/>
+                                    <action selector="doSettingsButton:" destination="9q4-cD-3wA" eventType="touchUpInside" id="OhS-7X-YfL"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ISO-MD-pzl" customClass="MFRoundedButton" customModule="feedthebot">
@@ -1453,7 +1449,7 @@
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <action selector="doAccountButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="CZn-Bf-dUE"/>
+                                    <action selector="doSettingsButton:" destination="5jR-ui-qr5" eventType="touchUpInside" id="Ccq-y3-fPw"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hex-by-y68" customClass="MFRoundedButton" customModule="feedthebot">
@@ -1665,7 +1661,7 @@
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <action selector="doAccountButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="CWf-QK-VwX"/>
+                                    <action selector="doSettingsButton:" destination="hxp-hf-lNg" eventType="touchUpInside" id="3rd-2H-Nq3"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xga-Gp-yNt" customClass="MFRoundedButton" customModule="feedthebot">

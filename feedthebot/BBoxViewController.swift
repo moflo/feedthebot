@@ -9,11 +9,14 @@
 import UIKit
 
 class BBoxViewController: UIViewController, UIScrollViewDelegate {
+    @IBAction func doSettingsButton(_ sender: Any) {
+        self.doTrainAddButton(sender)
+    }
     @IBAction func doDoneButton(_ sender: Any) {
         self.navigationController?.dismiss(animated: true, completion: nil)
     }
     @IBAction func doSkipButton(_ sender: Any) {
-        doSaveTrainingEvent("")
+//        doSaveTrainingEvent("")
     }
     
     @IBAction func doTrainAddButton(_ sender: Any) {

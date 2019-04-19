@@ -10,6 +10,8 @@ import UIKit
 
 class TrainViewController: UIViewController {
     
+    @IBAction func doSettingsButton(_ sender: Any) {
+    }
     @IBAction func doDoneButton(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
     }
@@ -78,12 +80,12 @@ class TrainViewController: UIViewController {
         }
         buttons.append(buttonTurnover)
         
-        let buttonOff = MFTrainButton(title: "PIXEL By PIXEL", icon: "icon_pixelwise")
-        buttonOff.completionHandler = { (sender) in
-            print(sender)
-            self.showTrainingController("TEXTTRAINING")
-        }
-        buttons.append(buttonOff)
+//        let buttonOff = MFTrainButton(title: "PIXEL By PIXEL", icon: "icon_pixelwise")
+//        buttonOff.completionHandler = { (sender) in
+//            print(sender)
+//            self.showTrainingController("TEXTTRAINING")
+//        }
+//        buttons.append(buttonOff)
                 
         
         trainingButtonView.menuButtons = buttons

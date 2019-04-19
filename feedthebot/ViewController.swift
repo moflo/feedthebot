@@ -19,7 +19,7 @@ class ViewController: UIViewController {
         UserManager.sharedInstance.updatePointsTotal(100)
     }
     @IBAction func doPayoutButton(_ sender: Any) {
-        UserManager.sharedInstance.doResetAccount()
+//        UserManager.sharedInstance.doResetAccount()
     }
     
     
@@ -118,12 +118,12 @@ class ViewController: UIViewController {
         }
         buttons.append(buttonGoal)
         
-        let buttonOff = MFTrainButton(title: "PIXEL By PIXEL", icon: "icon_pixelwise")
-        buttonOff.completionHandler = { (sender) in
-            print(sender)
-            self.showTrainingController("TEXTTRAINING")
-        }
-        buttons.append(buttonOff)
+//        let buttonOff = MFTrainButton(title: "PIXEL By PIXEL", icon: "icon_pixelwise")
+//        buttonOff.completionHandler = { (sender) in
+//            print(sender)
+//            self.showTrainingController("TEXTTRAINING")
+//        }
+//        buttons.append(buttonOff)
 
         trainingButtonView.menuButtons = buttons
         

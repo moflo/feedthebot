@@ -9,11 +9,22 @@
 import UIKit
 
 class CategoryViewController: UIViewController, UIScrollViewDelegate {
+    @IBAction func doSettingsButton(_ sender: Any) {
+        let alert = MFAlertTrainView(title: "Image Category",
+                                     icon: "",
+                                     info: "Select the category of the image by pressing the buttons below. Press check (√) to confirm.",
+                                     prompt: "Identify this photo!") { (category, buttonIndex) in
+                                        
+                                        
+        }
+        alert.show()
+    }
     @IBAction func doDoneButton(_ sender: Any) {
         self.navigationController?.dismiss(animated: true, completion: nil)
     }
     @IBAction func doSkipButton(_ sender: Any) {
-        doSaveTrainingEvent("")
+//        doSaveTrainingEvent("")
+        doSettingsButton(sender)
     }
     
     @IBAction func doTrainSkipButton(_ sender: Any) {

@@ -9,6 +9,9 @@
 import UIKit
 
 class PolyCatViewController: UIViewController, UIScrollViewDelegate {
+    @IBAction func doSettingsButton(_ sender: Any) {
+        doTrainAddButton(sender)
+    }
     @IBAction func doDoneButton(_ sender: Any) {
         self.navigationController?.dismiss(animated: true, completion: nil)
     }

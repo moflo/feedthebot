@@ -9,11 +9,22 @@
 import UIKit
 
 class SentimentViewController: UIViewController {
+    @IBAction func doSettingsButton(_ sender: Any) {
+        let alert = MFAlertTrainView(title: "Text Sentiment",
+                                     icon: "",
+                                     info: "Identify the sentiment category of the text by selecting the button below. Press check (√) to confirm.",
+                                     prompt: "Check some text!") { (category, buttonIndex) in
+                                        
+                                        
+        }
+        alert.show()
+    }
     @IBAction func doDoneButton(_ sender: Any) {
         self.navigationController?.dismiss(animated: true, completion: nil)
     }
     @IBAction func doSkipButton(_ sender: Any) {
-        doSaveTrainingEvent("")
+//        doSaveTrainingEvent("")
+        doSettingsButton(sender)
     }
     
     @IBAction func doTrainSkipButton(_ sender: Any) {

@@ -96,13 +96,13 @@ enum BoundingBoxShotType {
         case .mark :
             return MFDarkBlue(0.3).cgColor
         case .goal :
-            return UIColor.green.cgColor
+            return MFYellow(0.3).cgColor
         case .allowed :
-            return UIColor.red.cgColor
+            return MFRed(0.3).cgColor
         case .miss :
-            return UIColor.yellow.cgColor
+            return MFBlue(0.3).cgColor
         case .block :
-            return UIColor.darkGray.cgColor
+            return MFAlertGrayFill(0.3).cgColor
         }
         
     }
@@ -407,6 +407,7 @@ class BoundingBoxView : UIImageView {
         
         poly.polyLayer?.removeFromSuperlayer()
         
+        // Draw aboslue rectangle, regardless of point order
         let x = min(points[0].x,points[1].x)
         let y = min(points[0].y,points[1].y)
         let w = abs(points[0].x-points[1].x)

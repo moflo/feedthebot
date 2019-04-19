@@ -26,20 +26,28 @@ extension UIColor {
     
 }
 
-func MFBlue() -> UIColor {
-    return UIColor(hex:0x2096FF)
+func MFBlue(_ alpha :CGFloat = 1.0) -> UIColor {
+    let c = UIColor(hex:0x2096FF)
+    if alpha == 1.0 { return c }
+    return c.withAlphaComponent(alpha)
 }
 
-func MFRed() -> UIColor {
-    return UIColor(hex:0xE31153)
+func MFRed(_ alpha :CGFloat = 1.0) -> UIColor {
+    let c = UIColor(hex:0xE31153)
+    if alpha == 1.0 { return c }
+    return c.withAlphaComponent(alpha)
 }
 
-func MFGreen() -> UIColor {
-    return UIColor(hex:0x7ED321)
+func MFGreen(_ alpha :CGFloat = 1.0) -> UIColor {
+    let c = UIColor(hex:0x7ED321)
+    if alpha == 1.0 { return c }
+    return c.withAlphaComponent(alpha)
 }
 
-func MFPurple() -> UIColor {
-    return UIColor(hex:0x99056B)
+func MFPurple(_ alpha :CGFloat = 1.0) -> UIColor {
+    let c = UIColor(hex:0x99056B)
+    if alpha == 1.0 { return c }
+    return c.withAlphaComponent(alpha)
 }
 
 func MFDarkBlue(_ alpha :CGFloat = 1.0) -> UIColor {
@@ -48,25 +56,36 @@ func MFDarkBlue(_ alpha :CGFloat = 1.0) -> UIColor {
     return c.withAlphaComponent(alpha)
 }
 
-func MFYellow() -> UIColor {
-    return UIColor(hex:0xF7BA0A)
+func MFYellow(_ alpha :CGFloat = 1.0) -> UIColor {
+    let c = UIColor(hex:0xF7BA0A)
+    if alpha == 1.0 { return c }
+    return c.withAlphaComponent(alpha)
 }
+
 
 // Gradient 0x70CDF4 - 0xCDE7F2
-func MFBlueStart() -> UIColor {
-    return UIColor(hex:0x70CDF4)
+func MFBlueStart(_ alpha :CGFloat = 1.0) -> UIColor {
+    let c = UIColor(hex:0x70CDF4)
+    if alpha == 1.0 { return c }
+    return c.withAlphaComponent(alpha)
 }
 
-func MFBlueEnd() -> UIColor {
-    return UIColor(hex:0xCDE7F2)
+func MFBlueEnd(_ alpha :CGFloat = 1.0) -> UIColor {
+    let c = UIColor(hex:0xCDE7F2)
+    if alpha == 1.0 { return c }
+    return c.withAlphaComponent(alpha)
 }
 
 // MARK: - MFAlert colors
-func MFAlertBlue() -> UIColor {
-    return UIColor(hex:0x0078ff)
+func MFAlertBlue(_ alpha :CGFloat = 1.0) -> UIColor {
+    let c = UIColor(hex:0x0078ff)
+    if alpha == 1.0 { return c }
+    return c.withAlphaComponent(alpha)
 }
 
-func MFAlertGrayFill() -> UIColor {
-    return UIColor(hex:0xe5e5e5)
+func MFAlertGrayFill(_ alpha :CGFloat = 1.0) -> UIColor {
+    let c = UIColor(hex:0xe5e5e5)
+    if alpha == 1.0 { return c }
+    return c.withAlphaComponent(alpha)
 }
 
