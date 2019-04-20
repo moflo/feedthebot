@@ -138,11 +138,17 @@ class MFDataSet {
         self.init(order_id: order_id, trainingType: training_type)
         
         if let points = dict["points"] as? Int { self.points = points }
-        if let multiplier = dict["multiplier"] as? Float { self.multiplier = multiplier }
+        if let multiplier = dict["multiplier"] as? Double { self.multiplier = Float(multiplier) }
         if let eventCount = dict["eventCount"] as? Int { self.eventCount = eventCount }
         if let limitSeconds = dict["limitSeconds"] as? Int { self.limitSeconds = limitSeconds }
         if let instruction = dict["instruction"] as? String { self.instruction = instruction }
 
+        if let dataURLArray = dict["dataURLArray"] as? [String] {
+            dataURLArray.forEach { self.dataURLArray.append($0) }
+        }
+        if let categoryArray = dict["categoryArray"] as? [String] {
+            categoryArray.forEach { self.categoryArray.append($0) }
+        }
         
         if let timestamp = dict["updatedAt"] as? Timestamp {
             self.updatedAt = timestamp.dateValue()

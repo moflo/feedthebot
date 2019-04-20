@@ -58,6 +58,53 @@ class feedthebotTests: XCTestCase {
         let dSet3 = MFDataSet(dictionary: ["nada":"nada"])
         
         expect(dSet3).to(beNil())
+        
+        let dict: [String:Any] = [
+            "uuid": "TEST1",
+            "order_id": "TESTID",
+            "points": 102,
+            "multiplier": 10.0,
+            "training_type": "textOCR",
+            "instruction": "TEST2",
+            "eventCount": 103,
+            "limitSeconds": 104,
+            "dataURLArray": [
+                "URL1",
+                "URL2"
+            ],
+            "categoryArray": [
+                "CAT1",
+                "CAT2"
+            ]
+            //            "responseArray": self.responseArray,
+//            "updatedAt": Timestamp()
+        ]
+        
+        let dSet4 = MFDataSet(dictionary: dict)
+        
+        expect(dSet4).notTo(beNil())
+        if (dSet4 != nil ) {
+            expect(dSet4!.order_id).to(equal("TESTID"))
+            expect(dSet4!.trainingType).to(equal("textOCR"))
+            expect(dSet4!.training_type.rawValue).to(equal("textOCR"))
+            expect(dSet4!.training_type).to(equal(.textOCR))
+            expect(dSet4!.points).to(equal(102))
+            expect(dSet4!.multiplier).to(beCloseTo(10.0, within:0.01))
+            expect(dSet4!.instruction).notTo(beNil())
+            expect(dSet4!.eventCount).to(equal(103))
+            expect(dSet4!.limitSeconds).to(equal(104))
+            
+            expect(dSet4!.dataURLArray).notTo(beNil())
+            expect(dSet4!.dataURLArray.count).to(equal(2))
+            expect(dSet4!.dataURLArray[0]).to(equal("URL1"))
+            expect(dSet4!.dataURLArray[1]).to(equal("URL2"))
+
+            expect(dSet4!.categoryArray).notTo(beNil())
+            expect(dSet4!.categoryArray.count).to(equal(2))
+            expect(dSet4!.categoryArray[0]).to(equal("CAT1"))
+            expect(dSet4!.categoryArray[1]).to(equal("CAT2"))
+            expect(dSet4!.responseArray).notTo(beNil())
+        }
     }
     
     func testServerDataSetLoad() {

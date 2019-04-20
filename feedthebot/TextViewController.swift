@@ -57,6 +57,7 @@ class TextViewController: UIViewController, UIScrollViewDelegate {
 
         scrollView.minimumZoomScale = 1.0
         scrollView.maximumZoomScale = 6.0
+        scrollView.backgroundColor = MFBlue()
 
         // Do any additional setup after loading the view.
         DataSetManager.sharedInstance.loadPage(type: .textOCR, page: 1) { (datasets, error) in
@@ -172,7 +173,7 @@ class TextViewController: UIViewController, UIScrollViewDelegate {
         DispatchQueue.main.async {
             self.progressLabel.text = "\(self.trainingCount)/\(data.eventCount)"
             self.trainTextField.text = ""
-            
+
             if self.trainingCount < data.dataURLArray.count {
                 let urlString = data.dataURLArray[self.trainingCount]
                 self.imageView.sd_setImage(with: URL(string: urlString), placeholderImage: UIImage(named:"placeholder_image"))
@@ -191,6 +192,8 @@ class TextViewController: UIViewController, UIScrollViewDelegate {
     
     func doEndGame() {
         stopGameTimer()
+        self.trainTextField.resignFirstResponder()
+        self.view.endEditing(true)
         
         DataSetManager.sharedInstance.postTraining(dataSetObj)
         

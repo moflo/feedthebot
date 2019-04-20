@@ -78,7 +78,8 @@ class PolyCatViewController: UIViewController, UIScrollViewDelegate {
         // Do any additional setup after loading the view.
         scrollView.minimumZoomScale = 1.0
         scrollView.maximumZoomScale = 6.0
-        
+        scrollView.backgroundColor = MFBlue()
+
         trainDoneButton.isEnabled = false
         
         if (dataSetObj == nil) {

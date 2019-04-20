@@ -72,7 +72,8 @@ class CategoryViewController: UIViewController, UIScrollViewDelegate {
         // Do any additional setup after loading the view.
         scrollView.minimumZoomScale = 1.0
         scrollView.maximumZoomScale = 6.0
-        
+        scrollView.backgroundColor = MFBlue()
+
         categoryLabel.isEnabled = false
         categoryLabel.isHidden = true
         trainDoneButton.isEnabled = false
