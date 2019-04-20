@@ -59,9 +59,20 @@ class TextViewController: UIViewController, UIScrollViewDelegate {
         scrollView.maximumZoomScale = 6.0
 
         // Do any additional setup after loading the view.
-        if (dataSetObj == nil) {
-            dataSetObj = DataSetManager.sharedInstance.demoDataSet("Text OCR")
+        DataSetManager.sharedInstance.loadPage(type: .textOCR, page: 1) { (datasets, error) in
+            if error == nil && datasets != nil {
+                self.dataSetObj = datasets!.first
+            }
+            else {
+                self.dataSetObj = DataSetManager.sharedInstance.demoDataSet("Text OCR")
+            }
+            
+            DispatchQueue.main.async {
+                self.doPreloadDataSet()
+                self.doLoadDataSet()
+            }
         }
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -73,11 +84,11 @@ class TextViewController: UIViewController, UIScrollViewDelegate {
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(_:)), name:
             UIResponder.keyboardWillChangeFrameNotification, object: nil)
         
-        doPreloadDataSet()
+//        doPreloadDataSet()
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        doLoadDataSet()
+//        doLoadDataSet()
     }
     
     override func viewWillDisappear(_ animated: Bool) {

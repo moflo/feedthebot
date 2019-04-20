@@ -84,6 +84,7 @@ enum MFTrainingType :String {
 
 class MFDataSet {
     var uuid :String = UUID().uuidString
+    var order_id :String
     var points :Int = 0
     var multiplier :Float = 1.0
     var trainingType :String
@@ -99,6 +100,7 @@ class MFDataSet {
     var dictionary: [String: Any] {
         return [
             "uuid": self.uuid,
+            "order_id": self.order_id,
             "points": self.points,
             "multiplier": self.multiplier,
             "training_type": self.trainingType,
@@ -113,24 +115,32 @@ class MFDataSet {
     }
     
     init() {
-        self.uuid = ""; self.trainingType = "Text"; self.training_type = .textOCR
+        self.uuid = ""; self.order_id = ""; self.trainingType = "textOCR"; self.training_type = .textOCR
     }
     
-    convenience init(uuid: String, points: Int) {
+    convenience init(order_id: String, trainingType: String) {
         self.init()
-        self.uuid = uuid
-        self.points = points
+        self.order_id = order_id
+        self.trainingType = trainingType
+        self.training_type = MFTrainingType(rawValue: trainingType) ?? .textOCR
     }
     
-    
+    convenience init?(snapshot: DocumentSnapshot) {
+        guard let dict = snapshot.data() else { return nil }
+        self.init(dictionary: dict)
+    }
+
     convenience init?(dictionary: [String: Any] ) {
         guard let dict = dictionary as [String: Any]? else { return nil }
-        guard let uuid = dict["uuid"] as? String else { return nil }
-        guard let points = dict["points"] as? Int else { return nil }
+        guard let order_id = dict["order_id"] as? String else { return nil }
+        guard let training_type = dict["training_type"] as? String else { return nil }
         
-        self.init(uuid: uuid, points: points)
+        self.init(order_id: order_id, trainingType: training_type)
         
-        if let training_type = dict["training_type"] as? String { self.trainingType = training_type }
+        if let points = dict["points"] as? Int { self.points = points }
+        if let multiplier = dict["multiplier"] as? Float { self.multiplier = multiplier }
+        if let eventCount = dict["eventCount"] as? Int { self.eventCount = eventCount }
+        if let limitSeconds = dict["limitSeconds"] as? Int { self.limitSeconds = limitSeconds }
         if let instruction = dict["instruction"] as? String { self.instruction = instruction }
 
         
@@ -149,9 +159,59 @@ class MFDataSet {
 class DataSetManager : NSObject {
     static let sharedInstance = DataSetManager()
 
+
+    
+    // MARK: - Server Methods
+    
+    func postTraining(_ data:MFDataSet?) {
+        guard data != nil else { return }
+        
+    }
+    
+    func loadPage(type: MFTrainingType, page: Int, completionHandler: @escaping ([MFDataSet]?, Error?) -> () ) {
+        let userID = UserManager.sharedInstance.getUUID()
+        loadPage(userID: userID, type: type, page: page) { (datasets, error) in
+            completionHandler(datasets,error)
+        }
+        
+    }
+    
+    func loadPage(userID: String, type: MFTrainingType, page: Int, completionHandler: @escaping ([MFDataSet]?, Error?) -> () ) {
+        guard userID.count > 0 else {
+            let error = NSError(domain: "DataSetManager", code: -1, userInfo: ["userInfo":"UserID cannot be nil"])
+            completionHandler(nil,error)
+            return
+        }
+        guard page > 0 else {
+            let error = NSError(domain: "DataSetManager", code: -1, userInfo: ["userInfo":"Page cannot be 0"])
+            completionHandler(nil,error)
+            return
+        }
+        
+        let db = Firestore.firestore()
+        let activityRef = db.collection("datasets")
+        let query = activityRef.order(by: "updatedAt", descending: true).limit(to: page)
+        query.getDocuments { (snapshot, err) in
+            guard let snapshot = snapshot, err == nil else {
+                let error = NSError(domain: "DataSetManager", code: -1, userInfo: ["userInfo":"No activities found"])
+                completionHandler(nil,error)
+                return
+            }
+            let datasets = snapshot.documents.map { (document) -> MFDataSet in
+                if let model = MFDataSet(snapshot: document) {
+                    return model
+                } else {
+                    return MFDataSet()
+                }
+            }
+            completionHandler(datasets,nil)
+        }
+    }
+
+    // MARK: Demo methods
     
     func demoDataSet(_ trainingType :String) -> MFDataSet {
-        let data = MFDataSet(uuid: "DEADBEEF", points: 30)
+        let data = MFDataSet(order_id: "DEADBEEF", trainingType: "textOCR")
         
         data.dataURLArray.append("https://github.com/wangpengnorman/SAR-Strong-Baseline-for-Text-Recognition/blob/master/data/beach.jpg?raw=true")
         data.dataURLArray.append("https://github.com/wangpengnorman/SAR-Strong-Baseline-for-Text-Recognition/blob/master/data/united.jpg?raw=true")
@@ -167,12 +227,5 @@ class DataSetManager : NSObject {
         return data
     }
     
-    
-    // MARK: - Server Methods
-    
-    func postTraining(_ data:MFDataSet?) {
-        guard data != nil else { return }
-        
-    }
 }
 

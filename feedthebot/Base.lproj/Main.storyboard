@@ -397,17 +397,16 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fwv-xX-TFv">
                                 <rect key="frame" x="0.0" y="101" width="375" height="375"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="bounding_box" translatesAutoresizingMaskIntoConstraints="NO" id="FB7-Ah-Er5">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="bounding_box" translatesAutoresizingMaskIntoConstraints="NO" id="FB7-Ah-Er5">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="375"/>
                                     </imageView>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="FB7-Ah-Er5" secondAttribute="trailing" id="E4K-6q-aJ7"/>
-                                    <constraint firstItem="FB7-Ah-Er5" firstAttribute="top" secondItem="fwv-xX-TFv" secondAttribute="top" id="TTq-cJ-rlb"/>
-                                    <constraint firstItem="FB7-Ah-Er5" firstAttribute="centerY" secondItem="fwv-xX-TFv" secondAttribute="centerY" id="gLf-AZ-qfj"/>
-                                    <constraint firstAttribute="bottom" secondItem="FB7-Ah-Er5" secondAttribute="bottom" id="rBg-G3-YaL"/>
+                                    <constraint firstAttribute="trailing" secondItem="FB7-Ah-Er5" secondAttribute="trailing" constant="10" id="E4K-6q-aJ7"/>
+                                    <constraint firstItem="FB7-Ah-Er5" firstAttribute="top" secondItem="fwv-xX-TFv" secondAttribute="top" constant="10" id="TTq-cJ-rlb"/>
+                                    <constraint firstAttribute="bottom" secondItem="FB7-Ah-Er5" secondAttribute="bottom" constant="10" id="rBg-G3-YaL"/>
                                     <constraint firstAttribute="width" secondItem="fwv-xX-TFv" secondAttribute="height" multiplier="1:1" id="xfo-pO-jVu"/>
-                                    <constraint firstItem="FB7-Ah-Er5" firstAttribute="leading" secondItem="fwv-xX-TFv" secondAttribute="leading" id="zFf-Cn-voE"/>
+                                    <constraint firstItem="FB7-Ah-Er5" firstAttribute="leading" secondItem="fwv-xX-TFv" secondAttribute="leading" constant="10" id="zFf-Cn-voE"/>
                                 </constraints>
                                 <connections>
                                     <outlet property="delegate" destination="KKT-yN-f9Z" id="q8K-T1-ap7"/>
@@ -1033,7 +1032,7 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XsF-D6-eEZ">
                                 <rect key="frame" x="0.0" y="99" width="375" height="375"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bounding_box" translatesAutoresizingMaskIntoConstraints="NO" id="YGE-Tb-GqZ">
+                                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bounding_box" translatesAutoresizingMaskIntoConstraints="NO" id="YGE-Tb-GqZ">
                                         <rect key="frame" x="0.0" y="0.0" width="680" height="490"/>
                                     </imageView>
                                 </subviews>
