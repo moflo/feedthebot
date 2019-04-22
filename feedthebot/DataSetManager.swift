@@ -23,6 +23,8 @@ struct MFResponse  {
     
     var duration :Float = 0.0   // Time to complete response
 
+    var updatedAt :Date = Date()
+
     var dictionary: [String: Any] {
         return [
             "user_id": self.user_id,
@@ -80,6 +82,18 @@ enum MFTrainingType :String {
         default : return "Training"
         }
     }
+    
+    func iconName() -> String {
+        switch self {
+        case .textOCR : return "icon_text"
+        case .textSentiment : return "icon_text"
+        case .imageCategory : return "icon_classify"
+        case .imageBBox : return "icon_bounding"
+        case .imageBBoxCategory : return "icon_classify"
+        case .imagePolygon : return "icon_polygon"
+        default : return "icon_text"
+        }
+    }
 }
 
 class MFDataSet {
@@ -128,6 +142,7 @@ class MFDataSet {
     convenience init?(snapshot: DocumentSnapshot) {
         guard let dict = snapshot.data() else { return nil }
         self.init(dictionary: dict)
+        self.uuid = snapshot.documentID
     }
 
     convenience init?(dictionary: [String: Any] ) {
@@ -157,7 +172,8 @@ class MFDataSet {
     }
     
     func getImage() -> UIImage {
-        return UIImage(named: "icon_text")!
+        let imageName = self.training_type.iconName()
+        return UIImage(named: imageName)!
     }
 }
 
@@ -169,9 +185,26 @@ class DataSetManager : NSObject {
     
     // MARK: - Server Methods
     
-    func postTraining(_ data:MFDataSet?) {
-        guard data != nil else { return }
+    func postTraining(_ data:MFDataSet?, textArray: [String]? = nil) {
+        guard data != nil, textArray != nil else { return }
         
+        let user = UserManager.sharedInstance.getUserDetails()
+        
+        var response = MFResponse(datasetID: data!.uuid,
+                                 trainingType: data!.trainingType,
+                                 captureText: "testing",
+                                 duration: 1.0)
+        response.user_id = user.uuid
+        
+        let db = Firestore.firestore()
+        db.collection("response").document().setData(response.dictionary, merge: false) { err in
+            if let err = err {
+                print("Error writing response: \(err)")
+            } else {
+                print("Response successfully written!")
+            }
+        }
+
     }
     
     func loadPage(type: MFTrainingType, page: Int, completionHandler: @escaping ([MFDataSet]?, Error?) -> () ) {

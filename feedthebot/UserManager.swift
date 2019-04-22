@@ -71,39 +71,46 @@ struct MFUser {
 
 class MFActivity {
     var uuid :String = UUID().uuidString
+    var user_id :String = UUID().uuidString
     var points :Int = 0
-    var trainingType :String
+    var trainingType :MFTrainingType
     var updatedAt :Date = Date()
     
     var dictionary: [String: Any] {
         return [
             "uuid": self.uuid,
             "points": self.points,
-            "training_type": self.trainingType,
-            "updatedAt": Date()
+            "training_type": self.trainingType.rawValue,
+            "updatedAt": Timestamp()
         ]
     }
     
     init() {
-        self.uuid = ""; self.trainingType = "Text";
+        self.uuid = ""; self.trainingType = .other;
     }
     
-    convenience init(uuid: String, points: Int) {
+    convenience init(type: MFTrainingType, points: Int) {
         self.init()
-        self.uuid = uuid
+        self.trainingType = type
+        self.user_id = UserManager.sharedInstance.getUUID()
         self.points = points
     }
     
-    
+    convenience init?(snapshot: DocumentSnapshot) {
+        guard let dict = snapshot.data() else { return nil }
+        self.init(dictionary: dict)
+        self.uuid = snapshot.documentID
+    }
+
     convenience init?(dictionary: [String: Any] ) {
         guard let dict = dictionary as [String: Any]? else { return nil }
-        guard let uuid = dict["uuid"] as? String else { return nil }
+        guard let training_type = dict["training_type"] as? String else { return nil }
+        guard let trainType = MFTrainingType(rawValue: training_type) else { return nil }
         guard let points = dict["points"] as? Int else { return nil }
         
-        self.init(uuid: uuid, points: points)
+        self.init(type: trainType, points: points)
         
-        if let training_type = dict["training_type"] as? String { self.trainingType = training_type }
-        
+        if let user_id = dict["user_id"] as? String { self.user_id = user_id }
         
         if let timestamp = dict["updatedAt"] as? Timestamp {
             self.updatedAt = timestamp.dateValue()
@@ -132,6 +139,13 @@ class UserManager : NSObject {
         
         self.userUUID =  userID
         return self.userUUID
+    }
+
+    func getUserDetails() -> (uuid: String, points: Int) {
+        let uuid = self.userUUID
+        let points = self.userPoints
+        
+        return (uuid,points)
     }
 
     func getUserTotalPoints() -> Int {
@@ -236,7 +250,7 @@ class UserManager : NSObject {
     func getTestActivity(_ count:Int = 2) -> [MFActivity] {
         var activityList = [MFActivity]()
         for i in 1...count {
-            let activity = MFActivity(uuid: "\(i)", points: i*32)
+            let activity = MFActivity(type: .textOCR, points: i*32)
             activityList.append(activity)
         }
         return activityList

@@ -17,7 +17,7 @@ class MFPayoutCell : UITableViewCell {
     
     func populate(_ activityObj :MFActivity) {
         let icon_image = activityObj.getImage()
-        let type = activityObj.trainingType.capitalized
+        let type = activityObj.trainingType.detail().capitalized
         let points = activityObj.points
         let date_string : String = activityObj.updatedAt.description
         

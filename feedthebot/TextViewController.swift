@@ -95,6 +95,7 @@ class TextViewController: UIViewController, UIScrollViewDelegate {
     override func viewWillDisappear(_ animated: Bool) {
         NotificationCenter.default.removeObserver(self)
         gameTimer?.invalidate()
+        self.view.endEditing(true)
     }
     
     override var prefersStatusBarHidden : Bool {
@@ -192,10 +193,13 @@ class TextViewController: UIViewController, UIScrollViewDelegate {
     
     func doEndGame() {
         stopGameTimer()
-        self.trainTextField.resignFirstResponder()
-        self.view.endEditing(true)
         
-        DataSetManager.sharedInstance.postTraining(dataSetObj)
+        DispatchQueue.main.async {
+            self.trainTextField.resignFirstResponder()
+            self.view.endEditing(true)
+        }
+        
+        DataSetManager.sharedInstance.postTraining(dataSetObj, textArray: responseStrings)
         
         let alert = MFAlertCompleteView(title: "Training Done") { (buttonIndex) in
             
