@@ -209,14 +209,35 @@ class feedthebotTests: XCTestCase {
         }
     }
 
-    func testServerActivityLoad() {
+    func testServerPostActivity() {
         
-        let expectation1 = XCTestExpectation(description: "Load Datasets, error")
-        
-        DataSetManager.sharedInstance.loadPage(type: .textOCR, page: 0) { (datasets, error) in
+
+        var expectation1 = XCTestExpectation(description: "Post Activity, error")
+
+        UserManager.sharedInstance.postUserActivity("DEADBEEF", type:.textOCR, points: 1) { (error) in
+            expect(error).to(beNil())
             
-            expect(error).notTo(beNil())
-            expect(datasets).to(beNil())
+            expectation1.fulfill()
+
+        }
+        
+        wait(for: [expectation1], timeout: 10.0)
+
+        expectation1 = XCTestExpectation(description: "Post Activity, error")
+
+        UserManager.sharedInstance.postUserActivity("DEADBEEF", type: .textSentiment, points: 1) { (error) in
+            expect(error).to(beNil())
+            
+            expectation1.fulfill()
+            
+        }
+        
+        wait(for: [expectation1], timeout: 10.0)
+
+        expectation1 = XCTestExpectation(description: "Post Activity, error")
+        
+        UserManager.sharedInstance.postUserActivity("DEADBEEF", type: .imageCategory, points: 1) { (error) in
+            expect(error).to(beNil())
             
             expectation1.fulfill()
             
@@ -224,13 +245,66 @@ class feedthebotTests: XCTestCase {
         
         wait(for: [expectation1], timeout: 10.0)
         
-        let expectation2 = XCTestExpectation(description: "Load Datasets, page 1")
+        expectation1 = XCTestExpectation(description: "Post Activity, error")
         
-        DataSetManager.sharedInstance.loadPage(type: .textOCR, page: 1) { (datasets, error) in
+        UserManager.sharedInstance.postUserActivity("DEADBEEF", type: .imageBBox, points: 1) { (error) in
+            expect(error).to(beNil())
+            
+            expectation1.fulfill()
+            
+        }
+        
+        wait(for: [expectation1], timeout: 10.0)
+
+        expectation1 = XCTestExpectation(description: "Post Activity, error")
+        
+        UserManager.sharedInstance.postUserActivity("DEADBEEF", type: .imageBBoxCategory, points: 1) { (error) in
+            expect(error).to(beNil())
+            
+            expectation1.fulfill()
+            
+        }
+        
+        wait(for: [expectation1], timeout: 10.0)
+
+        expectation1 = XCTestExpectation(description: "Post Activity, error")
+        
+        UserManager.sharedInstance.postUserActivity("DEADBEEF", type: .imagePolygon, points: 1) { (error) in
+            expect(error).to(beNil())
+            
+            expectation1.fulfill()
+            
+        }
+        
+        wait(for: [expectation1], timeout: 10.0)
+
+    }
+    
+    func testServerActivityLoad() {
+        
+        let expectation1 = XCTestExpectation(description: "Load Activity, error")
+        
+        
+        UserManager.sharedInstance.loadUserActivity("XXX") { (activity, error) in
             
             expect(error).to(beNil())
-            expect(datasets).notTo(beNil())
-            expect(datasets?.count).to(equal(1))
+            expect(activity).to(beEmpty())
+            
+            expectation1.fulfill()
+            
+        }
+        
+        wait(for: [expectation1], timeout: 10.0)
+        
+        let expectation2 = XCTestExpectation(description: "Load Activity, user")
+        
+        UserManager.sharedInstance.loadUserActivity("DEADBEEF") { (activity, error) in
+            
+            expect(error).to(beNil())
+            expect(activity).notTo(beNil())
+            expect(activity?.count) > 1
+            
+            print(activity?.first)
             
             expectation2.fulfill()
             
@@ -240,6 +314,7 @@ class feedthebotTests: XCTestCase {
         
         
     }
+    
 //    func testPerformanceExample() {
 //        self.measure {
 //        }

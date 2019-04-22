@@ -78,7 +78,7 @@ class MFActivity {
     
     var dictionary: [String: Any] {
         return [
-            "uuid": self.uuid,
+            "user_id": self.user_id,
             "points": self.points,
             "training_type": self.trainingType.rawValue,
             "updatedAt": Timestamp()
@@ -245,6 +245,65 @@ class UserManager : NSObject {
         
     }
     
+    // MARK: MFActivity Methods
+    
+    func postActivity(_ type: MFTrainingType, points: Int) {
+        let userID = UserManager.sharedInstance.getUUID()
+        postUserActivity(userID,type: type, points: points)
+    }
+    
+    func postUserActivity(_ userID: String, type: MFTrainingType, points: Int, completionHandler: ((Error?) -> () )! = nil ) {
+        guard userID.count > 0 else { return }
+
+        let activity = MFActivity(type: type, points: points)
+        activity.user_id = userID
+        
+        let db = Firestore.firestore()
+        db.collection("activity").document().setData(activity.dictionary, merge: false) { err in
+            if let err = err {
+                print("Error writing activity: \(err)")
+            } else {
+                print("Activity successfully written!")
+            }
+            if (completionHandler != nil) {
+                completionHandler(err)
+            }
+        }
+        
+    }
+
+    func loadActivity(completionHandler: @escaping ([MFActivity]?, Error?) -> () ) {
+        let userID = UserManager.sharedInstance.getUUID()
+        loadUserActivity(userID, completionHandler: completionHandler)
+    }
+
+    func loadUserActivity(_ userID: String, completionHandler: @escaping ([MFActivity]?, Error?) -> () ) {
+        guard userID.count > 0 else {
+            let error = NSError(domain: "Activity", code: -1, userInfo: ["userInfo":"UserID cannot be nil"])
+            completionHandler(nil,error)
+            return
+        }
+
+        let db = Firestore.firestore()
+        let activityRef = db.collection("activity")
+        let query = activityRef.whereField("user_id", isEqualTo: userID).order(by: "updatedAt", descending: true)
+        query.getDocuments { (snapshot, err) in
+            guard let snapshot = snapshot, err == nil else {
+                let error = NSError(domain: "Activity", code: -1, userInfo: ["userInfo":"No activities found"])
+                completionHandler(nil,error)
+                return
+            }
+            let activities = snapshot.documents.map { (document) -> MFActivity in
+                if let model = MFActivity(snapshot: document) {
+                    return model
+                } else {
+                    return MFActivity()
+                }
+            }
+            completionHandler(activities,nil)
+        }
+    }
+
     // MARK: - Test Methods
 
     func getTestActivity(_ count:Int = 2) -> [MFActivity] {
