@@ -241,6 +241,7 @@ class feedthebotTests: XCTestCase {
         expect(act2?.points).to(equal(act1.points))
         expect(act2?.user_id).to(equal(act1.user_id))
 //        expect(act2?.updatedAt).to(beCloseTo(Date()))
+        expect(act2?.wasPaid) == false
         expect(act2?.updatedAt) ≈ (Date(), 0.1)
 
         let act3 = MFActivity(dictionary: ["nada":"nada"])
@@ -251,6 +252,7 @@ class feedthebotTests: XCTestCase {
             "uuid": "TEST1",
             "points": 102,
             "training_type": "textOCR",
+            "was_paid": true,
             "user_id": "TEST2"
         ]
         
@@ -261,6 +263,7 @@ class feedthebotTests: XCTestCase {
             expect(act4!.user_id).to(equal("TEST2"))
             expect(act4!.trainingType).to(equal(.textOCR))
             expect(act4!.points).to(equal(102))
+            expect(act4!.wasPaid) == true
             expect(act4!.uuid).notTo(beNil())
         }
     }

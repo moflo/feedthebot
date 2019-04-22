@@ -74,6 +74,7 @@ class MFActivity {
     var user_id :String = UUID().uuidString
     var points :Int = 0
     var trainingType :MFTrainingType
+    var wasPaid :Bool = false
     var updatedAt :Date = Date()
     
     var dictionary: [String: Any] {
@@ -81,6 +82,7 @@ class MFActivity {
             "user_id": self.user_id,
             "points": self.points,
             "training_type": self.trainingType.rawValue,
+            "was_paid": self.wasPaid,
             "updatedAt": Timestamp()
         ]
     }
@@ -111,7 +113,8 @@ class MFActivity {
         self.init(type: trainType, points: points)
         
         if let user_id = dict["user_id"] as? String { self.user_id = user_id }
-        
+        if let was_paid = dict["was_paid"] as? Bool { self.wasPaid = was_paid }
+
         if let timestamp = dict["updatedAt"] as? Timestamp {
             self.updatedAt = timestamp.dateValue()
         }
