@@ -148,19 +148,75 @@ class feedthebotTests: XCTestCase {
     
     func testMFResponse() {
         
-        var dSet1 = MFResponse(datasetID: "UUID1", trainingType: "textOCR", captureText: "TEST", duration: 1.0)
+        let catArray = ["TEST1","TEST2"]
+        
+        var dSet1 = MFResponse(datasetID: "UUID1", trainingType: "textOCR", duration: 10, categoryArray: catArray)
         let updated = Date.init(timeIntervalSinceNow: -60*60*60*2)
         dSet1.updatedAt = updated
         
         expect(dSet1).notTo(beNil())
-        expect(dSet1.user_id).to(equal("UUID1"))
+        expect(dSet1.dataset_id).to(equal("UUID1"))
         expect(dSet1.trainingType).to(equal("textOCR"))
-//        expect(dSet1.training_type.rawValue).to(equal("textOCR"))
-//        expect(dSet1.training_type).to(equal(.textOCR))
-        expect(dSet1.duration).to(beCloseTo(1.0, within:0.01))
+        expect(dSet1.duration).to(equal(10))
         
-//        expect(dSet1.responseArray).notTo(beNil())
+        expect(dSet1.categoryArray).notTo(beNil())
+        expect(dSet1.categoryArray.count) == 2
+        expect(dSet1.boundingArray).notTo(beNil())
+        expect(dSet1.boundingArray.count) == 0
+        expect(dSet1.catPolyArray).notTo(beNil())
+        expect(dSet1.catPolyArray.count) == 0
+
+        let bboxArray:[String:[Float]] =
+            [
+                "TEST1":[1.0,2.0,3.0,4.0],
+                "TEST2":[1.0,2.0,3.0,4.0]
+            ]
         
+        var dSet2 = MFResponse(datasetID: "UUID2", trainingType: "textOCR", duration: 10, boundingArray: bboxArray)
+        let updated2 = Date.init(timeIntervalSinceNow: -60*60*60*2)
+        dSet2.updatedAt = updated2
+        
+        expect(dSet2).notTo(beNil())
+        expect(dSet2.dataset_id).to(equal("UUID2"))
+        expect(dSet2.trainingType).to(equal("textOCR"))
+        expect(dSet2.duration).to(equal(10))
+        
+        expect(dSet2.categoryArray).notTo(beNil())
+        expect(dSet2.categoryArray.count) == 0
+        expect(dSet2.boundingArray).notTo(beNil())
+        expect(dSet2.boundingArray.count) == 2
+        expect(dSet2.catPolyArray).notTo(beNil())
+        expect(dSet2.catPolyArray.count) == 0
+
+        let catPolyArray:[[String:[Float]]] =
+            [
+                [
+                    "TEST1":[1.0,2.0,3.0,4.0],
+                    "TEST2":[1.0,2.0,3.0,4.0]
+                ],
+                [
+                    "TEST3":[1.0,2.0,3.0,4.0,5.0,6.0]
+                ]
+            ]
+        
+        var dSet3 = MFResponse(datasetID: "UUID3", trainingType: "textOCR", duration: 10, catPolyArray: catPolyArray)
+        let updated3 = Date.init(timeIntervalSinceNow: -60*60*60*2)
+        dSet3.updatedAt = updated3
+        
+        expect(dSet3).notTo(beNil())
+        expect(dSet3.dataset_id).to(equal("UUID3"))
+        expect(dSet3.trainingType).to(equal("textOCR"))
+        expect(dSet3.duration).to(equal(10))
+        
+        expect(dSet3.categoryArray).notTo(beNil())
+        expect(dSet3.categoryArray.count) == 0
+        expect(dSet3.boundingArray).notTo(beNil())
+        expect(dSet3.boundingArray.count) == 0
+        expect(dSet3.catPolyArray).notTo(beNil())
+        expect(dSet3.catPolyArray.count) == 2
+
+        
+
         
     }
     
@@ -304,7 +360,7 @@ class feedthebotTests: XCTestCase {
             expect(activity).notTo(beNil())
             expect(activity?.count) > 1
             
-            print(activity?.first)
+//            print(activity?.first)
             
             expectation2.fulfill()
             

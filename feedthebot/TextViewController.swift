@@ -199,8 +199,10 @@ class TextViewController: UIViewController, UIScrollViewDelegate {
             self.view.endEditing(true)
         }
         
-        DataSetManager.sharedInstance.postTraining(dataSetObj, textArray: responseStrings)
-        
+        DataSetManager.sharedInstance.postTraining(dataSetObj,
+                                                   duration:gameTimeSeconds,
+                                                   categoryArray: responseStrings)
+
         let alert = MFAlertCompleteView(title: "Training Done") { (buttonIndex) in
             
             switch buttonIndex {

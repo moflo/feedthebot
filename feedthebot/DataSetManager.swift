@@ -15,13 +15,11 @@ struct MFResponse  {
     var dataset_id :String = UUID().uuidString
     var trainingType :String
     
-    var captureText :String = ""                                // Capture OCR results
-    var category :String = ""                                   // For single category choice
-    var cetegoryArray :[String] = [String]()                    // For multiple choice category
-    var boundingBox :[Float] = [Float]()                        // For single bounding box choice
-    var boundingArray :[String:[Float]] = [String:[Float]]()    // For category bounding boxes
+    var categoryArray :[String] = [String]()                            // For multiple choice category
+    var boundingArray :[String:[Float]] = [String:[Float]]()            // For category bounding boxes
+    var catPolyArray: [ [String:[Float]] ] = [ [String:[Float]] ]()     // For category polygons
     
-    var duration :Float = 0.0   // Time to complete response
+    var duration :Int = 0   // Time (seconds) to complete response
 
     var updatedAt :Date = Date()
 
@@ -29,11 +27,9 @@ struct MFResponse  {
         return [
             "user_id": self.user_id,
             "training_type": self.trainingType,
-            "capture_text": self.captureText,
-            "category": self.category,
-            "cetegory_array": self.cetegoryArray,
-            "bounding_box": self.boundingBox,
+            "category_array": self.categoryArray,
             "bounding_array": self.boundingArray,
+            "cat_poly_array": self.catPolyArray,
             "updatedAt": Timestamp()
         ]
     }
@@ -42,20 +38,28 @@ struct MFResponse  {
         self.trainingType = "Text"
     }
 
-    init(datasetID: String, trainingType: String, captureText: String, duration :Float) {
+    init(datasetID: String, trainingType: String, duration :Int, categoryArray :[String]) {
         self.init()
         self.dataset_id = datasetID
         self.trainingType = trainingType
-        self.captureText = captureText
         self.duration = duration
+        self.categoryArray = categoryArray
     }
     
-    init(datasetID: String, trainingType: String, category: String, duration :Float) {
+    init(datasetID: String, trainingType: String, duration :Int, boundingArray :[String:[Float]]) {
         self.init()
         self.dataset_id = datasetID
         self.trainingType = trainingType
-        self.category = category
         self.duration = duration
+        self.boundingArray = boundingArray
+    }
+    
+    init(datasetID: String, trainingType: String, duration :Int, catPolyArray :[[String:[Float]]]) {
+        self.init()
+        self.dataset_id = datasetID
+        self.trainingType = trainingType
+        self.duration = duration
+        self.catPolyArray = catPolyArray
     }
     
 
@@ -185,15 +189,16 @@ class DataSetManager : NSObject {
     
     // MARK: - Server Methods
     
-    func postTraining(_ data:MFDataSet?, textArray: [String]? = nil) {
-        guard data != nil, textArray != nil else { return }
+    func postTraining(_ data:MFDataSet?, duration: Int, categoryArray: [String]?) {
+        guard data != nil, categoryArray != nil else { return }
         
         let user = UserManager.sharedInstance.getUserDetails()
         
         var response = MFResponse(datasetID: data!.uuid,
-                                 trainingType: data!.trainingType,
-                                 captureText: "testing",
-                                 duration: 1.0)
+                                  trainingType: data!.trainingType,
+                                  duration: duration,
+                                  categoryArray: categoryArray!)
+        
         response.user_id = user.uuid
         
         let db = Firestore.firestore()

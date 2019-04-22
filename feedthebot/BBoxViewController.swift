@@ -155,8 +155,10 @@ class BBoxViewController: UIViewController, UIScrollViewDelegate {
     func doEndGame() {
         stopGameTimer()
         
-        DataSetManager.sharedInstance.postTraining(dataSetObj)
-        
+        DataSetManager.sharedInstance.postTraining(dataSetObj,
+                                                   duration:gameTimeSeconds,
+                                                   categoryArray: responseStrings)
+
         let alert = MFAlertCompleteView(title: "Training Done") { (buttonIndex) in
             
             switch buttonIndex {
