@@ -6,8 +6,14 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="Impact.ttf">
+            <string>Impact</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--View Controller-->
         <scene sceneID="EHf-IW-A2E">
@@ -27,13 +33,13 @@
                                     <constraint firstAttribute="height" constant="128" id="e5H-mR-bLL"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Thank you..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rp8-60-eqF">
-                                <rect key="frame" x="107" y="244" width="161" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Thank you..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rp8-60-eqF">
+                                <rect key="frame" x="94" y="313.5" width="187" height="40"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="161" id="dag-5F-wa0"/>
-                                    <constraint firstAttribute="height" constant="21" id="jaQ-Yz-S0W"/>
+                                    <constraint firstAttribute="height" constant="40" id="VFj-kd-lQT"/>
+                                    <constraint firstAttribute="width" constant="187" id="qeJ-3b-SOP"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="22"/>
+                                <fontDescription key="fontDescription" name="Impact" family="Impact" pointSize="30"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                                 <color key="shadowColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -43,15 +49,19 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="Hhp-Dh-CBb" firstAttribute="bottom" secondItem="Ze5-6b-2t3" secondAttribute="bottom" id="4W7-U4-hlp"/>
-                            <constraint firstItem="rp8-60-eqF" firstAttribute="centerX" secondItem="dJi-ea-bue" secondAttribute="centerX" id="5YL-YV-ghd"/>
+                            <constraint firstItem="rp8-60-eqF" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="4rg-36-yju"/>
+                            <constraint firstItem="rp8-60-eqF" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="8kR-wm-yQ1"/>
                             <constraint firstItem="dJi-ea-bue" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="Agb-1h-u2F"/>
                             <constraint firstItem="dJi-ea-bue" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" constant="66" id="Ai9-2a-2xb"/>
                             <constraint firstItem="Hhp-Dh-CBb" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="K8h-6m-y62"/>
                             <constraint firstItem="Hhp-Dh-CBb" firstAttribute="trailing" secondItem="Ze5-6b-2t3" secondAttribute="trailing" id="P73-DJ-ejb"/>
                             <constraint firstItem="Hhp-Dh-CBb" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="nu1-HK-2Tq"/>
-                            <constraint firstItem="rp8-60-eqF" firstAttribute="leading" secondItem="dJi-ea-bue" secondAttribute="trailing" constant="-144.5" id="x4D-ZY-fBr"/>
                         </constraints>
+                        <viewLayoutGuide key="safeArea" id="GY6-RD-eFY"/>
                     </view>
+                    <connections>
+                        <outlet property="titleLabel" destination="rp8-60-eqF" id="5dd-mC-GW6"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

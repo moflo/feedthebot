@@ -832,7 +832,7 @@ class MFTrainingButtonView : UIView, UICollectionViewDataSource, UICollectionVie
             if buttonType == .Orange {
             let iconSize = CGFloat(64)
             
-            btn = UIView(frame: CGRect(x: 0, y: 0, width: bounds.width*0.9, height: bounds.width*0.9))
+            btn = UIView(frame: CGRect(x: 0, y: 0, width: bounds.width*0.9, height: bounds.height*0.9))
             btn.backgroundColor = .green
             
             let radius :CGFloat = 0.25 * btn.frame.size.height

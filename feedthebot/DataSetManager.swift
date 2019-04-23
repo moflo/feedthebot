@@ -207,6 +207,11 @@ class DataSetManager : NSObject {
                 print("Error writing response: \(err)")
             } else {
                 print("Response successfully written!")
+                
+                UserManager.sharedInstance.postUserActivity(user.uuid,
+                                                            type: data!.training_type,
+                                                            points: data!.points)
+                UserManager.sharedInstance
             }
         }
 
