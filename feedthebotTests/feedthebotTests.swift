@@ -9,7 +9,7 @@
 import XCTest
 @testable import feedthebot
 import Nimble
-
+import Firebase
 
 class feedthebotTests: XCTestCase {
 
@@ -21,6 +21,68 @@ class feedthebotTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
+    // MARK: - MFUser Testing
+    
+    
+    func testMFUser() {
+        
+        var data1 = MFUser(uuid: "UUID1", points: 101)
+        let updated = Date.init(timeIntervalSinceNow: -60*60*60*2)
+        data1.updatedAt = Timestamp(date: updated)
+        
+        expect(data1).notTo(beNil())
+        expect(data1.uuid) == "UUID1"
+        expect(data1.points) == 101
+        expect(data1.exchangeRate) == 0.013
+        expect(data1.lifetimePoints) == 0
+
+        expect(data1.name).notTo(beNil())
+        expect(data1.email).notTo(beNil())
+        expect(data1.avatar_url).notTo(beNil())
+        
+        
+        let data2 = MFUser(dictionary: data1.dictionary)
+        
+        expect(data2).notTo(beNil())
+        expect(data2?.uuid) == data1.uuid
+        expect(data2?.points) == data1.points
+        expect(data2?.exchangeRate) == data1.exchangeRate
+        expect(data2?.lifetimePoints) == data1.lifetimePoints
+//        expect(data2?.updatedAt) == Timestamp(date:Date())
+        
+        let data3 = MFUser(dictionary: ["nada":"nada"])
+        
+        expect(data3).to(beNil())
+        
+        let dict: [String:Any] = [
+            "uuid": "TEST1",
+            "email": "EMAIL",
+            "name": "NAME",
+            "avatar_url": "URL",
+            "points": 102,
+            "lifetime_points": 102,
+            "exchange_rate": Float(10.0),
+            "updatedAt": Timestamp()
+        ]
+        
+        let data4 = MFUser(dictionary: dict)
+        
+        expect(data4).notTo(beNil())
+        if (data4 != nil ) {
+            expect(data4!).notTo(beNil())
+            expect(data4!.uuid) == "TEST1"
+            expect(data4!.points) == 102
+            expect(data4!.exchangeRate) == 10.0
+            expect(data4!.lifetimePoints) == 102
+            
+            expect(data4!.name).notTo(beNil())
+            expect(data4!.name) == "NAME"
+            expect(data4!.email).notTo(beNil())
+            expect(data4!.email) == "EMAIL"
+            expect(data4!.avatar_url).notTo(beNil())
+            expect(data4!.avatar_url) == "URL"
+        }
+    }
     
     // MARK: - MFDataset Testing
     
@@ -31,15 +93,15 @@ class feedthebotTests: XCTestCase {
         dSet1.updatedAt = updated
         
         expect(dSet1).notTo(beNil())
-        expect(dSet1.order_id).to(equal("UUID1"))
-        expect(dSet1.trainingType).to(equal("textOCR"))
-        expect(dSet1.training_type.rawValue).to(equal("textOCR"))
-        expect(dSet1.training_type).to(equal(.textOCR))
-        expect(dSet1.points).to(equal(0))
+        expect(dSet1.order_id) == "UUID1"
+        expect(dSet1.trainingType) == "textOCR"
+        expect(dSet1.training_type.rawValue) == "textOCR"
+        expect(dSet1.training_type) == .textOCR
+        expect(dSet1.points) == 0
         expect(dSet1.multiplier).to(beCloseTo(1.0, within:0.01))
         expect(dSet1.instruction).notTo(beNil())
-        expect(dSet1.eventCount).to(equal(10))
-        expect(dSet1.limitSeconds).to(equal(2*60))
+        expect(dSet1.eventCount) == 10
+        expect(dSet1.limitSeconds) == 2*60
 
         expect(dSet1.dataURLArray).notTo(beNil())
         expect(dSet1.categoryArray).notTo(beNil())
@@ -49,13 +111,13 @@ class feedthebotTests: XCTestCase {
         let dSet2 = MFDataSet(dictionary: dSet1.dictionary)
         
         expect(dSet2).notTo(beNil())
-        expect(dSet2?.order_id).to(equal("UUID1"))
-        expect(dSet2?.training_type).to(equal(dSet1.training_type))
-        expect(dSet2?.training_type).to(equal(dSet1.training_type))
-        expect(dSet2?.trainingType).to(equal(dSet1.trainingType))
-        expect(dSet2?.points).to(equal(dSet1.points))
-        expect(dSet2?.multiplier).to(equal(dSet1.multiplier))
-        expect(dSet2?.instruction).to(equal(dSet1.instruction))
+        expect(dSet2?.order_id) == "UUID1"
+        expect(dSet2?.training_type) == dSet1.training_type
+        expect(dSet2?.training_type) == dSet1.training_type
+        expect(dSet2?.trainingType) == dSet1.trainingType
+        expect(dSet2?.points) == dSet1.points
+        expect(dSet2?.multiplier) == dSet1.multiplier
+        expect(dSet2?.instruction) == dSet1.instruction
 //        expect(dSet2?.updatedAt).to(beCloseTo(Date()))
         expect(dSet2?.updatedAt) ≈ (Date(), 0.1)
 
@@ -72,6 +134,7 @@ class feedthebotTests: XCTestCase {
             "instruction": "TEST2",
             "eventCount": 103,
             "limitSeconds": 104,
+            "responseCount": 105,
             "dataURLArray": [
                 "URL1",
                 "URL2"
@@ -88,25 +151,25 @@ class feedthebotTests: XCTestCase {
         
         expect(dSet4).notTo(beNil())
         if (dSet4 != nil ) {
-            expect(dSet4!.order_id).to(equal("TESTID"))
-            expect(dSet4!.trainingType).to(equal("textOCR"))
-            expect(dSet4!.training_type.rawValue).to(equal("textOCR"))
-            expect(dSet4!.training_type).to(equal(.textOCR))
-            expect(dSet4!.points).to(equal(102))
+            expect(dSet4!.order_id) == "TESTID"
+            expect(dSet4!.trainingType) == "textOCR"
+            expect(dSet4!.training_type.rawValue) == "textOCR"
+            expect(dSet4!.training_type) == .textOCR
+            expect(dSet4!.points) == 102
             expect(dSet4!.multiplier).to(beCloseTo(10.0, within:0.01))
             expect(dSet4!.instruction).notTo(beNil())
-            expect(dSet4!.eventCount).to(equal(103))
-            expect(dSet4!.limitSeconds).to(equal(104))
+            expect(dSet4!.eventCount) == 103
+            expect(dSet4!.limitSeconds) == 104
             
             expect(dSet4!.dataURLArray).notTo(beNil())
-            expect(dSet4!.dataURLArray.count).to(equal(2))
-            expect(dSet4!.dataURLArray[0]).to(equal("URL1"))
-            expect(dSet4!.dataURLArray[1]).to(equal("URL2"))
+            expect(dSet4!.dataURLArray.count) == 2
+            expect(dSet4!.dataURLArray[0]) == "URL1"
+            expect(dSet4!.dataURLArray[1]) == "URL2"
 
             expect(dSet4!.categoryArray).notTo(beNil())
-            expect(dSet4!.categoryArray.count).to(equal(2))
-            expect(dSet4!.categoryArray[0]).to(equal("CAT1"))
-            expect(dSet4!.categoryArray[1]).to(equal("CAT2"))
+            expect(dSet4!.categoryArray.count) == 2
+            expect(dSet4!.categoryArray[0]) == "CAT1"
+            expect(dSet4!.categoryArray[1]) == "CAT2"
             expect(dSet4!.responseArray).notTo(beNil())
         }
     }

@@ -16,6 +16,8 @@ struct MFUser {
     // User class object
     var uuid :String = UUID().uuidString
     var points :Int = 0
+    var lifetimePoints :Int = 0
+    var exchangeRate :Float = 0.013      // $0.013 per point
     var name :String
     var email :String
     var provider :String? = nil
@@ -27,6 +29,8 @@ struct MFUser {
         return [
             "uuid": self.uuid,
             "points": self.points,
+            "lifetime_points": self.lifetimePoints,
+            "exchange_rate": self.exchangeRate,
             "name": self.name,
             "email": self.email,
             "provider": self.provider ?? "",
@@ -54,6 +58,8 @@ struct MFUser {
         
         self.init(uuid: uuid, points: points)
         
+        if let lifetimePoints = dict["lifetime_points"] as? Int { self.lifetimePoints = lifetimePoints }
+        if let exchangeRate = dict["exchange_rate"] as? Float { self.exchangeRate = exchangeRate }
         if let name = dict["name"] as? String { self.name = name }
         if let email = dict["email"] as? String { self.email = email }
         if let provider = dict["provider"] as? String { self.provider = provider }

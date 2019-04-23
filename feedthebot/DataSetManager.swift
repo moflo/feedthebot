@@ -113,6 +113,7 @@ class MFDataSet {
     var dataURLArray :[String] = [String]()
     var categoryArray :[String] = [String]()
     var responseArray :[MFResponse] = [MFResponse]()
+    var responseCount :Int = 0
     var updatedAt :Date = Date()
     
     var dictionary: [String: Any] {
@@ -128,6 +129,7 @@ class MFDataSet {
             "dataURLArray": self.dataURLArray,
             "categoryArray": self.categoryArray,
 //            "responseArray": self.responseArray,
+            "responseCount": self.responseCount,
             "updatedAt": Timestamp()
         ]
     }
@@ -160,6 +162,7 @@ class MFDataSet {
         if let multiplier = dict["multiplier"] as? Double { self.multiplier = Float(multiplier) }
         if let eventCount = dict["eventCount"] as? Int { self.eventCount = eventCount }
         if let limitSeconds = dict["limitSeconds"] as? Int { self.limitSeconds = limitSeconds }
+        if let responseCount = dict["responseCount"] as? Int { self.responseCount = responseCount }
         if let instruction = dict["instruction"] as? String { self.instruction = instruction }
 
         if let dataURLArray = dict["dataURLArray"] as? [String] {
