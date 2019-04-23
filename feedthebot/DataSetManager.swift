@@ -214,7 +214,8 @@ class DataSetManager : NSObject {
                 UserManager.sharedInstance.postUserActivity(user.uuid,
                                                             type: data!.training_type,
                                                             points: data!.points)
-                UserManager.sharedInstance
+                
+                UserManager.sharedInstance.updatePointsTotal(Int(data!.points))
             }
         }
 

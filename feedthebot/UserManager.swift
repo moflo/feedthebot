@@ -81,6 +81,7 @@ class MFActivity {
     var points :Int = 0
     var trainingType :MFTrainingType
     var wasPaid :Bool = false
+    var earnings :Double = 0.0
     var updatedAt :Date = Date()
     
     var dictionary: [String: Any] {
@@ -99,9 +100,11 @@ class MFActivity {
     
     convenience init(type: MFTrainingType, points: Int) {
         self.init()
+        let user = UserManager.sharedInstance.getUserDetails()
         self.trainingType = type
-        self.user_id = UserManager.sharedInstance.getUUID()
+        self.user_id = user.uuid
         self.points = points
+        self.earnings = Double(points) * user.exchangeRate
     }
     
     convenience init?(snapshot: DocumentSnapshot) {
@@ -139,6 +142,8 @@ class UserManager : NSObject {
     fileprivate var userUUID :String = ""
 
     fileprivate var userPoints :Int = 0
+    
+    fileprivate var exchangeRate :Double = 0.01
 
     func getUUID() -> String {
         let auth = FUIAuth.defaultAuthUI()!
@@ -150,11 +155,11 @@ class UserManager : NSObject {
         return self.userUUID
     }
 
-    func getUserDetails() -> (uuid: String, points: Int) {
+    func getUserDetails() -> (uuid: String, points: Int, exchangeRate: Double) {
         let uuid = self.userUUID
         let points = self.userPoints
-        
-        return (uuid,points)
+        let exchangeRate = self.exchangeRate
+        return (uuid,points,exchangeRate)
     }
 
     func getUserTotalPoints() -> Int {
@@ -242,6 +247,7 @@ class UserManager : NSObject {
 //                self.userEmail = user.email
 //                self.userName = user.name
 //                self.userAvatarURL = user.avatar_url
+                self.exchangeRate = Double(user.exchangeRate)
                 self.userPoints = user.points
 
                 completionHandler(nil)
@@ -315,7 +321,7 @@ class UserManager : NSObject {
 
     // MARK: - Test Methods
 
-    func getTestActivity(_ count:Int = 2) -> [MFActivity] {
+    func getTestActivity(_ count:Int = 6) -> [MFActivity] {
         var activityList = [MFActivity]()
         for i in 1...count {
             let activity = MFActivity(type: .textOCR, points: i*32)

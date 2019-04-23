@@ -18,12 +18,12 @@ class MFPayoutCell : UITableViewCell {
     func populate(_ activityObj :MFActivity) {
         let icon_image = activityObj.getImage()
         let type = activityObj.trainingType.detail().capitalized
-        let points = activityObj.points
+        let earnings = activityObj.earnings
         let date_string : String = activityObj.updatedAt.description
         
         icon.image = icon_image
         trainingType.text = type
-        let price = String(format: "%.2f", Double(points)*0.1)
+        let price = String(format: "%.2f", earnings)
         amount.text = "$\(price)"
         dateLabel.text = date_string
     }
@@ -55,8 +55,14 @@ class PayoutViewController: UIViewController, UITableViewDelegate, UITableViewDa
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
-        let testActivities = UserManager.sharedInstance.getTestActivity()
+        let testActivities = UserManager.sharedInstance.getTestActivity(12)
         activityList.append(contentsOf: testActivities)
+
+        let points :Int = activityList.map({ $0.points }).reduce(0, +)
+        let exchangeRate = UserManager.sharedInstance.getUserDetails().exchangeRate
+        let earnings :Double = Double(points) * exchangeRate
+        let price = String(format: "$%.2f", earnings)
+        titleLabel.text = price
     }
     
     override func viewWillAppear(_ animated: Bool) {
