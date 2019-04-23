@@ -141,9 +141,7 @@ class UserManager : NSObject {
 
     fileprivate var userUUID :String = ""
 
-    fileprivate var userPoints :Int = 0
-    
-    fileprivate var exchangeRate :Double = 0.01
+    fileprivate var userObj = MFUser()
 
     func getUUID() -> String {
         let auth = FUIAuth.defaultAuthUI()!
@@ -152,18 +150,19 @@ class UserManager : NSObject {
         }
         
         self.userUUID =  userID
+        self.userObj.uuid = userID
         return self.userUUID
     }
 
     func getUserDetails() -> (uuid: String, points: Int, exchangeRate: Double) {
         let uuid = self.userUUID
-        let points = self.userPoints
-        let exchangeRate = self.exchangeRate
-        return (uuid,points,exchangeRate)
+        let points = self.userObj.points
+        let exchangeRate = self.userObj.exchangeRate
+        return (uuid,points,Double(exchangeRate))
     }
 
     func getUserTotalPoints() -> Int {
-        return self.userPoints
+        return self.userObj.points
     }
     
     func shouldDoubleTapToSelect() -> Bool {
@@ -181,6 +180,11 @@ class UserManager : NSObject {
                 let isAnonymous = user.isAnonymous  // true
                 let uid = user.uid
                 self.userUUID = uid
+                
+                self.userObj.uuid = uid
+                self.userObj.name = user.displayName ?? ""
+                self.userObj.email = user.email ?? ""
+                self.userObj.avatar_url = user.photoURL != nil ? user.photoURL!.absoluteString : ""
 
                 print("Authenticated anonymous:", uid, isAnonymous)
             }
@@ -199,13 +203,14 @@ class UserManager : NSObject {
     }
 
     func updatePointsTotal(_ points: Int) {
-        
-        self.updateUserDetails(uuid: self.userUUID, points: points + self.userPoints)
+        self.updateUserDetails(uuid: self.userUUID, points: points)
     }
     
-    func updateUserDetails(uuid: String, points: Int) {
+    func updateUserDetails(uuid: String, points: Int, completionHandler: ((Error?) -> () )! = nil ) {
         
-         let userObj = MFUser(uuid: uuid, points: points)
+        self.userObj.uuid = uuid
+        self.userObj.points = self.userObj.points + points
+        self.userObj.lifetimePoints = self.userObj.lifetimePoints + points
         //        self.synchronize()
         
         // Update Firebase user details
@@ -213,13 +218,17 @@ class UserManager : NSObject {
         db.collection("users").document(uuid).setData(userObj.dictionary, merge: true) { err in
             if let err = err {
                 print("Error writing document: \(err)")
+                if completionHandler != nil {
+                    completionHandler(err)
+                }
             } else {
                 print("Document successfully written!")
+                if completionHandler != nil {
+                    completionHandler(nil)
+                }
             }
         }
         
-        self.userUUID = userObj.uuid
-        self.userPoints = userObj.points
 
     }
 
@@ -232,23 +241,24 @@ class UserManager : NSObject {
             return
         }
         
+        self.refreshUserData(userID, completionHandler: completionHandler)
+    }
+    
+    func refreshUserData( _ userID: String, completionHandler: @escaping (Error?) -> () ) {
+
         let db = Firestore.firestore()
         let userRef = db.collection("users").document(userID)
         
         userRef.getDocument { (document, error) in
+//            print("GetUser: ",document?.data())
+            if document?.data() == nil && error == nil { completionHandler(nil) }
             if let user = document.flatMap({
                 $0.data().flatMap({ (data) in
                     return MFUser(dictionary: data)
                 })
             }) {
-//                self.userObj = user
+                self.userObj = user
                 self.userUUID = user.uuid
-//                self.userName = user.name
-//                self.userEmail = user.email
-//                self.userName = user.name
-//                self.userAvatarURL = user.avatar_url
-                self.exchangeRate = Double(user.exchangeRate)
-                self.userPoints = user.points
 
                 completionHandler(nil)
             } else {

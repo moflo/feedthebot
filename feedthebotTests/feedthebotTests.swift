@@ -84,6 +84,42 @@ class feedthebotTests: XCTestCase {
         }
     }
     
+    func testServerMFUserLoad() {
+        
+        let expectation1 = XCTestExpectation(description: "Load MFUser, error")
+        
+        
+        UserManager.sharedInstance.updateUserDetails(uuid: "DEADBEEF", points: 101) { (error) in
+            
+            expect(error).to(beNil())
+            
+            expectation1.fulfill()
+            
+        }
+        
+        wait(for: [expectation1], timeout: 10.0)
+        
+        let expectation2 = XCTestExpectation(description: "Load MFUser, user")
+        
+        UserManager.sharedInstance.refreshUserData("DEADBEEF") { (error) in
+            
+            expect(error).to(beNil())
+            
+            expectation2.fulfill()
+            
+        }
+
+        wait(for: [expectation2], timeout: 10.0)
+        
+        let user = UserManager.sharedInstance.getUserDetails()
+        
+        expect(user.uuid) == "DEADBEEF"
+        expect(user.points) == 101
+        expect(user.exchangeRate) ≈ 0.013
+        
+
+    }
+
     // MARK: - MFDataset Testing
     
     func testMFDataSet() {
