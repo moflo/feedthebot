@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class PolyCatViewController: UIViewController, UIScrollViewDelegate {
     @IBAction func doSettingsButton(_ sender: Any) {
@@ -83,7 +84,7 @@ class PolyCatViewController: UIViewController, UIScrollViewDelegate {
         trainDoneButton.isEnabled = false
         
         if (dataSetObj == nil) {
-            dataSetObj = DataSetManager.sharedInstance.demoDataSet("Text OCR")
+            dataSetObj = DataSetManager.sharedInstance.demoDataSet(.textOCR)
         }
     }
     
@@ -124,6 +125,17 @@ class PolyCatViewController: UIViewController, UIScrollViewDelegate {
         guard let data = dataSetObj else { return }
         
         pointsLabel.text = "\(data.points)"
+
+        if data.dataURLArray.count > 0 {
+            let prefetcher = SDWebImagePrefetcher.shared
+            let urlArray = data.dataURLArray.map { URL(string: $0) }
+            let urls :[URL] = urlArray.compactMap { $0 }    // $0 as? URL
+            prefetcher.cancelPrefetching()
+            prefetcher.prefetchURLs( urls )
+            
+        }
+        
+        imageView.image = UIImage(named:"placeholder_image")
     }
     
     func doLoadDataSet() {
@@ -133,6 +145,13 @@ class PolyCatViewController: UIViewController, UIScrollViewDelegate {
         trainingCount = 0
         progressLabel.text = "\(trainingCount)/\(data.eventCount)"
         
+        if trainingCount < data.dataURLArray.count {
+            let urlString = data.dataURLArray[trainingCount]
+            if let url = URL(string: urlString) {
+                imageView.sd_setImage(with: url, placeholderImage: UIImage(named:"placeholder_image"))
+            }
+        }
+
         responseStrings = [String].init(repeating: "", count: data.eventCount)
         
         gameTimeSeconds = data.limitSeconds
@@ -265,48 +284,28 @@ class PolyCatViewController: UIViewController, UIScrollViewDelegate {
     func setupStatButtons() {
         
         var buttons = [MFTrainButton]()
-        let buttonNone = MFTrainButton(title: "CATEGORY ONE", icon: "icon_text", category: .none)
-        buttonNone.completionHandler = { (sender) in
-            self.imageView?.setTypeColor(.none)
-            self.showSelectedCateogory("CATEGORY ONE")
+
+        if let categoryArray = self.dataSetObj?.categoryArray {
+            var catType = BoundingBoxShotType.mark
+            
+            for category in categoryArray {
+                let buttonShot = MFTrainButton(title: category.uppercased(), icon: "icon_text", category: catType)
+                buttonShot.completionHandler = { (sender) in
+                    self.showSelectedCateogory(category)
+                }
+                buttons.append(buttonShot)
+                
+                catType = catType.next()
+            }
         }
-        buttons.append(buttonNone)
-        
-        let buttonMark = MFTrainButton(title: "CATEGORY TWO", icon: "icon_bounding", category: .mark)
-        buttonMark.completionHandler = { (sender) in
-            self.imageView?.setTypeColor(.mark)
-            self.showSelectedCateogory("CATEGORY TWO")
+        else {
+            let buttonCorner = MFTrainButton(title: "OPTION1", icon: "icon_text", category: .goal)
+            buttonCorner.completionHandler = { (sender) in
+                self.showSelectedCateogory("OPTION1")
+            }
+            buttons.append(buttonCorner)
         }
-        buttons.append(buttonMark)
-        
-        let buttonGoal = MFTrainButton(title: "CATEGORY THREE", icon: "icon_bounding", category: .goal)
-        buttonGoal.completionHandler = { (sender) in
-            self.imageView?.setTypeColor(.goal)
-            self.showSelectedCateogory("CATEGORY THREE")
-        }
-        buttons.append(buttonGoal)
-        
-        let buttonAllow = MFTrainButton(title: "CATEGORY FOUR", icon: "icon_bounding", category: .allowed)
-        buttonAllow.completionHandler = { (sender) in
-            self.imageView?.setTypeColor(.allowed)
-            self.showSelectedCateogory("CATEGORY FOUR")
-        }
-        buttons.append(buttonAllow)
-        
-        let buttonMiss = MFTrainButton(title: "CATEGORY FIVE", icon: "icon_bounding", category: .miss)
-        buttonMiss.completionHandler = { (sender) in
-            self.imageView?.setTypeColor(.miss)
-            self.showSelectedCateogory("CATEGORY FIVE")
-        }
-        buttons.append(buttonMiss)
-        
-        let buttonBlock = MFTrainButton(title: "CATEGORY SIX", icon: "icon_bounding", category: .block)
-        buttonBlock.completionHandler = { (sender) in
-            self.imageView?.setTypeColor(.block)
-            self.showSelectedCateogory("CATEGORY SIX")
-        }
-        buttons.append(buttonBlock)
-        
+
         trainingButtonView.menuType = .DarkBlue
         trainingButtonView.menuButtons = buttons
         

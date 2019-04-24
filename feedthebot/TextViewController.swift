@@ -65,7 +65,7 @@ class TextViewController: UIViewController, UIScrollViewDelegate {
                 self.dataSetObj = datasets!.first
             }
             else {
-                self.dataSetObj = DataSetManager.sharedInstance.demoDataSet("Text OCR")
+                self.dataSetObj = DataSetManager.sharedInstance.demoDataSet(.textOCR)
             }
             
             DispatchQueue.main.async {

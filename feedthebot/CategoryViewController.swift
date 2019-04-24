@@ -79,7 +79,7 @@ class CategoryViewController: UIViewController, UIScrollViewDelegate {
         trainDoneButton.isEnabled = false
         
         if (dataSetObj == nil) {
-            dataSetObj = DataSetManager.sharedInstance.demoDataSet("Text OCR")
+            dataSetObj = DataSetManager.sharedInstance.demoDataSet(.textOCR)
         }
     }
     
@@ -289,18 +289,28 @@ class CategoryViewController: UIViewController, UIScrollViewDelegate {
     func setupStatButtons() {
         
         var buttons = [MFTrainButton]()
-        let buttonShot = MFTrainButton(title: "CATEGORY1", icon: "icon_text", category: .mark)
-        buttonShot.completionHandler = { (sender) in
-            self.showSelectedCateogory("CATEGORY ONE")
-        }
-        buttons.append(buttonShot)
         
-        let buttonCorner = MFTrainButton(title: "CATEGORY2", icon: "icon_bounding", category: .goal)
-        buttonCorner.completionHandler = { (sender) in
-            self.showSelectedCateogory("CATEGORY TWO")
+        if let categoryArray = self.dataSetObj?.categoryArray {
+            var catType = BoundingBoxShotType.mark
+            
+            for category in categoryArray {
+                let buttonShot = MFTrainButton(title: category.uppercased(), icon: "icon_text", category: catType)
+                buttonShot.completionHandler = { (sender) in
+                    self.showSelectedCateogory(category)
+                }
+                buttons.append(buttonShot)
+            
+                catType = catType.next()
+            }
         }
-        buttons.append(buttonCorner)
-
+        else {
+            let buttonCorner = MFTrainButton(title: "OPTION1", icon: "icon_text", category: .goal)
+            buttonCorner.completionHandler = { (sender) in
+                self.showSelectedCateogory("OPTION1")
+            }
+            buttons.append(buttonCorner)
+        }
+        
         trainingButtonView.menuType = .DarkBlue
         trainingButtonView.menuButtons = buttons
 

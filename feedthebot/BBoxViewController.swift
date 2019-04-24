@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class BBoxViewController: UIViewController, UIScrollViewDelegate {
     @IBAction func doSettingsButton(_ sender: Any) {
@@ -69,7 +70,7 @@ class BBoxViewController: UIViewController, UIScrollViewDelegate {
         scrollView.backgroundColor = MFBlue()
 
         if (dataSetObj == nil) {
-            dataSetObj = DataSetManager.sharedInstance.demoDataSet("Text OCR")
+            dataSetObj = DataSetManager.sharedInstance.demoDataSet(.textOCR)
         }
     }
     
@@ -105,6 +106,17 @@ class BBoxViewController: UIViewController, UIScrollViewDelegate {
         guard let data = dataSetObj else { return }
         
         pointsLabel.text = "\(data.points)"
+
+        if data.dataURLArray.count > 0 {
+            let prefetcher = SDWebImagePrefetcher.shared
+            let urlArray = data.dataURLArray.map { URL(string: $0) }
+            let urls :[URL] = urlArray.compactMap { $0 }    // $0 as? URL
+            prefetcher.cancelPrefetching()
+            prefetcher.prefetchURLs( urls )
+            
+        }
+        
+        trainingImage.image = UIImage(named:"placeholder_image")
     }
     
     func doLoadDataSet() {
@@ -114,6 +126,13 @@ class BBoxViewController: UIViewController, UIScrollViewDelegate {
         trainingCount = 0
         progressLabel.text = "\(trainingCount)/\(data.eventCount)"
         
+        if trainingCount < data.dataURLArray.count {
+            let urlString = data.dataURLArray[trainingCount]
+            if let url = URL(string: urlString) {
+                trainingImage.sd_setImage(with: url, placeholderImage: UIImage(named:"placeholder_image"))
+            }
+        }
+
         responseStrings = [String].init(repeating: "", count: data.eventCount)
         
         gameTimeSeconds = data.limitSeconds

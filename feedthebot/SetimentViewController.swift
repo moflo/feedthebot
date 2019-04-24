@@ -73,7 +73,7 @@ class SentimentViewController: UIViewController {
         trainDoneButton.isEnabled = false
         
         if (dataSetObj == nil) {
-            dataSetObj = DataSetManager.sharedInstance.demoDataSet("Text OCR")
+            dataSetObj = DataSetManager.sharedInstance.demoDataSet(.textOCR)
         }
     }
     
@@ -254,18 +254,28 @@ class SentimentViewController: UIViewController {
     func setupStatButtons() {
         
         var buttons = [MFTrainButton]()
-        let buttonShot = MFTrainButton(title: "CATEGORY1", icon: "icon_text")
-        buttonShot.completionHandler = { (sender) in
-            self.showSelectedCateogory("CATEGORY ONE")
+
+        if let categoryArray = self.dataSetObj?.categoryArray {
+            var catType = BoundingBoxShotType.mark
+            
+            for category in categoryArray {
+                let buttonShot = MFTrainButton(title: category.uppercased(), icon: "icon_text", category: catType)
+                buttonShot.completionHandler = { (sender) in
+                    self.showSelectedCateogory(category)
+                }
+                buttons.append(buttonShot)
+                
+                catType = catType.next()
+            }
         }
-        buttons.append(buttonShot)
-        
-        let buttonCorner = MFTrainButton(title: "CATEGORY2", icon: "icon_bounding")
-        buttonCorner.completionHandler = { (sender) in
-            self.showSelectedCateogory("CATEGORY TWO")
+        else {
+            let buttonCorner = MFTrainButton(title: "OPTION1", icon: "icon_text", category: .goal)
+            buttonCorner.completionHandler = { (sender) in
+                self.showSelectedCateogory("OPTION1")
+            }
+            buttons.append(buttonCorner)
         }
-        buttons.append(buttonCorner)
-        
+
         trainingButtonView.menuType = .DarkBlue
         trainingButtonView.menuButtons = buttons
         

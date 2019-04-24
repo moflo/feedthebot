@@ -52,8 +52,8 @@ protocol BoundingBoxViewDelegate {
     func didFinishTouch(_ positionX: Float, positionY: Float)
 }
 
-enum BoundingBoxShotType {
-    case none, mark, goal, allowed, miss, block
+enum BoundingBoxShotType : Int{
+    case none = 0, mark, goal, allowed, miss, block
     
     func fillColor() -> CGColor {
         switch self {
@@ -105,6 +105,13 @@ enum BoundingBoxShotType {
             return MFAlertGrayFill(0.3).cgColor
         }
         
+    }
+    
+    func next() -> BoundingBoxShotType {
+        var next = self.rawValue + 1
+        if next > BoundingBoxShotType.block.rawValue { next = 0 }
+        
+        return BoundingBoxShotType(rawValue: next) ?? .none
     }
 }
 

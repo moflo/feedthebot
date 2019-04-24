@@ -263,7 +263,7 @@ class DataSetManager : NSObject {
 
     // MARK: Demo methods
     
-    func demoDataSet(_ trainingType :String) -> MFDataSet {
+    func demoDataSet(_ trainingType :MFTrainingType) -> MFDataSet {
         let data = MFDataSet(order_id: "DEADBEEF", trainingType: "textOCR")
         
         data.dataURLArray.append("https://github.com/wangpengnorman/SAR-Strong-Baseline-for-Text-Recognition/blob/master/data/beach.jpg?raw=true")
@@ -276,6 +276,11 @@ class DataSetManager : NSObject {
         data.dataURLArray.append("https://storage.googleapis.com/kagglesdsdata/datasets%2F30321%2F38645%2Fdataset%2Fv011_words_small%2F1077.png?GoogleAccessId=datasets-dataviewer@kaggle-161607.iam.gserviceaccount.com&Expires=1555804635&Signature=jdgs0TiW71HiMPcvc%2BqdQOyZBXHfzNQuYI7ccjVoGblFNDY04a7g9tvH6UeBKshfm2hH5KsBSzSnmGxcfrEdOI9sGxEjbkIZ8SaHJFPcSOuKrHpSmJoFJb5L5THo146QuiZ%2BoUICcGDHnoj23eeDfxtATF9mrH1ZligBD%2B0RFBglcLHXS%2FR1M%2BmLaj98JM8g4WuiDrp3W8aX6O%2FxxXc9tVNjQQQ%2B7UiPc7UxXHg8OaIHV7waUjkdjwrFDpZQb303W9OQ6T2Oe9vKzdByMzyx3y01T%2Fv0uPD%2FZfPKZ2yT%2FO6bk1WuQCkztzpam0KjoEEomq4Kdwmn5ckEnOvnOZkhew%3D%3D")
         
         data.dataURLArray.append("https://storage.googleapis.com/kagglesdsdata/datasets%2F130171%2F311075%2Fkaggle%2FTrain%2F0iuj.png?GoogleAccessId=datasets-dataviewer@kaggle-161607.iam.gserviceaccount.com&Expires=1555784360&Signature=poySvUTvUJ91sh%2BfC60KUjwGEUgWsZzOpuuMLtFAN05Zj6tNuiG4VJ8PIUSq1zxOthvr1YttbeFOOvDMupNI92gGolb1o4s%2BTQk3OJKg80SRU6vEA92bjGDnP7XzEOo8Y1nUi2H0OsnarT2iXFOVKB0JubUbDDfpA1lCTM6vsgtK91BejCKHuCjdsdfqcbOlf%2FJ8wCQBgmAZD6X6ayrr1PiGF5vhtf6D1FDUz7nPQedptBPKZ50F8HdPRrcciOiUSB%2F2Bp4oo6mnNL0WJPJuVXxlo2WYtTEYIK66pOUqh7J5lRGgcWIsi0wphHKLvrUQgXf5mTfTajrzPb%2BTg9YIDw%3D%3D")
+        
+        
+        // Category
+        
+        data.categoryArray.append(contentsOf: ["Mild","Rough","Obvious","Likely","Negative"])
         
         return data
     }
