@@ -78,21 +78,32 @@ class CategoryViewController: UIViewController, UIScrollViewDelegate {
         categoryLabel.isHidden = true
         trainDoneButton.isEnabled = false
         
-        if (dataSetObj == nil) {
-            dataSetObj = DataSetManager.sharedInstance.demoDataSet(.textOCR)
+        // Load the latest Dataset
+        DataSetManager.sharedInstance.loadPage(type: .imageCategory, page: 1) { (datasets, error) in
+            if error == nil && datasets != nil && datasets!.count > 0 {
+                self.dataSetObj = datasets!.first
+            }
+            else {
+                self.dataSetObj = DataSetManager.sharedInstance.demoDataSet(.imageCategory)
+            }
+            
+            DispatchQueue.main.async {
+                self.doPreloadDataSet()
+                self.doLoadDataSet()
+            }
         }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         
-        doPreloadDataSet()
-        
-        setupStatButtons()
+//        doPreloadDataSet()
+//
+//        setupStatButtons()
 
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        doLoadDataSet()
+//        doLoadDataSet()
 
         // Adjust menu
          trainingButtonView.reset()
@@ -131,6 +142,8 @@ class CategoryViewController: UIViewController, UIScrollViewDelegate {
         }
         
         imageView.image = UIImage(named:"placeholder_image")
+        
+        setupStatButtons()
     }
     
     func doLoadDataSet() {

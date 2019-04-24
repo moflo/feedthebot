@@ -83,21 +83,32 @@ class PolyCatViewController: UIViewController, UIScrollViewDelegate {
 
         trainDoneButton.isEnabled = false
         
-        if (dataSetObj == nil) {
-            dataSetObj = DataSetManager.sharedInstance.demoDataSet(.textOCR)
+        // Load the latest Dataset
+        DataSetManager.sharedInstance.loadPage(type: .imageBBoxCategory, page: 1) { (datasets, error) in
+            if error == nil && datasets != nil && datasets!.count > 0 {
+                self.dataSetObj = datasets!.first
+            }
+            else {
+                self.dataSetObj = DataSetManager.sharedInstance.demoDataSet(.imageBBoxCategory)
+            }
+            
+            DispatchQueue.main.async {
+                self.doPreloadDataSet()
+                self.doLoadDataSet()
+            }
         }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         
-        doPreloadDataSet()
+//        doPreloadDataSet()
         
-        setupStatButtons()
+//        setupStatButtons()
         
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        doLoadDataSet()
+//        doLoadDataSet()
         
         // Adjust menu
         trainingButtonView.reset()
@@ -136,6 +147,8 @@ class PolyCatViewController: UIViewController, UIScrollViewDelegate {
         }
         
         imageView.image = UIImage(named:"placeholder_image")
+        
+        setupStatButtons()
     }
     
     func doLoadDataSet() {

@@ -9,7 +9,7 @@
 import UIKit
 import SDWebImage
 
-class TextViewController: UIViewController, UIScrollViewDelegate {
+class TextViewController: UIViewController, UIScrollViewDelegate, UITextFieldDelegate {
     @IBAction func doSettingsButton(_ sender: Any) {
         let alert = MFAlertTrainView(title: "Text Recognition",
                                      icon: "",
@@ -44,7 +44,8 @@ class TextViewController: UIViewController, UIScrollViewDelegate {
 
     @IBOutlet weak var trainTextField: MFFormTextField1!
     @IBOutlet weak var trainTextV: NSLayoutConstraint!
-    
+    @IBOutlet weak var trainDoneButton: UIButton!
+
     var dataSetObj :MFDataSet? = nil
     var trainingCount :Int = 0
     var gameTimer : Timer? = nil
@@ -59,7 +60,9 @@ class TextViewController: UIViewController, UIScrollViewDelegate {
         scrollView.maximumZoomScale = 6.0
         scrollView.backgroundColor = MFBlue()
 
-        // Do any additional setup after loading the view.
+        trainDoneButton.isEnabled = false
+
+        // Load the latest Dataset
         DataSetManager.sharedInstance.loadPage(type: .textOCR, page: 1) { (datasets, error) in
             if error == nil && datasets != nil && datasets!.count > 0 {
                 self.dataSetObj = datasets!.first
@@ -136,6 +139,9 @@ class TextViewController: UIViewController, UIScrollViewDelegate {
         trainingCount = 0
         progressLabel.text = "\(trainingCount)/\(data.eventCount)"
         
+        self.trainTextField.text = ""
+        self.trainDoneButton.isEnabled = false
+
         if trainingCount < data.dataURLArray.count {
             let urlString = data.dataURLArray[trainingCount]
             if let url = URL(string: urlString) {
@@ -174,6 +180,7 @@ class TextViewController: UIViewController, UIScrollViewDelegate {
         DispatchQueue.main.async {
             self.progressLabel.text = "\(self.trainingCount)/\(data.eventCount)"
             self.trainTextField.text = ""
+            self.trainDoneButton.isEnabled = false
 
             if self.trainingCount < data.dataURLArray.count {
                 let urlString = data.dataURLArray[self.trainingCount]
@@ -275,6 +282,15 @@ class TextViewController: UIViewController, UIScrollViewDelegate {
     
     
     // MARK: Keyboard View observers
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if string == "\n" { return false }
+        
+        let userEnteredString :NSString = textField.text! as NSString
+        let newString = userEnteredString.replacingCharacters(in: range, with: string) as NSString
+        self.trainDoneButton.isEnabled = newString != ""
+        
+        return true
+    }
     
     @objc func keyboardWillShow(_ notification: Notification) {
         // Activate the second textField

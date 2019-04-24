@@ -531,6 +531,7 @@
                         <outlet property="progressLabel" destination="r5o-ks-FMU" id="woB-mU-wRD"/>
                         <outlet property="scrollView" destination="fwv-xX-TFv" id="s39-zB-6ze"/>
                         <outlet property="timeLabel" destination="8za-yA-Bbs" id="EgT-Oq-JI7"/>
+                        <outlet property="trainDoneButton" destination="JAq-XW-gy7" id="MpJ-hW-hCP"/>
                         <outlet property="trainTextField" destination="gEG-vC-zdA" id="miq-E6-aP5"/>
                         <outlet property="trainTextV" destination="nfy-Rn-V9O" id="zPz-3B-oxX"/>
                     </connections>

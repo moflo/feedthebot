@@ -69,19 +69,30 @@ class BBoxViewController: UIViewController, UIScrollViewDelegate {
         scrollView.maximumZoomScale = 6.0
         scrollView.backgroundColor = MFBlue()
 
-        if (dataSetObj == nil) {
-            dataSetObj = DataSetManager.sharedInstance.demoDataSet(.textOCR)
+        // Load the latest Dataset
+        DataSetManager.sharedInstance.loadPage(type: .imageBBox, page: 1) { (datasets, error) in
+            if error == nil && datasets != nil && datasets!.count > 0 {
+                self.dataSetObj = datasets!.first
+            }
+            else {
+                self.dataSetObj = DataSetManager.sharedInstance.demoDataSet(.imageBBox)
+            }
+            
+            DispatchQueue.main.async {
+                self.doPreloadDataSet()
+                self.doLoadDataSet()
+            }
         }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         
-        doPreloadDataSet()
+//        doPreloadDataSet()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         
-        doLoadDataSet()
+//        doLoadDataSet()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
