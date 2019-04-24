@@ -54,15 +54,28 @@ class PayoutViewController: UIViewController, UITableViewDelegate, UITableViewDa
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Do any additional setup after loading the view.
-        let testActivities = UserManager.sharedInstance.getTestActivity(12)
-        activityList.append(contentsOf: testActivities)
+        // Load Activities
+        UserManager.sharedInstance.loadActivity { (activities, error) in
+            guard activities != nil, error == nil else { return }
+            
+            self.activityList.append(contentsOf: activities!)
+            self.tableView.reloadData()
+            
+            DispatchQueue.main.async {
 
-        let points :Int = activityList.map({ $0.points }).reduce(0, +)
-        let exchangeRate = UserManager.sharedInstance.getUserDetails().exchangeRate
-        let earnings :Double = Double(points) * exchangeRate
-        let price = String(format: "$%.2f", earnings)
-        titleLabel.text = price
+                let points :Int = self.activityList.map({ $0.points }).reduce(0, +)
+                let exchangeRate = UserManager.sharedInstance.getUserDetails().exchangeRate
+                let earnings :Double = Double(points) * exchangeRate
+                let price = String(format: "$%.2f", earnings)
+                self.titleLabel.text = price
+                
+            }
+        }
+        
+        // Test activities
+//        let testActivities = UserManager.sharedInstance.getTestActivity(12)
+//        activityList.append(contentsOf: testActivities)
+
     }
     
     override func viewWillAppear(_ animated: Bool) {

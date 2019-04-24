@@ -311,7 +311,9 @@ class UserManager : NSObject {
 
         let db = Firestore.firestore()
         let activityRef = db.collection("activity")
-        let query = activityRef.whereField("user_id", isEqualTo: userID).order(by: "updatedAt", descending: true)
+        let query = activityRef.whereField("user_id", isEqualTo: userID)
+                    .whereField("was_paid", isEqualTo: false)
+                    .order(by: "updatedAt", descending: true)
         query.getDocuments { (snapshot, err) in
             guard let snapshot = snapshot, err == nil else {
                 let error = NSError(domain: "Activity", code: -1, userInfo: ["userInfo":"No activities found"])

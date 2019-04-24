@@ -474,7 +474,7 @@ class feedthebotTests: XCTestCase {
             
             expect(error).to(beNil())
             expect(activity).notTo(beNil())
-            expect(activity?.count) > 1
+            expect(activity?.count) > 0
             
 //            print(activity?.first)
             
