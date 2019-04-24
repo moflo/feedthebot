@@ -283,10 +283,10 @@ class TextViewController: UIViewController, UIScrollViewDelegate, UITextFieldDel
     
     // MARK: Keyboard View observers
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        if string == "\n" { return false }
+        if string == "\n" { return false }  // Done keyboard button press
         
-        let userEnteredString :NSString = textField.text! as NSString
-        let newString = userEnteredString.replacingCharacters(in: range, with: string) as NSString
+        let oldString = NSString(string: textField.text!)
+        let newString = oldString.replacingCharacters(in: range, with: string) as NSString
         self.trainDoneButton.isEnabled = newString != ""
         
         return true

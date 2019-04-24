@@ -107,7 +107,7 @@ class MFDataSet {
     var multiplier :Float = 1.0
     var trainingType :String
     var training_type :MFTrainingType
-    var instruction :String = "This should be long text which describes the type of training data."
+    var instruction :String = "Tap on the image once to start drawing a rectangle. Tap again to finish."
     var eventCount :Int = 10
     var limitSeconds :Int = 60*2
     var dataURLArray :[String] = [String]()
@@ -266,17 +266,33 @@ class DataSetManager : NSObject {
     func demoDataSet(_ trainingType :MFTrainingType) -> MFDataSet {
         let data = MFDataSet(order_id: "DEADBEEF", trainingType: "textOCR")
         
-        data.dataURLArray.append("https://github.com/wangpengnorman/SAR-Strong-Baseline-for-Text-Recognition/blob/master/data/beach.jpg?raw=true")
-        data.dataURLArray.append("https://github.com/wangpengnorman/SAR-Strong-Baseline-for-Text-Recognition/blob/master/data/united.jpg?raw=true")
-        
-        // https://www.kaggle.com/backalla/words-mnist
-        
-        data.dataURLArray.append("https://storage.googleapis.com/kagglesdsdata/datasets%2F30321%2F38645%2Fdataset%2Fv011_words_small%2F1020.jpeg?GoogleAccessId=datasets-dataviewer@kaggle-161607.iam.gserviceaccount.com&Expires=1555804635&Signature=I%2FniQUbbpULfjYB%2BMR9A0R1v3H%2Bh5ONimd93l5Pzc5XEO%2F0InALRVgdarJUfRUHXx2OYMvItsxyLpH79q5I52rXtLP60NYGBLpIMEFhgLgb8YkHVc9jfYx%2F1cdApn5AhwwziMKSYcn2Sdig9cGUpYLffBoJ9ySjkJ%2BCe03XkrBRJiKCV5G4MBckHGHKqHZwgBgN3j%2FsrUM8Q8DkKuHedDGunRykZlDd3f%2B52r2bn1ru%2FZLZsR%2FR3NIk2Vyf0Je%2B2IV%2F9UH8Bs7u%2Fyi3wt4FQPpQKml4kykDEBPydxkP3BOHszowF1glgUUyUKy6utI4XbfuFL5DdbZ8TtsV0z%2BqpqQ%3D%3D")
-        
-        data.dataURLArray.append("https://storage.googleapis.com/kagglesdsdata/datasets%2F30321%2F38645%2Fdataset%2Fv011_words_small%2F1077.png?GoogleAccessId=datasets-dataviewer@kaggle-161607.iam.gserviceaccount.com&Expires=1555804635&Signature=jdgs0TiW71HiMPcvc%2BqdQOyZBXHfzNQuYI7ccjVoGblFNDY04a7g9tvH6UeBKshfm2hH5KsBSzSnmGxcfrEdOI9sGxEjbkIZ8SaHJFPcSOuKrHpSmJoFJb5L5THo146QuiZ%2BoUICcGDHnoj23eeDfxtATF9mrH1ZligBD%2B0RFBglcLHXS%2FR1M%2BmLaj98JM8g4WuiDrp3W8aX6O%2FxxXc9tVNjQQQ%2B7UiPc7UxXHg8OaIHV7waUjkdjwrFDpZQb303W9OQ6T2Oe9vKzdByMzyx3y01T%2Fv0uPD%2FZfPKZ2yT%2FO6bk1WuQCkztzpam0KjoEEomq4Kdwmn5ckEnOvnOZkhew%3D%3D")
-        
-        data.dataURLArray.append("https://storage.googleapis.com/kagglesdsdata/datasets%2F130171%2F311075%2Fkaggle%2FTrain%2F0iuj.png?GoogleAccessId=datasets-dataviewer@kaggle-161607.iam.gserviceaccount.com&Expires=1555784360&Signature=poySvUTvUJ91sh%2BfC60KUjwGEUgWsZzOpuuMLtFAN05Zj6tNuiG4VJ8PIUSq1zxOthvr1YttbeFOOvDMupNI92gGolb1o4s%2BTQk3OJKg80SRU6vEA92bjGDnP7XzEOo8Y1nUi2H0OsnarT2iXFOVKB0JubUbDDfpA1lCTM6vsgtK91BejCKHuCjdsdfqcbOlf%2FJ8wCQBgmAZD6X6ayrr1PiGF5vhtf6D1FDUz7nPQedptBPKZ50F8HdPRrcciOiUSB%2F2Bp4oo6mnNL0WJPJuVXxlo2WYtTEYIK66pOUqh7J5lRGgcWIsi0wphHKLvrUQgXf5mTfTajrzPb%2BTg9YIDw%3D%3D")
-        
+        if trainingType == .textSentiment {
+            data.dataURLArray.append("We encourage you to review your app concept and incorporate different content and features that are in compliance with the App Store Review Guidelines.")
+            data.dataURLArray.append("Specifically, your app contains placeholder text in the description and throughout the app.")
+            data.dataURLArray.append("While some migth find this to be true, we are driven by back end processes.")
+            data.dataURLArray.append("We are providing a service for data scientist and CoreML developers to improve their machine learning models.")
+            data.dataURLArray.append("What we hope to accomplish is to provide a method for rapid improvement of the embedded machine learning models using crowdsourced workers.")
+            data.dataURLArray.append("We think it's appropriate to compensate the mobile app users for the work they are doing, similar to how artists are compenstated for their work.")
+            data.dataURLArray.append("This solution is a marketplace for human intelligence, we are paying users for their skill.")
+            data.dataURLArray.append("We think there are socially beneficial data labeling work that is best performed by skilled users, and these users are often on mobile platforms.")
+            data.dataURLArray.append("While other solutions are using so-called responsive websites, we are working with customers who need to have their CoreML model tuned and therefore are providing a native mobile app.")
+            data.dataURLArray.append("We appreciate the chance to discuss this business approach with you.")
+
+            data.instruction = "Read the message and then select the sentiment using buttons below."
+        }
+        else {
+            data.dataURLArray.append("https://github.com/wangpengnorman/SAR-Strong-Baseline-for-Text-Recognition/blob/master/data/beach.jpg?raw=true")
+            data.dataURLArray.append("https://github.com/wangpengnorman/SAR-Strong-Baseline-for-Text-Recognition/blob/master/data/united.jpg?raw=true")
+            
+            // https://www.kaggle.com/backalla/words-mnist
+            
+            data.dataURLArray.append("https://storage.googleapis.com/kagglesdsdata/datasets%2F30321%2F38645%2Fdataset%2Fv011_words_small%2F1020.jpeg?GoogleAccessId=datasets-dataviewer@kaggle-161607.iam.gserviceaccount.com&Expires=1555804635&Signature=I%2FniQUbbpULfjYB%2BMR9A0R1v3H%2Bh5ONimd93l5Pzc5XEO%2F0InALRVgdarJUfRUHXx2OYMvItsxyLpH79q5I52rXtLP60NYGBLpIMEFhgLgb8YkHVc9jfYx%2F1cdApn5AhwwziMKSYcn2Sdig9cGUpYLffBoJ9ySjkJ%2BCe03XkrBRJiKCV5G4MBckHGHKqHZwgBgN3j%2FsrUM8Q8DkKuHedDGunRykZlDd3f%2B52r2bn1ru%2FZLZsR%2FR3NIk2Vyf0Je%2B2IV%2F9UH8Bs7u%2Fyi3wt4FQPpQKml4kykDEBPydxkP3BOHszowF1glgUUyUKy6utI4XbfuFL5DdbZ8TtsV0z%2BqpqQ%3D%3D")
+            
+            data.dataURLArray.append("https://storage.googleapis.com/kagglesdsdata/datasets%2F30321%2F38645%2Fdataset%2Fv011_words_small%2F1077.png?GoogleAccessId=datasets-dataviewer@kaggle-161607.iam.gserviceaccount.com&Expires=1555804635&Signature=jdgs0TiW71HiMPcvc%2BqdQOyZBXHfzNQuYI7ccjVoGblFNDY04a7g9tvH6UeBKshfm2hH5KsBSzSnmGxcfrEdOI9sGxEjbkIZ8SaHJFPcSOuKrHpSmJoFJb5L5THo146QuiZ%2BoUICcGDHnoj23eeDfxtATF9mrH1ZligBD%2B0RFBglcLHXS%2FR1M%2BmLaj98JM8g4WuiDrp3W8aX6O%2FxxXc9tVNjQQQ%2B7UiPc7UxXHg8OaIHV7waUjkdjwrFDpZQb303W9OQ6T2Oe9vKzdByMzyx3y01T%2Fv0uPD%2FZfPKZ2yT%2FO6bk1WuQCkztzpam0KjoEEomq4Kdwmn5ckEnOvnOZkhew%3D%3D")
+            
+            data.dataURLArray.append("https://storage.googleapis.com/kagglesdsdata/datasets%2F130171%2F311075%2Fkaggle%2FTrain%2F0iuj.png?GoogleAccessId=datasets-dataviewer@kaggle-161607.iam.gserviceaccount.com&Expires=1555784360&Signature=poySvUTvUJ91sh%2BfC60KUjwGEUgWsZzOpuuMLtFAN05Zj6tNuiG4VJ8PIUSq1zxOthvr1YttbeFOOvDMupNI92gGolb1o4s%2BTQk3OJKg80SRU6vEA92bjGDnP7XzEOo8Y1nUi2H0OsnarT2iXFOVKB0JubUbDDfpA1lCTM6vsgtK91BejCKHuCjdsdfqcbOlf%2FJ8wCQBgmAZD6X6ayrr1PiGF5vhtf6D1FDUz7nPQedptBPKZ50F8HdPRrcciOiUSB%2F2Bp4oo6mnNL0WJPJuVXxlo2WYtTEYIK66pOUqh7J5lRGgcWIsi0wphHKLvrUQgXf5mTfTajrzPb%2BTg9YIDw%3D%3D")
+            
+        }
         
         // Category
         

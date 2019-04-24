@@ -130,7 +130,14 @@ class SentimentViewController: UIViewController {
         trainingCount = 0
         progressLabel.text = "\(trainingCount)/\(data.eventCount)"
         
-        textView.text = "Sample textual data goes here for sentiment analysis."
+        if trainingCount < data.dataURLArray.count {
+            let urlString = data.dataURLArray[trainingCount]
+            textView.text = urlString
+        }
+        else {
+            textView.text = "Thinking..."
+
+        }
         textView.centerVertically()
         
         responseStrings = [String].init(repeating: "", count: data.eventCount)
@@ -163,6 +170,15 @@ class SentimentViewController: UIViewController {
         
         DispatchQueue.main.async {
             self.progressLabel.text = "\(self.trainingCount)/\(data.eventCount)"
+            if self.trainingCount < data.dataURLArray.count {
+                let urlString = data.dataURLArray[self.trainingCount]
+                self.textView.text = urlString
+            }
+            else {
+                self.textView.text = "Thinking..."
+                
+            }
+            self.textView.centerVertically()
         }
         
         // Check for game over

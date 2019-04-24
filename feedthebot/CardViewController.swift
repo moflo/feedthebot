@@ -18,6 +18,7 @@ class CardViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func doPayoutButton(_ sender: Any) {
         if self.checkFieldValid() {
+            self.dismissKeyboard()
             self.navigationController?.popToRootViewController(animated: true)
         }
         else {
