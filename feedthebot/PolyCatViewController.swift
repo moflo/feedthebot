@@ -206,7 +206,8 @@ class PolyCatViewController: UIViewController, UIScrollViewDelegate {
             default :
                 print("DoEndGame: ", buttonIndex)
             }
-            
+            self.doDoneButton(self)
+
         }
         alert.show()
         

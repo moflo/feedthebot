@@ -61,7 +61,7 @@ class TextViewController: UIViewController, UIScrollViewDelegate {
 
         // Do any additional setup after loading the view.
         DataSetManager.sharedInstance.loadPage(type: .textOCR, page: 1) { (datasets, error) in
-            if error == nil && datasets != nil {
+            if error == nil && datasets != nil && datasets!.count > 0 {
                 self.dataSetObj = datasets!.first
             }
             else {
@@ -196,7 +196,7 @@ class TextViewController: UIViewController, UIScrollViewDelegate {
         
         DispatchQueue.main.async {
             self.trainTextField.resignFirstResponder()
-            self.view.endEditing(true)
+//            self.view.endEditing(true)
         }
         
         DataSetManager.sharedInstance.postTraining(dataSetObj,
@@ -213,6 +213,7 @@ class TextViewController: UIViewController, UIScrollViewDelegate {
                 print("DoEndGame: ", buttonIndex)
             }
             
+            self.doDoneButton(self)
         }
         alert.show()
 
@@ -277,18 +278,18 @@ class TextViewController: UIViewController, UIScrollViewDelegate {
     
     @objc func keyboardWillShow(_ notification: Notification) {
         // Activate the second textField
-        self.trainTextField.becomeFirstResponder()
+//        self.trainTextField.becomeFirstResponder()
         
         // Show the last text cell
         let info = (notification as NSNotification).userInfo
         
         let keyboardFrame = (info?[UIResponder.keyboardFrameBeginUserInfoKey] as! NSValue).cgRectValue
         
-        let frameH = self.view.frame.size.height
+//        let frameH = self.view.frame.size.height
+//        let scale = UIScreen.main.scale
         let keyboardH = keyboardFrame.height
-        let scale = UIScreen.main.scale
-        
-        print("keyboardWillShow: ",frameH, keyboardH, scale)
+
+//        print("keyboardWillShow: ",frameH, keyboardH, scale)
         // -60px offset for toolbar...
 //        animateToolbar(frameH-keyboardH-60.0)
         animateToolbar(keyboardH)
@@ -299,7 +300,7 @@ class TextViewController: UIViewController, UIScrollViewDelegate {
     func animateToolbar(_ height: CGFloat) {
         UIView.animate(withDuration: 0.33, delay: 0.1, options: .curveEaseOut, animations: { () -> Void in
             
-            print("animateToolbar: ",self.trainTextV?.constant ?? 0,height)
+//            print("animateToolbar: ",self.trainTextV?.constant ?? 0,height)
             
             // Animate underLine position
             self.trainTextV?.constant = height

@@ -174,7 +174,8 @@ class SentimentViewController: UIViewController {
             default :
                 print("DoEndGame: ", buttonIndex)
             }
-            
+            self.doDoneButton(self)
+
         }
         alert.show()
         
