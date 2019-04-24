@@ -243,7 +243,7 @@ class DataSetManager : NSObject {
         
         let db = Firestore.firestore()
         let activityRef = db.collection("datasets")
-        let query = activityRef.order(by: "updatedAt", descending: true).limit(to: page)
+        let query = activityRef.whereField("training_type", isEqualTo: type.rawValue).order(by: "updatedAt", descending: true).limit(to: page)
         query.getDocuments { (snapshot, err) in
             guard let snapshot = snapshot, err == nil else {
                 let error = NSError(domain: "DataSetManager", code: -1, userInfo: ["userInfo":"No activities found"])

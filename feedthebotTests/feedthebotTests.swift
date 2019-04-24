@@ -238,7 +238,21 @@ class feedthebotTests: XCTestCase {
         }
         
         wait(for: [expectation2], timeout: 10.0)
+
+        let expectation3 = XCTestExpectation(description: "Load Datasets, page 1, none")
         
+        DataSetManager.sharedInstance.loadPage(type: .other, page: 1) { (datasets, error) in
+            
+            expect(error).to(beNil())
+            expect(datasets).notTo(beNil())
+            expect(datasets?.count) == 0
+            
+            expectation3.fulfill()
+            
+        }
+        
+        wait(for: [expectation3], timeout: 10.0)
+
 
     }
 
