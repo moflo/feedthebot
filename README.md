@@ -4,6 +4,27 @@ Feed The Bot
 Perhaps the dumbest idea I've ever had.
 
 
+Rejected - April 24
+---
+Guideline 3.2.2 - Business - Other Business Model Issues - Unacceptable
+
+
+The primary purpose of your app is to encourage users to watch ads or perform marketing-oriented tasks, which is not appropriate for the App Store.
+
+Next Steps
+
+We encourage you to review your app concept and incorporate different content and features that are in compliance with the App Store Review Guidelines.
+
+Resonse :
+----
+
+We'll submit a new version for your consideration, removing placeholder default text and addressing Guideline 3.2.2: "users to watch ads or perform marketing-oriented tasks."
+
+This is a data labeling app, used by data scientists to improve their CoreML and other machine learning models. It is not marketing nor an ad serving app, but rather a convenient method for skilled users to be compensated for helping to improve the quality of machine learning models. We're paying for skill and talent, similar to how you allow game developers to reward users for their gaming skill.
+
+
+
+
 Google AI Platform - Online Labeling Services
 ---
 
