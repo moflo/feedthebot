@@ -43,6 +43,13 @@ class PayoutViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
 
     @IBAction func doPayoutButton(_ sender: Any) {
+        let alert = MFAlertTrainView(title: "Payout Online",
+                                     icon: "",
+                                     info: "Please visit our website to process your payments.",
+                                     prompt: "FeedTheBot.moflo.me") { (category, buttonIndex) in
+                                        
+        }
+        alert.show()
 
     }
     

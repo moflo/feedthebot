@@ -50,7 +50,14 @@ struct MFUser {
         self.points = points
     }
     
-    
+    init(uuid: String, email: String, name: String, avatar: String) {
+        self.init()
+        self.uuid = uuid
+        self.email = email
+        self.name = name
+        self.avatar_url = avatar
+    }
+
     init?(dictionary: [String: Any] ) {
         guard let dict = dictionary as [String: Any]? else { return nil }
         guard let uuid = dict["uuid"] as? String else { return nil }
@@ -154,11 +161,15 @@ class UserManager : NSObject {
         return self.userUUID
     }
 
-    func getUserDetails() -> (uuid: String, points: Int, exchangeRate: Double) {
+    func getUserDetails() -> (uuid: String, points: Int, exchangeRate: Double,name: String, email: String,url:String) {
         let uuid = self.userUUID
         let points = self.userObj.points
         let exchangeRate = self.userObj.exchangeRate
-        return (uuid,points,Double(exchangeRate))
+        let email = self.userObj.email
+        let name = self.userObj.name
+        let url = self.userObj.avatar_url
+
+        return (uuid,points,Double(exchangeRate),name,email,url)
     }
 
     func getUserTotalPoints() -> Int {
@@ -206,6 +217,33 @@ class UserManager : NSObject {
         self.updateUserDetails(uuid: self.userUUID, points: points)
     }
     
+    func updateUserDetails(userObj :User) {
+        
+        var photoURL = "http://feedthebot.moflo.me/img/User_Icon.png"
+        if let url = userObj.photoURL {
+            photoURL = url.absoluteString
+        }
+        
+        self.updateUserDetails(uuid: userObj.uid,
+                               email: userObj.email!,
+                               name: userObj.displayName ?? "User",
+                               avatar: photoURL )
+        
+    }
+
+    func updateUserDetails(uuid: String, email: String, name: String, avatar: String) {
+        
+        self.userObj = MFUser(uuid: uuid, email: email, name: name, avatar: avatar)
+        //        self.synchronize()
+        
+        // Update Firebase user details
+        let db = Firestore.firestore()
+        db.collection("users").document(uuid).setData(self.userObj.dictionary, merge: true)
+        
+//        self.synchronize()
+        
+    }
+
     func updateUserDetails(uuid: String, points: Int, completionHandler: ((Error?) -> () )! = nil ) {
         
         self.userObj.uuid = uuid

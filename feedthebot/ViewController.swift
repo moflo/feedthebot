@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FirebaseUI
 
 
 class ViewController: UIViewController {
@@ -21,7 +22,15 @@ class ViewController: UIViewController {
 
     }
     @IBAction func doSettingsButton(_ sender: Any) {
-        self.performSegue(withIdentifier: "payoutSegue", sender: self)
+        let email = UserManager.sharedInstance.getUserDetails().email
+        let alert = UIAlertController(title: "Switch Accounts", message: "Sign out of your account (\(email)) and switch accounts", preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "Sign Out", style: UIAlertAction.Style.default, handler: {
+            (alert :UIAlertAction) -> Void in
+            UserManager.sharedInstance.doResetAccount()
+            self.viewWillAppear(false)
+        }))
+        self.present(alert, animated: true, completion: nil)
     }
     @IBAction func doTrainButton(_ sender: Any) {
     }
@@ -69,6 +78,15 @@ class ViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     
+        // Check user authorization, show sign in screen
+        let auth = FUIAuth.defaultAuthUI()!
+        auth.delegate = self
+        if auth.auth?.currentUser == nil {
+            DEBUG_LOG("account_auth", details: "home view login")
+            auth.providers = [FUIEmailAuth(),FUIGoogleAuth()]
+            present(auth.authViewController(), animated: true, completion: nil)
+        }
+
         UserManager.sharedInstance.refreshUserData { (error) in
             if (error == nil) {
                 DispatchQueue.main.async {
@@ -142,3 +160,47 @@ class ViewController: UIViewController {
 
 }
 
+// MARK: -  Custom Login View
+
+class CustomAuthViewController: FUIAuthPickerViewController {
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        
+        // Do any additional setup after loading the view.
+        let w = UIScreen.main.bounds.size.width
+        let offX = (w - 200.0) * 0.5
+        var offY = CGFloat(160.0)
+        let logoView = UIImageView(frame: CGRect(x: offX, y: offY, width: 200, height: 200))
+        logoView.image = UIImage(named: "bot_small_white")
+        view.insertSubview(logoView, at: 1)
+        
+        offY = offY + 200 + 80
+        let welcomeLabel = UILabel(frame: CGRect(x: 0, y: 0, width: w * 0.75, height: 88))
+        welcomeLabel.center = CGPoint(x: w * 0.5, y: offY)
+        welcomeLabel.text = "Welcome to FeedTheBot!\nPlease sign in or create an account to continue."
+        welcomeLabel.textAlignment = .center
+        welcomeLabel.numberOfLines = 3
+        welcomeLabel.textColor = .gray
+        view.insertSubview(welcomeLabel, at: 1)
+    }
+    
+}
+
+extension ViewController : FUIAuthDelegate {
+    func authPickerViewController(forAuthUI authUI: FUIAuth) -> FUIAuthPickerViewController {
+        return CustomAuthViewController(authUI: authUI)
+        
+    }
+    
+    func authUI(_ authUI: FUIAuth, didSignInWith authDataResult: AuthDataResult?, error: Error?) {
+        // handle user (`authDataResult.user`) and error as necessary
+        if authDataResult != nil {
+            UserManager.sharedInstance.updateUserDetails(userObj: authDataResult!.user)
+            let detail = UserManager.sharedInstance.getUserDetails()
+            DEBUG_USER(name: detail.name, email: detail.email)
+        }
+    }
+    
+}
