@@ -30,7 +30,7 @@ class MFSignupViewController: UIViewController, UITextFieldDelegate, UITextViewD
                 MFProgressHUD.sharedView.hide()
 
                 if error == nil {
-                    MFAlertView(title: "Success!", message: "We'll set up your account.", cancelPrompt: "Let's Go", completionHandler: { (buttonIndex) -> () in
+                    MFAlertView(title: "Success!", message: "We set up your account.", cancelPrompt: "Let's Go", completionHandler: { (buttonIndex) -> () in
                         self.dismiss(animated: true, completion: nil)
                         
                     }).show()

@@ -24,7 +24,7 @@ class MFPayoutCell : UITableViewCell {
         icon.image = icon_image
         trainingType.text = type
         let price = String(format: "%.2f", earnings)
-        amount.text = "$\(price)"
+        amount.text = "\(price)"
         dateLabel.text = date_string
     }
     
@@ -73,7 +73,7 @@ class PayoutViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 let points :Int = self.activityList.map({ $0.points }).reduce(0, +)
                 let exchangeRate = UserManager.sharedInstance.getUserDetails().exchangeRate
                 let earnings :Double = Double(points) * exchangeRate
-                let price = String(format: "$%.2f", earnings)
+                let price = String(format: "%.2f", earnings)
                 self.titleLabel.text = price
                 
             }
