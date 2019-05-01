@@ -45,12 +45,13 @@ class TrainViewController: UIViewController {
     func setupStatButtons() {
         
         var buttons = [MFTrainButton]()
-        let buttonShot = MFTrainButton(title: .TEXT, icon: "icon_text")
-        buttonShot.completionHandler = { (sender) in
-            print(sender)
-            self.showTrainingController("TEXTTRAINING")
-        }
-        buttons.append(buttonShot)
+        
+        //let buttonShot = MFTrainButton(title: .TEXT, icon: "icon_text")
+        //buttonShot.completionHandler = { (sender) in
+        //    print(sender)
+        //    self.showTrainingController("TEXTTRAINING")
+        //}
+        //buttons.append(buttonShot)
         
         let buttonCorner = MFTrainButton(title: .BOUNDINGBOX, icon: "icon_bounding")
         buttonCorner.completionHandler = { (sender) in

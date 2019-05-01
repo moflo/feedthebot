@@ -179,8 +179,15 @@ class UserManager : NSObject {
     func shouldDoubleTapToSelect() -> Bool {
         return true
     }
+
     // MARK: - Server Methods
     
+    func isUserLoggedIn () -> Bool {
+        let current_user = Auth.auth().currentUser
+        let logged_in = current_user != nil && !current_user!.isAnonymous
+        return logged_in
+    }
+
     func doAnonymousLogin() {
         Auth.auth().signInAnonymously() { (authResult, error) in
             // Check anonymous user
@@ -206,6 +213,45 @@ class UserManager : NSObject {
 
     }
     
+    func doAccountLogin( _ email: String, password: String, completionHandler: @escaping (MFUser?, Error?) -> () ) {
+        DEBUG_LOG("login", details: "password")
+        
+        Auth.auth().signIn(withEmail: email, password: password) { (auth, error) in
+            
+            guard error == nil else { completionHandler(nil,error); return }
+            guard auth != nil, let user = auth?.user else { completionHandler(nil,error); return }
+
+            let uid = user.uid
+            self.userUUID = uid
+        
+            self.userObj.uuid = uid
+            self.userObj.name = user.displayName ?? ""
+            self.userObj.email = user.email ?? ""
+            self.userObj.avatar_url = user.photoURL != nil ? user.photoURL!.absoluteString : ""
+
+            completionHandler(self.userObj,error)
+            
+                
+        }
+    }
+
+    func doAccountPasswordReminder(_ email: String, completionHandler: @escaping (Error?) -> () ) {
+        // User password reset method
+        
+        Auth.auth().sendPasswordReset(withEmail: email) { error in
+            if let error = error {
+                // An error happened
+                completionHandler(error)
+                
+            } else {
+                // Password reset email sent
+                completionHandler(nil)
+                
+            }
+        }
+        
+    }
+
     func doResetAccount() {
         // Method to log out of previous Firebase account
         let authUI = FUIAuth.defaultAuthUI()

@@ -29,6 +29,8 @@
 		918F2666225D7F4F00D6056C /* feedthebotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 918F2665225D7F4F00D6056C /* feedthebotTests.swift */; };
 		918F2676225D857900D6056C /* TrainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 918F2675225D857900D6056C /* TrainViewController.swift */; };
 		918F2678225DA65F00D6056C /* TextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 918F2677225DA65F00D6056C /* TextViewController.swift */; };
+		919D7D9B2279221800ACC9B3 /* MFSignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 919D7D992279221600ACC9B3 /* MFSignupViewController.swift */; };
+		919D7D9C2279221800ACC9B3 /* MFPasswordResetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 919D7D9A2279221800ACC9B3 /* MFPasswordResetViewController.swift */; };
 		91CD057B22604B570085614D /* PayoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91CD057A22604B570085614D /* PayoutViewController.swift */; };
 		91D35D012269923A00C53BCF /* PolyCatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91D35D002269923900C53BCF /* PolyCatViewController.swift */; };
 		91D35D03226A241500C53BCF /* MFPolyEdit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91D35D02226A241500C53BCF /* MFPolyEdit.swift */; };
@@ -78,6 +80,8 @@
 		918F2673225D801500D6056C /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		918F2675225D857900D6056C /* TrainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainViewController.swift; sourceTree = "<group>"; };
 		918F2677225DA65F00D6056C /* TextViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextViewController.swift; sourceTree = "<group>"; };
+		919D7D992279221600ACC9B3 /* MFSignupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MFSignupViewController.swift; sourceTree = "<group>"; };
+		919D7D9A2279221800ACC9B3 /* MFPasswordResetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MFPasswordResetViewController.swift; sourceTree = "<group>"; };
 		91CD057A22604B570085614D /* PayoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayoutViewController.swift; sourceTree = "<group>"; };
 		91D35D002269923900C53BCF /* PolyCatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolyCatViewController.swift; sourceTree = "<group>"; };
 		91D35D02226A241500C53BCF /* MFPolyEdit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MFPolyEdit.swift; sourceTree = "<group>"; };
@@ -169,6 +173,8 @@
 				91D35D02226A241500C53BCF /* MFPolyEdit.swift */,
 				9175454F226008D400DB77EE /* MFForms.swift */,
 				914C718A2264EC0E00AF9099 /* MFAlerts.swift */,
+				919D7D992279221600ACC9B3 /* MFSignupViewController.swift */,
+				919D7D9A2279221800ACC9B3 /* MFPasswordResetViewController.swift */,
 				918F2654225D7F4D00D6056C /* Main.storyboard */,
 				918F2657225D7F4F00D6056C /* Assets.xcassets */,
 				918F2659225D7F4F00D6056C /* LaunchScreen.storyboard */,
@@ -460,6 +466,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				919D7D9B2279221800ACC9B3 /* MFSignupViewController.swift in Sources */,
 				918F2653225D7F4D00D6056C /* ViewController.swift in Sources */,
 				91D35D012269923A00C53BCF /* PolyCatViewController.swift in Sources */,
 				918F2651225D7F4D00D6056C /* AppDelegate.swift in Sources */,
@@ -473,6 +480,7 @@
 				914C718822616C0900AF9099 /* CardViewController.swift in Sources */,
 				914C71912267AA4A00AF9099 /* BBoxViewController.swift in Sources */,
 				91D35D07226A7C1C00C53BCF /* Strings+Localized.swift in Sources */,
+				919D7D9C2279221800ACC9B3 /* MFPasswordResetViewController.swift in Sources */,
 				914C7186226109AC00AF9099 /* DataSetManager.swift in Sources */,
 				91D35D03226A241500C53BCF /* MFPolyEdit.swift in Sources */,
 				914C718D226685D600AF9099 /* CategoryViewController.swift in Sources */,

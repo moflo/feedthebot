@@ -79,12 +79,11 @@ class ViewController: UIViewController {
         super.viewWillAppear(animated)
     
         // Check user authorization, show sign in screen
-        let auth = FUIAuth.defaultAuthUI()!
-        auth.delegate = self
-        if auth.auth?.currentUser == nil {
+        if !UserManager.sharedInstance.isUserLoggedIn() {
             DEBUG_LOG("account_auth", details: "home view login")
-            auth.providers = [FUIEmailAuth(),FUIGoogleAuth()]
-            present(auth.authViewController(), animated: true, completion: nil)
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "ACCOUNTLOGIN") as! UINavigationController
+            self.present(vc, animated: true)
         }
 
         UserManager.sharedInstance.refreshUserData { (error) in
@@ -111,12 +110,12 @@ class ViewController: UIViewController {
         
         var buttons = [MFTrainButton]()
         
-        let buttonShot = MFTrainButton(title: .TEXT, icon: "icon_text")
-        buttonShot.completionHandler = { (sender) in
-            print(sender)
-            self.showTrainingController("TEXTTRAINING")
-        }
-        buttons.append(buttonShot)
+//        let buttonShot = MFTrainButton(title: .TEXT, icon: "icon_text")
+//        buttonShot.completionHandler = { (sender) in
+//            print(sender)
+//            self.showTrainingController("TEXTTRAINING")
+//        }
+//        buttons.append(buttonShot)
         
         let buttonTurnover = MFTrainButton(title: .CLASSIFICATION, icon: "icon_classify")
         buttonTurnover.completionHandler = { (sender) in
