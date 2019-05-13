@@ -10,7 +10,11 @@ import UIKit
 
 class MFSignupViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate {
     
-    
+    @IBAction func doHomeButton(_ sender: Any) {
+//        self.navigationController?.popToRootViewController(animated: true)
+        self.dismiss(animated: true, completion: nil)
+    }
+
     @IBOutlet weak var loginButton: MFRoundedButton!
     @IBAction func doLoginButton(_ sender: AnyObject) {
         
@@ -173,7 +177,11 @@ class MFSignupViewController: UIViewController, UITextFieldDelegate, UITextViewD
         self.layoutLogoHeight?.constant = self.CONST_EMAIL_INITIAL
         
         // Adjust nav bar items
-        
+
+        let barButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(self.doHomeButton(_:)))
+
+        self.navigationItem.leftBarButtonItem = barButton
+
         // Remove default backbutton
         let appearance = UIBarButtonItem.appearance(whenContainedInInstancesOf: [UINavigationController.self])
         
