@@ -188,6 +188,13 @@ class UserManager : NSObject {
         return logged_in
     }
 
+    func isUserAnonymous() -> Bool {
+        if let current_user = Auth.auth().currentUser {
+            return current_user.isAnonymous
+        }
+        return false
+    }
+    
     func doAnonymousLogin() {
         Auth.auth().signInAnonymously() { (authResult, error) in
             // Check anonymous user
@@ -260,7 +267,16 @@ class UserManager : NSObject {
     }
 
     func updatePointsTotal(_ points: Int) {
-        self.updateUserDetails(uuid: self.userUUID, points: points)
+        let uuid = self.getUUID()
+        let existing_points = self.userObj.points
+        
+        // Update Firebase user details
+        let db = Firestore.firestore()
+        db.collection("users").document(uuid).updateData([
+            "points": FieldValue.increment(Int64(points))
+            ])
+
+        self.userObj.points = existing_points + points
     }
     
     func updateUserDetails(userObj :User) {

@@ -43,14 +43,29 @@ class PayoutViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
 
     @IBAction func doPayoutButton(_ sender: Any) {
-        let alert = MFAlertTrainView(title: "Payout Online",
-                                     icon: "",
-                                     info: "Please visit our website to process your payments.",
-                                     prompt: "FeedTheBot.moflo.me") { (category, buttonIndex) in
-                                        
-        }
-        alert.show()
+        if UserManager.sharedInstance.isUserAnonymous() {
+            let alert = UIAlertController(title: "Create Account", message: "Create an account to manage your points online?", preferredStyle: UIAlertController.Style.alert)
+            alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
+            alert.addAction(UIAlertAction(title: "Sign In", style: UIAlertAction.Style.default, handler: {
+                (alert :UIAlertAction) -> Void in
 
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let vc = storyboard.instantiateViewController(withIdentifier: "ACCOUNTLOGIN") as! UINavigationController
+                self.present(vc, animated: true)
+
+            }))
+            self.present(alert, animated: true, completion: nil)
+
+        }
+        else {
+            let alert = MFAlertTrainView(title: "Payout Online",
+                                         icon: "",
+                                         info: "Please visit our website to process your payments.",
+                                         prompt: "FeedTheBot.moflo.me") { (category, buttonIndex) in
+                                            
+            }
+            alert.show()
+        }
     }
     
     @IBOutlet weak var titleLabel: UILabel!

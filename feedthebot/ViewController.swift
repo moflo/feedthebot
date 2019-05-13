@@ -22,15 +22,32 @@ class ViewController: UIViewController {
 
     }
     @IBAction func doSettingsButton(_ sender: Any) {
-        let email = UserManager.sharedInstance.getUserDetails().email
-        let alert = UIAlertController(title: "Switch Accounts", message: "Sign out of your account (\(email)) and switch accounts", preferredStyle: UIAlertController.Style.alert)
-        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
-        alert.addAction(UIAlertAction(title: "Sign Out", style: UIAlertAction.Style.default, handler: {
-            (alert :UIAlertAction) -> Void in
-            UserManager.sharedInstance.doResetAccount()
-            self.viewWillAppear(false)
-        }))
-        self.present(alert, animated: true, completion: nil)
+        if UserManager.sharedInstance.isUserAnonymous() {
+            let alert = UIAlertController(title: "Create Account", message: "Create an account to manage your points online?", preferredStyle: UIAlertController.Style.alert)
+            alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
+            alert.addAction(UIAlertAction(title: "Sign In", style: UIAlertAction.Style.default, handler: {
+                (alert :UIAlertAction) -> Void in
+
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let vc = storyboard.instantiateViewController(withIdentifier: "ACCOUNTLOGIN") as! UINavigationController
+                self.present(vc, animated: true)
+
+            }))
+            self.present(alert, animated: true, completion: nil)
+
+        }
+        else {
+            let email = UserManager.sharedInstance.getUserDetails().email
+            let alert = UIAlertController(title: "Switch Accounts", message: "Sign out of your account (\(email)) and switch accounts", preferredStyle: UIAlertController.Style.alert)
+            alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
+            alert.addAction(UIAlertAction(title: "Sign Out", style: UIAlertAction.Style.default, handler: {
+                (alert :UIAlertAction) -> Void in
+                UserManager.sharedInstance.doResetAccount()
+                self.viewWillAppear(false)
+            }))
+            self.present(alert, animated: true, completion: nil)
+            
+        }
     }
     @IBAction func doTrainButton(_ sender: Any) {
     }
@@ -80,10 +97,11 @@ class ViewController: UIViewController {
     
         // Check user authorization, show sign in screen
         if !UserManager.sharedInstance.isUserLoggedIn() {
-            DEBUG_LOG("account_auth", details: "home view login")
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let vc = storyboard.instantiateViewController(withIdentifier: "ACCOUNTLOGIN") as! UINavigationController
-            self.present(vc, animated: true)
+            DEBUG_LOG("anonymous_auth", details: "home view login")
+            UserManager.sharedInstance.doAnonymousLogin()
+//            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//            let vc = storyboard.instantiateViewController(withIdentifier: "ACCOUNTLOGIN") as! UINavigationController
+//            self.present(vc, animated: true)
         }
 
         UserManager.sharedInstance.refreshUserData { (error) in
