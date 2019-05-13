@@ -58,9 +58,9 @@ class PayoutViewController: UIViewController, UITableViewDelegate, UITableViewDa
 
         }
         else {
-            let alert = MFAlertTrainView(title: "Payout Online",
+            let alert = MFAlertTrainView(title: "Manage Online",
                                          icon: "",
-                                         info: "Please visit our website to process your payments.",
+                                         info: "Please visit our website to manage your points.",
                                          prompt: "FeedTheBot.moflo.me") { (category, buttonIndex) in
                                             
             }
