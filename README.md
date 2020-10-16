@@ -1,7 +1,7 @@
 Feed The Bot
 ==========
 
-Perhaps the dumbest idea I've ever had.
+AI/ML data labeling app.
 
 
 Rejected - April 24
